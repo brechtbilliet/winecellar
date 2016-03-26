@@ -1,0 +1,20 @@
+@import "../../../colors";
+.navbar.navbar-inverse {
+  background-color: $color-purple;
+  .navbar-nav li a {
+    color: $color-white;
+    &:hover{
+      background: $color-purple-light;
+    }
+  }
+  .navbar-brand {
+    color: $color-white;
+  }
+  .navbar-text {
+    color: $color-white;
+  }
+  .navbar-nav li a.router-link-active{
+    background: $color-purple-dark;
+    color: $color-white;
+  }
+}

@@ -1,0 +1,4 @@
+@import "../../../colors";
+:host i.over, :host i.starred{
+  color: $color-purple;
+}

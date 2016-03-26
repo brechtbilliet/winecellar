@@ -1,0 +1,58 @@
+@import "../../../colors";
+body{
+  margin-top: 50px;
+  background: $color-background;
+}
+a{
+  color: $color-purple;
+  &:hover{
+    color: $color-purple-dark;
+  }
+}
+.btn, input.form-control, textarea.form-control, .dropdown-menu, .input-group-addon {
+  border-radius: 0px;
+  box-shadow: none;
+  outline: none;
+  &:focus, &:active, &:focus:active{
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.dropdown-menu{
+  background: $color-purple-dark;
+}
+.dropdown.open .dropdown-menu li a {
+  background-color: $color-purple-dark;
+}
+.navbar-nav li a{
+  background: $color-purple;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
+  background: $color-purple-dark;
+  color: #fff;
+}
+.btn-primary{
+  background-color: $color-purple;
+  border-color: $color-purple;
+  &:hover{
+    background-color: $color-purple-dark;
+    border-color: $color-purple-dark;
+  }
+  &:focus, &:active, &:focus:active{
+    background-color: $color-purple;
+    border-color: $color-purple;
+  }
+}
+.btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled.focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary.focus {
+  background-color: $color-purple;
+  border-color: $color-purple;
+}
+.form-control:focus{
+  border-color: $color-purple-light;
+  box-shadow: none;
+}
+.badge.badge-primary{
+  background: $color-purple;
+  border-radius: 0px;
+}

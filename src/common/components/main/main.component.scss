@@ -1,0 +1,15 @@
+@import "../../../colors";
+:host {
+  background: $color-background;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  padding: 10px;
+  table.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: $color-white;
+  }
+  table.table-striped td{
+    border: none;
+  }
+}

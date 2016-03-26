@@ -1,0 +1,49 @@
+@import "../../../colors";
+
+:host {
+  height: 100%;
+  display: flex;
+}
+
+:host {
+  .collapsable-part {
+    min-width: 400px;
+    background: $color-purple-dark;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    h2 {
+      padding-left: 10px;
+      color: $color-white;
+    }
+    .btn-collapsable {
+      position: fixed;
+      left: 364px;
+      margin-top: 0px;
+      z-index: 9999;
+      border-radius: 0;
+    }
+    &.is-collapsed {
+      width: 35px;
+      min-width: 0px;
+      .btn-collapsable {
+        left: 0px;
+      }
+    }
+  }
+  .table.table-striped {
+    tbody > tr:nth-of-type(odd) {
+      background: $color-purple-dark;
+      color: $color-white;
+      td {
+        border: none;
+      }
+    }
+    tbody > tr:nth-of-type(even) {
+      color: $color-white;
+      td {
+        border: none;
+      }
+    }
+  }
+}
