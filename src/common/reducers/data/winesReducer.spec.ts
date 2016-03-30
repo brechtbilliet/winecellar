@@ -25,7 +25,7 @@ describe("reducer > data", () => {
             let payload: Array<Wine> = [new Wine(), new Wine(), new Wine()];
             let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_ADD_ALL, payload});
             expect(changedState).not.toBe(initialState);
-            _.each(payload, (wine: Wine, index: Number) => {
+            _.each(payload, (wine: Wine, index: number) => {
                 expect(wine).toBe(changedState[index]);
             })
         });
