@@ -3,3 +3,4 @@ dist
 out
 typings
 .idea
+npm-debug.log
