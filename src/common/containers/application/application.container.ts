@@ -20,11 +20,12 @@ import "font-awesome/css/font-awesome.css";
 import {ApplicationState} from "../../state/ApplicationState";
 import {Account} from "../../../authentication/types/Account";
 import {Authentication} from "../../../authentication/components/authentication/authentication.component";
+import {Title} from "angular2/src/platform/browser/title";
 
 @Component({
     selector: "application",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [AuthenticationEndpoint],
+    providers: [AuthenticationEndpoint, Title],
     directives: [ROUTER_DIRECTIVES, Navbar, Spinner, Authentication],
     encapsulation: ViewEncapsulation.None,
     styles: [require("./application.container.scss")],
@@ -50,7 +51,8 @@ export class WineCellarApp {
     public isBusy$: Observable<boolean>;
 
     constructor(private store: Store<ApplicationState>,
-                private endpoint: AuthenticationEndpoint) {
+                private endpoint: AuthenticationEndpoint,
+                private title: Title) {
         this.isAuthenticated$ = this.store.select((item: ApplicationState) => item.data.authentication.isAuthenticated);
         this.account$ = this.store.select((item: ApplicationState) => item.data.authentication.account);
         this.isBusy$ = this.store.select((item: ApplicationState) => item.containers.application.isBusy);
@@ -62,6 +64,7 @@ export class WineCellarApp {
                 payload: JSON.parse(localStorageObj)
             });
         }
+        this.title.setTitle("Winecellar application")
     }
 
     public logout(): void {

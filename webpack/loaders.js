@@ -1,9 +1,6 @@
 var StringReplacePlugin = require("string-replace-webpack-plugin");
 var API_KEY = process.env.npm_config_apikey;
 var BACKEND_ENV = process.env.npm_config_backendenv || "https://winecellarapp.herokuapp.com/api";
-if (!API_KEY) {
-    throw new Error("provide an apikey for the wine.com database with --apikey=<yourkey>")
-}
 
 module.exports = [
     {
