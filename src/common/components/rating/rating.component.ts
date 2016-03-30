@@ -4,7 +4,7 @@ import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output} from "a
     changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [require("./rating.component.scss")],
     template: `
-        <i class="fa fa-star rating foo" [class.fa-2x]="big" *ngFor="#i of [1,2,3,4,5]"
+        <i class="fa fa-star rating" [class.fa-2x]="big" *ngFor="#i of [1,2,3,4,5]"
             [class.over]="overValue >= i" 
             [class.starred]="rating >= i" 
             (mouseover)="over(i)" 
