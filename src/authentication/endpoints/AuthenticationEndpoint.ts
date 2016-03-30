@@ -47,8 +47,8 @@ export class AuthenticationEndpoint {
     }
 
     public logout(): void {
-        this.store.dispatch(({type: DATA_AUTHENTICATION_CLEAR_AUTHENTICATION}))
-        this.store.dispatch(({type: DATA_WINES_ADD_ALL, payload: []}))
+        this.store.dispatch(({type: DATA_AUTHENTICATION_CLEAR_AUTHENTICATION}));
+        this.store.dispatch(({type: DATA_WINES_ADD_ALL, payload: []}));
         localStorage.removeItem(LOCALSTORAGE_AUTH);
     }
 }

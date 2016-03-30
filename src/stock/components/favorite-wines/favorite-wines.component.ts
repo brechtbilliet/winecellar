@@ -2,7 +2,7 @@ import {Component, ChangeDetectionStrategy, EventEmitter, Output, Input} from "a
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import * as _ from "lodash";
 import {Wine} from "../../entities/Wine";
-import {NumberPicker} from "../number-picker/number-picker.component";
+import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 @Component({
     selector: "favorite-wines",
     directives: [NumberPicker, ROUTER_DIRECTIVES],

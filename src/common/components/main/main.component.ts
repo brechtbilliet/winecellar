@@ -3,10 +3,6 @@ import {Component, ChangeDetectionStrategy} from "angular2/core";
     selector: "main",
     styles: [require("./main.component.scss")],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
-        <div>
-            <ng-content></ng-content>
-        </div>
-    `
+    template: `<ng-content></ng-content>`
 })
 export class Main {}

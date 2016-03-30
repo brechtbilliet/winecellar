@@ -7,9 +7,8 @@ import {Navbar} from "../../components/navbar/navbar.component";
 import {Spinner} from "../../components/spinner/spinner.component";
 import {EditWinePage} from "../../../stock/containers/edit-wine-page/edit-wine-page.container";
 
-import {Component, ViewEncapsulation} from "angular2/core";
+import {Component, ViewEncapsulation, ChangeDetectionStrategy} from "angular2/core";
 import {ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
-import {Authentication} from "../../../authentication/containers/authentication/authentication.container";
 import {Observable} from "rxjs/Observable";
 import {LOCALSTORAGE_AUTH} from "../../../config";
 import {DATA_AUTHENTICATION_SET_AUTHENTICATION} from "../../actionTypes";
@@ -20,9 +19,11 @@ import "toastr/build/toastr.css";
 import "font-awesome/css/font-awesome.css";
 import {ApplicationState} from "../../state/ApplicationState";
 import {Account} from "../../../authentication/types/Account";
+import {Authentication} from "../../../authentication/components/authentication/authentication.component";
 
 @Component({
     selector: "application",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [AuthenticationEndpoint],
     directives: [ROUTER_DIRECTIVES, Navbar, Spinner, Authentication],
     encapsulation: ViewEncapsulation.None,
@@ -31,7 +32,7 @@ import {Account} from "../../../authentication/types/Account";
         <navbar (logout)="logout()" 
             [account]="account$|async"
             *ngIf="isAuthenticated$|async"></navbar>
-        <authentication></authentication>
+        <authentication *ngIf="!(isAuthenticated$|async)"></authentication>
         <router-outlet *ngIf="isAuthenticated$|async"></router-outlet>
         <spinner [spin]="isBusy$ | async"></spinner>
   `

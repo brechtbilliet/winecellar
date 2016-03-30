@@ -5,7 +5,7 @@ import {it, describe, expect} from "angular2/testing";
 import {authenticationReducer} from "./authenticationReducer";
 import {AuthenticationDataState} from "../../state/DataState";
 import {INITIAL_STATE} from "../../state/initialState";
-describe("reducer: containers > authenticationReducer", () => {
+describe("reducer: data > authenticationReducer", () => {
     describe("case DATA_AUTHENTICATION_SET_AUTHENTICATION", () => {
         it("should return a new instance with the correct state", () => {
             let initialState: AuthenticationDataState = INITIAL_STATE.data.authentication;

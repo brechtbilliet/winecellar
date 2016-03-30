@@ -4,8 +4,6 @@ import {Component, ChangeDetectionStrategy} from "angular2/core";
     selector: "default-page",
     styles: [require("./default-page.component.scss")],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
-        <ng-content></ng-content>
-    `
+    template: `<ng-content></ng-content>`
 })
 export class DefaultPage {}

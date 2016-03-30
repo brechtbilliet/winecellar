@@ -88,7 +88,7 @@ export class WineEndpoint {
         this.http.put(API_URL + "/wines/" + wine._id, JSON.stringify(newWine), this.getHttpOptions())
             .map((res: Response) => res.json())
             .subscribe(() => {
-                let payload: any = {wine, myRating};
+                let payload: any = {_id: wine._id, myRating};
                 this.store.dispatch({type: DATA_WINES_UPDATE_RATE, payload: payload});
                 this.store.dispatch({type: CONTAINER_APPLICATION_DISABLE_BUSY_FLAG});
             }, (resp: Response) => this.onError(resp));
@@ -100,7 +100,7 @@ export class WineEndpoint {
         this.http.put(API_URL + "/wines/" + wine._id, JSON.stringify(newWine), this.getHttpOptions())
             .map((res: Response) => res.json())
             .subscribe(() => {
-                let payload: any = {wine, inStock};
+                let payload: any = {_id: wine._id, inStock};
                 this.store.dispatch({type: DATA_WINES_UPDATE_STOCK, payload: payload});
                 this.store.dispatch({type: CONTAINER_APPLICATION_DISABLE_BUSY_FLAG});
             }, (resp: Response) => this.onError(resp));

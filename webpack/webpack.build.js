@@ -38,6 +38,8 @@ module.exports = {
             {
                 warning: false,
                 mangle: false,
+                beautify: false,
+                compress: true,
                 comments: false
             }
         ),

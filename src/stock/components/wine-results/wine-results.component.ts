@@ -1,8 +1,8 @@
 import {Wine} from "../../entities/Wine";
-import {Rating} from "./../rating/rating.component";
+import {Rating} from "../../../common/components/rating/rating.component";
 import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output} from "angular2/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
-import {NumberPicker} from "../number-picker/number-picker.component";
+import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 @Component({
     selector: "wine-results",
     directives: [Rating, NumberPicker, ROUTER_DIRECTIVES],

@@ -1,13 +1,13 @@
 import {WineSearch} from "../../containers/wine-search/wine-search.container";
 import {Product} from "../../WineComApiTypes";
 import {Wine} from "../../entities/Wine";
-import {Rating} from "./../rating/rating.component";
+import {Rating} from "../../../common/components/rating/rating.component";
 import {Component, ChangeDetectionStrategy, EventEmitter, Input, Output} from "angular2/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {Control, Validators, ControlGroup} from "angular2/common";
 import {FormGroupTextbox} from "../../../common/components/form/form-group-textbox/form-group-textbox.component";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
-import {NumberPicker} from "../number-picker/number-picker.component";
+import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 import {FormGroupTextarea} from "../../../common/components/form/form-group-textarea/form-group-textarea.component";
 @Component({
     selector: "detail-wine",

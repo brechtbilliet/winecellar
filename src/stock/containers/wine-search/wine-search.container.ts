@@ -8,13 +8,14 @@ import {
     CONTAINER_WINESEARCH_UPDATE_FOUND_WINES,
     CONTAINER_WINESEARCH_CLEAR_FOUND_WINES, CONTAINER_APPLICATION_ENABLE_BUSY_FLAG, CONTAINER_APPLICATION_DISABLE_BUSY_FLAG,
 } from "../../../common/actionTypes";
-import {Component, Input, EventEmitter, ElementRef, Output} from "angular2/core";
+import {Component, Input, EventEmitter, ElementRef, Output, ChangeDetectionStrategy} from "angular2/core";
 import {ApplicationState} from "../../../common/state/ApplicationState";
 
 @Component({
     selector: "wine-search",
     styles: [require("./wine-search.container.scss")],
     providers: [WineComApiEndpoint],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="form-group has-feedback" [class.has-success]="control.valid">
             <label for="loginInput" class="col-sm-4 control-label">
@@ -48,6 +49,7 @@ export class WineSearch {
     public foundWines$: Observable<Array<Product>>;
 
     private previousVal: string;
+    
     constructor(private el: ElementRef,
                 private store: Store<ApplicationState>,
                 private wineComApiEndpoint: WineComApiEndpoint) {
@@ -75,7 +77,7 @@ export class WineSearch {
             .filter((value: string) => {
                 return value.length > 2 && this.previousVal !== value;
             })
-            .map((value: string) => {
+            .map((value: string): any => {
                 this.store.dispatch({type: CONTAINER_APPLICATION_ENABLE_BUSY_FLAG});
                 this.previousVal = value;
                 return this.wineComApiEndpoint.search(value);

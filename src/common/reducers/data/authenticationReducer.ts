@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import {Reducer, Action} from "@ngrx/store";
 
 import {DATA_AUTHENTICATION_CLEAR_AUTHENTICATION, DATA_AUTHENTICATION_SET_AUTHENTICATION} from "../../actionTypes";
@@ -11,7 +10,7 @@ export const authenticationReducer: Reducer<AuthenticationDataState> =
         switch (action.type) {
             case DATA_AUTHENTICATION_SET_AUTHENTICATION:
                 let payload: AuthenticationResult = action.payload;
-                return <AuthenticationDataState> _.assign({}, state, {
+                return <AuthenticationDataState> Object.assign({}, state, {
                     isAuthenticated: true,
                     jwtToken: payload.token,
                     account: {
@@ -21,7 +20,7 @@ export const authenticationReducer: Reducer<AuthenticationDataState> =
                     }
                 });
             case DATA_AUTHENTICATION_CLEAR_AUTHENTICATION:
-                return <AuthenticationDataState> _.assign({}, state, {
+                return <AuthenticationDataState> Object.assign({}, state, {
                     isAuthenticated: false,
                     jwtToken: null,
                     account: null

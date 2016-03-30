@@ -1,5 +1,4 @@
 import {Reducer, Action} from "@ngrx/store";
-import * as _ from "lodash";
 import {CONTAINER_WINESEARCH_UPDATE_FOUND_WINES, CONTAINER_WINESEARCH_CLEAR_FOUND_WINES} from "../../actionTypes";
 import {INITIAL_STATE} from "../../state/initialState";
 import {WineSearchContainerState} from "../../state/ContainersState";
@@ -8,11 +7,11 @@ export const wineSearchReducer: Reducer<WineSearchContainerState> =
      action: Action = null) => {
         switch (action.type) {
             case CONTAINER_WINESEARCH_UPDATE_FOUND_WINES:
-                return <WineSearchContainerState>_.assign({}, state, {
+                return <WineSearchContainerState> Object.assign({}, state, {
                     foundWines: action.payload
                 });
             case CONTAINER_WINESEARCH_CLEAR_FOUND_WINES:
-                return <WineSearchContainerState>_.assign({}, state, {
+                return <WineSearchContainerState> Object.assign({}, state, {
                     foundWines: []
                 });
             default:

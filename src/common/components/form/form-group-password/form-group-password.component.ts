@@ -1,7 +1,8 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input, ChangeDetectionStrategy} from "angular2/core";
 import {Control} from "angular2/common";
 @Component({
     selector: "form-group-password",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="form-group has-feedback" [class.has-success]="control.valid">
             <label for="loginInput" class="col-sm-4 control-label">{{label}}</label>
