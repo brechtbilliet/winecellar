@@ -3,7 +3,6 @@ import {
     TEST_BROWSER_PLATFORM_PROVIDERS,
     TEST_BROWSER_APPLICATION_PROVIDERS
 } from 'angular2/platform/testing/browser';
-
 import {it, describe, expect, ComponentFixture, TestComponentBuilder, injectAsync, beforeEachProviders} from "angular2/testing";
 import {Spinner} from "./spinner.component";
 describe("component: spinner", () => {
