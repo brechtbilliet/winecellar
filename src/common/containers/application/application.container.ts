@@ -39,7 +39,7 @@ import {Title} from "angular2/src/platform/browser/title";
   `
 })
 @RouteConfig([
-    {path: "/", name: "Root", redirectTo: ["/MyWines"]},
+    {path: "/", name: "Root", redirectTo: ["/stock"]},
     {path: "/stock", name: "MyWines", component: MyWinesPage},
     {path: "/stock/add", name: "AddWine", component: AddWinePage},
     {path: "/stock/:id", name: "EditWine", component: EditWinePage},
