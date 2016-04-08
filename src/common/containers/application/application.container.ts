@@ -38,7 +38,7 @@ import "font-awesome/css/font-awesome.css";
   `
 })
 @RouteConfig([
-    {path: "/", name: "Root", redirectTo: ["/stock"]},
+    {path: "/", name: "Root", redirectTo: ["MyWines"]},
     {path: "/stock", name: "MyWines", component: MyWinesPage},
     {path: "/stock/add", name: "AddWine", component: AddWinePage},
     {path: "/stock/:id", name: "EditWine", component: EditWinePage},
