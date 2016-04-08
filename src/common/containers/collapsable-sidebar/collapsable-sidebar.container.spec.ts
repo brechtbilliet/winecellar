@@ -21,43 +21,46 @@ describe("component: collapsable-sidebar", () => {
 
     resetBaseTestProviders();
     setBaseTestProviders(TEST_BROWSER_PLATFORM_PROVIDERS, TEST_BROWSER_APPLICATION_PROVIDERS);
-    beforeEach(() => {
-        isCollapsedMock$ = new Observable((observer: Observer<boolean>) => {
-            observer.next(false);
-        });
-        (<Spy>storeMock.select).and.returnValue(isCollapsedMock$);
-    })
     beforeEachProviders(() => [
         CollapsableSidebar,
         provide(Store, {useValue: storeMock})
     ]);
     describe("on init", () => {
         describe("given the isCollapsed state is false", () => {
-            it("should render based on the state of the store", <any> injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+            it("should should not collapse the sidebar", <any> injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+                isCollapsedMock$ = new Observable((observer: Observer<boolean>) => {
+                    observer.next(false);
+                });
+                (<Spy>storeMock.select).and.returnValue(isCollapsedMock$);
                 return tcb.createAsync(CollapsableSidebarWrapper).then((componentFixture: ComponentFixture) => {
                     const element: any = componentFixture.nativeElement;
                     componentFixture.detectChanges();
-
                     expect(element.querySelectorAll(".is-collapsed").length).toBe(0);
+                    expect(element.querySelectorAll(".rendered").length).toBe(1);
                 });
             }));
         });
-        // describe("given the isCollapsed state is true", () => {
-        //     it("should render based on the state of the store", <any> injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        //         return tcb.createAsync(CollapsableSidebarWrapper).then((componentFixture: ComponentFixture) => {
-        //             const element: any = componentFixture.nativeElement;
-        //             componentFixture.detectChanges();
-        //             expect(element.querySelectorAll(".is-collapsed").length).toBe(1);
-        //         });
-        //     }));
-        // });
+        describe("given the isCollapsed state is true", () => {
+            it("should collapse the sidebar", <any> injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+                isCollapsedMock$ = new Observable((observer: Observer<boolean>) => {
+                    observer.next(true);
+                });
+                (<Spy>storeMock.select).and.returnValue(isCollapsedMock$);
+                return tcb.createAsync(CollapsableSidebarWrapper).then((componentFixture: ComponentFixture) => {
+                    const element: any = componentFixture.nativeElement;
+                    componentFixture.detectChanges();
+                    expect(element.querySelectorAll(".is-collapsed").length).toBe(1);
+                    expect(element.querySelectorAll(".rendered").length).toBe(0);
+                });
+            }));
+        });
     });
 });
 
 @Component({
     directives: [CollapsableSidebar],
     template: `
-        <collapsable-sidebar>test</collapsable-sidebar>
+        <collapsable-sidebar><div class="rendered"></div></collapsable-sidebar>
     `
 })
 class CollapsableSidebarWrapper {
