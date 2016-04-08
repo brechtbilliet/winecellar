@@ -21,15 +21,19 @@ import {ApplicationState} from "../../state/ApplicationState";
 import {Account} from "../../../authentication/types/Account";
 import {Authentication} from "../../../authentication/components/authentication/authentication.component";
 import {Title} from "angular2/src/platform/browser/title";
+import {Devtools, instrumentStore} from "@ngrx/devtools";
+import {provideStore} from "@ngrx/store";
+import {store} from "../../store";
 
 @Component({
     selector: "application",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [AuthenticationEndpoint, Title],
-    directives: [ROUTER_DIRECTIVES, Navbar, Spinner, Authentication],
+    providers: [AuthenticationEndpoint, Title, provideStore(store), instrumentStore()],
+    directives: [Devtools, ROUTER_DIRECTIVES, Navbar, Spinner, Authentication],
     encapsulation: ViewEncapsulation.None,
     styles: [require("./application.container.scss")],
     template: `
+        <ngrx-devtools></ngrx-devtools>
         <navbar (logout)="logout()" 
             [account]="account$|async"
             *ngIf="isAuthenticated$|async"></navbar>
