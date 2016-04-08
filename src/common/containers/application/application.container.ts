@@ -6,34 +6,29 @@ import {AuthenticationEndpoint} from "../../../authentication/endpoints/Authenti
 import {Navbar} from "../../components/navbar/navbar.component";
 import {Spinner} from "../../components/spinner/spinner.component";
 import {EditWinePage} from "../../../stock/containers/edit-wine-page/edit-wine-page.container";
-
 import {Component, ViewEncapsulation, ChangeDetectionStrategy} from "angular2/core";
 import {ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
 import {Observable} from "rxjs/Observable";
 import {LOCALSTORAGE_AUTH} from "../../../config";
 import {DATA_AUTHENTICATION_SET_AUTHENTICATION} from "../../actionTypes";
+import {ApplicationState} from "../../state/ApplicationState";
+import {Account} from "../../../authentication/types/Account";
+import {Authentication} from "../../../authentication/components/authentication/authentication.component";
+import {Title} from "angular2/src/platform/browser/title";
 import "jquery";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "toastr/build/toastr.css";
 import "font-awesome/css/font-awesome.css";
-import {ApplicationState} from "../../state/ApplicationState";
-import {Account} from "../../../authentication/types/Account";
-import {Authentication} from "../../../authentication/components/authentication/authentication.component";
-import {Title} from "angular2/src/platform/browser/title";
-import {Devtools, instrumentStore} from "@ngrx/devtools";
-import {provideStore} from "@ngrx/store";
-import {store} from "../../store";
 
 @Component({
     selector: "application",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [AuthenticationEndpoint, Title, provideStore(store), instrumentStore()],
-    directives: [Devtools, ROUTER_DIRECTIVES, Navbar, Spinner, Authentication],
+    providers: [AuthenticationEndpoint, Title],
+    directives: [ROUTER_DIRECTIVES, Navbar, Spinner, Authentication],
     encapsulation: ViewEncapsulation.None,
     styles: [require("./application.container.scss")],
     template: `
-        <ngrx-devtools></ngrx-devtools>
         <navbar (logout)="logout()" 
             [account]="account$|async"
             *ngIf="isAuthenticated$|async"></navbar>
