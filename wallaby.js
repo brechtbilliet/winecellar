@@ -36,7 +36,6 @@ module.exports = function () {
             {pattern: 'src/**/*.spec.ts', ignore: true},
             {pattern: 'node_modules/**/*.js', ignore: true, instrument: false}
         ],
-        debug: true,
         tests: [
             {pattern: 'src/**/*.spec.ts', load: false},
             {pattern: 'node_modules/**/*.js', ignore: true, instrument: false}
