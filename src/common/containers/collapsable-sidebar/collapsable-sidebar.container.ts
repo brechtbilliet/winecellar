@@ -8,19 +8,19 @@ import {ApplicationState} from "../../state/ApplicationState";
     styles: [require("./collapsable-sidebar.container.scss")],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <div class="collapsable-part" [class.is-collapsed]="isCollapsed|async">
+        <div class="collapsable-part" [class.is-collapsed]="isCollapsed$|async">
             <button class="btn btn-primary btn-collapsable" (click)="toggleSidebar()">
-                <i class="fa" [class.fa-chevron-right]="isCollapsed| async" [class.fa-chevron-left]="(isCollapsed| async) === false"></i>
+                <i class="fa" [class.fa-chevron-right]="isCollapsed$| async" [class.fa-chevron-left]="(isCollapsed$| async) === false"></i>
             </button>
-            <ng-content *ngIf="(isCollapsed| async) === false"></ng-content>
+            <ng-content *ngIf="(isCollapsed$| async) === false"></ng-content>
         </div>
     `
 })
 export class CollapsableSidebar {
-    public isCollapsed: Observable<boolean>;
+    public isCollapsed$: Observable<boolean>;
 
     constructor(private store: Store<ApplicationState>) {
-        this.isCollapsed = store.select((state: ApplicationState) => state.containers.collapsableSidebar.isCollapsed);
+        this.isCollapsed$ = store.select((state: ApplicationState) => state.containers.collapsableSidebar.isCollapsed);
     }
 
     public toggleSidebar(): void {
