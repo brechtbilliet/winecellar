@@ -17,9 +17,10 @@ describe("component: rating", () => {
         it("should set the correct stars to starred", <any> injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
             return tcb.createAsync(Rating).then((componentFixture: ComponentFixture) => {
                 const element: any = componentFixture.nativeElement;
-                componentFixture.componentInstance.rating = 3;
+                let newVal: number = 3;
+                componentFixture.componentInstance.rating = newVal;
                 componentFixture.detectChanges();
-                expect(element.querySelectorAll(".starred").length).toBe(3);
+                expect(element.querySelectorAll(".starred").length).toBe(newVal);
             });
         }));
     });

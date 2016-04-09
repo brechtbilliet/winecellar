@@ -40,7 +40,10 @@ describe("reducer > data", () => {
             initialState[0]._id = "fakeid1";
             initialState[1]._id = "fakeid2";
             initialState[2]._id = "fakeid3";
-            let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_REMOVE, payload: initialState[0]._id});
+            let changedState: Array<Wine> = winesReducer(initialState, {
+                type: DATA_WINES_REMOVE,
+                payload: initialState[0]._id
+            });
             expect(changedState).not.toBe(initialState);
             expect(changedState.length).toBe(2);
             expect(_.filter(changedState, (wine: Wine) => wine._id === initialState[0]._id).length).toBe(0)
@@ -55,7 +58,10 @@ describe("reducer > data", () => {
             let updateWine: Wine = Object.assign({}, initialState[0], {
                 name: "updated"
             })
-            let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_UPDATE, payload: {_id: initialState[0]._id, wine: updateWine}});
+            let changedState: Array<Wine> = winesReducer(initialState, {
+                type: DATA_WINES_UPDATE,
+                payload: {_id: initialState[0]._id, wine: updateWine}
+            });
             expect(changedState).not.toBe(initialState);
             expect(changedState[0]).not.toBe(initialState[0]);
             expect(changedState[0]).not.toBe(updateWine);
@@ -69,7 +75,10 @@ describe("reducer > data", () => {
             initialState[1]._id = "fakeid2";
             initialState[2]._id = "fakeid3";
             let newRating: number = 5;
-            let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_UPDATE_RATE, payload: {_id: initialState[0]._id, myRating: newRating}});
+            let changedState: Array<Wine> = winesReducer(initialState, {
+                type: DATA_WINES_UPDATE_RATE,
+                payload: {_id: initialState[0]._id, myRating: newRating}
+            });
             expect(changedState).not.toBe(initialState);
             expect(changedState[0]).not.toBe(initialState[0]);
             expect(changedState[0].myRating).toBe(newRating);
@@ -82,7 +91,10 @@ describe("reducer > data", () => {
             initialState[1]._id = "fakeid2";
             initialState[2]._id = "fakeid3";
             let newInStock: number = 5;
-            let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_UPDATE_STOCK, payload: {_id: initialState[0]._id, inStock: newInStock}});
+            let changedState: Array<Wine> = winesReducer(initialState, {
+                type: DATA_WINES_UPDATE_STOCK,
+                payload: {_id: initialState[0]._id, inStock: newInStock}
+            });
             expect(changedState).not.toBe(initialState);
             expect(changedState[0]).not.toBe(initialState[0]);
             expect(changedState[0].inStock).toBe(newInStock);
