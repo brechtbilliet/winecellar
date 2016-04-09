@@ -1,6 +1,4 @@
-import {
-    DATA_AUTHENTICATION_SET_AUTHENTICATION, DATA_AUTHENTICATION_CLEAR_AUTHENTICATION
-} from "../../actionTypes";
+import {DATA_AUTHENTICATION_SET_AUTHENTICATION, DATA_AUTHENTICATION_CLEAR_AUTHENTICATION} from "../../actionTypes";
 import {it, describe, expect} from "angular2/testing";
 import {authenticationReducer} from "./authenticationReducer";
 import {AuthenticationDataState} from "../../state/DataState";

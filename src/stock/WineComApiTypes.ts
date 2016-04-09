@@ -1,7 +1,6 @@
 export interface WineComSearchResult {
     products: Products;
 }
-
 export interface Products {
     list: Array<Product>;
     offset: number;

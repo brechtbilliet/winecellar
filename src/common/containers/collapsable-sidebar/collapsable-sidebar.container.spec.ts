@@ -5,16 +5,17 @@ import {
     beforeEachProviders,
     setBaseTestProviders,
     it,
-    describe, resetBaseTestProviders
+    describe,
+    resetBaseTestProviders
 } from "angular2/testing";
 import {CollapsableSidebar} from "./collapsable-sidebar.container";
-import {provide, Component,} from "angular2/core";
+import {provide, Component} from "angular2/core";
 import {Store} from "@ngrx/store";
 import {TEST_BROWSER_APPLICATION_PROVIDERS, TEST_BROWSER_PLATFORM_PROVIDERS} from "angular2/platform/testing/browser";
 import {ApplicationState} from "../../state/ApplicationState";
-import Spy = jasmine.Spy;
 import {Observable} from "rxjs/Observable";
 import {Observer} from "rxjs/Observer";
+import Spy = jasmine.Spy;
 describe("component: collapsable-sidebar", () => {
     let storeMock: Store<ApplicationState> = jasmine.createSpyObj("store", ["select"]);
     let isCollapsedMock$: Observable<boolean>;

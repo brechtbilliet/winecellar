@@ -1,5 +1,4 @@
 import {Reducer, Action} from "@ngrx/store";
-
 import {DATA_AUTHENTICATION_CLEAR_AUTHENTICATION, DATA_AUTHENTICATION_SET_AUTHENTICATION} from "../../actionTypes";
 import {INITIAL_STATE} from "../../state/initialState";
 import {AuthenticationDataState} from "../../state/DataState";

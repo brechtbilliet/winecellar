@@ -4,8 +4,12 @@ import {Wine} from "../../../stock/entities/Wine";
 import {winesReducer} from "./winesReducer";
 import * as _ from "lodash";
 import {
-    DATA_WINES_ADD, DATA_WINES_ADD_ALL, DATA_WINES_REMOVE, DATA_WINES_UPDATE,
-    DATA_WINES_UPDATE_RATE, DATA_WINES_UPDATE_STOCK
+    DATA_WINES_ADD,
+    DATA_WINES_ADD_ALL,
+    DATA_WINES_REMOVE,
+    DATA_WINES_UPDATE,
+    DATA_WINES_UPDATE_RATE,
+    DATA_WINES_UPDATE_STOCK
 } from "../../actionTypes";
 describe("reducer > data", () => {
     describe("case DATA_WINES_ADD", () => {

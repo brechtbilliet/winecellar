@@ -3,7 +3,6 @@ import {FormGroupTextbox} from "../../../common/components/form/form-group-textb
 import {FormGroupPassword} from "../../../common/components/form/form-group-password/form-group-password.component";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
 import {Panel} from "../../../common/components/panel/panel.component";
-
 import {Component} from "angular2/core";
 import {ControlGroup, Control, Validators} from "angular2/common";
 

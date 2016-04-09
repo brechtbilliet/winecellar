@@ -1,9 +1,6 @@
-import {setBaseTestProviders, resetBaseTestProviders} from "angular2/testing";
 import {
-    TEST_BROWSER_PLATFORM_PROVIDERS,
-    TEST_BROWSER_APPLICATION_PROVIDERS
-} from "angular2/platform/testing/browser";
-import {
+    setBaseTestProviders,
+    resetBaseTestProviders,
     it,
     describe,
     expect,
@@ -11,6 +8,7 @@ import {
     TestComponentBuilder,
     injectAsync
 } from "angular2/testing";
+import {TEST_BROWSER_PLATFORM_PROVIDERS, TEST_BROWSER_APPLICATION_PROVIDERS} from "angular2/platform/testing/browser";
 import {Rating} from "./rating.component";
 describe("component: rating", () => {
     resetBaseTestProviders();

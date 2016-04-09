@@ -3,7 +3,6 @@ import {bootstrap} from "angular2/platform/browser";
 import {HTTP_PROVIDERS} from "angular2/http";
 import {ROUTER_PROVIDERS, APP_BASE_HREF, HashLocationStrategy, LocationStrategy} from "angular2/router";
 import {provideStore, usePostMiddleware, usePreMiddleware, Middleware} from "@ngrx/store";
-
 import {WineCellarApp} from "./common/containers/application/application.container";
 import {store} from "./common/store";
 
