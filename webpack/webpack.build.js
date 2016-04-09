@@ -4,6 +4,7 @@ var webpack = require('webpack');
 var StringReplacePlugin = require("string-replace-webpack-plugin");
 var API_KEY = process.env.npm_config_apikey;
 var BACKEND_ENV = process.env.npm_config_backendenv || "https://winecellarapp.herokuapp.com/api";
+var CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -39,7 +40,10 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin(
             {
                 warning: false,
-                mangle: false,
+                mangle: {
+                    screw_ie8 : true,
+                    keep_fnames: true
+                },
                 beautify: false,
                 compress: true,
                 comments: false
@@ -57,8 +61,13 @@ module.exports = {
             'window.jQuery': 'jquery',
             'window.jquery': 'jquery'
         }),
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
-
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+        new CompressionPlugin({
+            algorithm: "gzip",
+            test: /\.js$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8
+        })
     ],
     module:{
         loaders: loaders.concat([
