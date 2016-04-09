@@ -41,7 +41,7 @@ export class EditWinePage implements OnDestroy {
                 private store: Store<ApplicationState>,
                 private wineEndpoint: WineEndpoint,
                 private router: Router) {
-        this.wineEndpoint.loadById(routeParams.get("id"));
+        this.wineEndpoint.loadCurrentWine(routeParams.get("id"));
         this.wine$ = this.store.select((state: ApplicationState) => {
             return state.containers.editWinePage.wine;
         });

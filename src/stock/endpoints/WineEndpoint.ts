@@ -77,7 +77,7 @@ export class WineEndpoint {
             }, (resp: Response) => this.onError(resp));
     }
 
-    public loadById(id: string): void {
+    public loadCurrentWine(id: string): void {
         this.store.dispatch({type: CONTAINER_APPLICATION_ENABLE_BUSY_FLAG});
         this.http.get(API_URL + "/wines/" + id, this.getHttpOptions())
             .map((res: Response) => res.json())
@@ -89,7 +89,7 @@ export class WineEndpoint {
 
     public setRate(wine: Wine, myRating: number): void {
         this.store.dispatch({type: CONTAINER_APPLICATION_ENABLE_BUSY_FLAG});
-        let newWine: Wine = <Wine> _.assign({}, wine, {myRating: myRating});
+        let newWine: Wine = <Wine> Object.assign({}, wine, {myRating: myRating});
         this.http.put(API_URL + "/wines/" + wine._id, JSON.stringify(newWine), this.getHttpOptions())
             .map((res: Response) => res.json())
             .subscribe(() => {
@@ -101,7 +101,7 @@ export class WineEndpoint {
 
     public setStock(wine: Wine, inStock: number): void {
         this.store.dispatch({type: CONTAINER_APPLICATION_ENABLE_BUSY_FLAG});
-        let newWine: Wine = <Wine> _.assign({}, wine, {inStock: inStock});
+        let newWine: Wine = <Wine> Object.assign({}, wine, {inStock: inStock});
         this.http.put(API_URL + "/wines/" + wine._id, JSON.stringify(newWine), this.getHttpOptions())
             .map((res: Response) => res.json())
             .subscribe(() => {
