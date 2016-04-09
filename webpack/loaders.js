@@ -1,7 +1,3 @@
-var StringReplacePlugin = require("string-replace-webpack-plugin");
-var API_KEY = process.env.npm_config_apikey;
-var BACKEND_ENV = process.env.npm_config_backendenv || "https://winecellarapp.herokuapp.com/api";
-
 module.exports = [
     {
         test: /\.ts(x?)$/,
@@ -34,23 +30,5 @@ module.exports = [
         include: /src/,
         test: '\.png$',
         loader: 'url'
-    }, {
-        test: /config.ts$/,
-        loader: StringReplacePlugin.replace({
-            replacements: [
-                {
-                    pattern: '%API_KEY%',
-                    replacement: function () {
-                        return API_KEY
-                    }
-                },
-                {
-                    pattern: '%BACKEND_ENV%',
-                    replacement: function () {
-                        return BACKEND_ENV
-                    }
-                }
-            ]
-        })
     }
 ];

@@ -17,7 +17,7 @@ require('es7-reflect-metadata/dist/browser');
 require('zone.js/dist/zone.js');
 require('zone.js/dist/long-stack-trace-zone.js');
 // these are global EmitHelpers used by compiled typescript
-globalPolyfills()
+globalPolyfills();
 
 require('angular2/testing');
 

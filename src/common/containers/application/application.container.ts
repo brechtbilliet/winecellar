@@ -9,7 +9,7 @@ import {EditWinePage} from "../../../stock/containers/edit-wine-page/edit-wine-p
 import {Component, ViewEncapsulation, ChangeDetectionStrategy} from "angular2/core";
 import {ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
 import {Observable} from "rxjs/Observable";
-import {LOCALSTORAGE_AUTH} from "../../../config";
+import {LOCALSTORAGE_AUTH} from "../../../configuration";
 import {DATA_AUTHENTICATION_SET_AUTHENTICATION} from "../../actionTypes";
 import {ApplicationState} from "../../state/ApplicationState";
 import {Account} from "../../../authentication/types/Account";

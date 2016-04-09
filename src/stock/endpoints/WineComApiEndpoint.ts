@@ -1,7 +1,7 @@
 import {Observable} from "rxjs/Observable";
 import {Http, Response} from "angular2/http";
 import {Injectable} from "angular2/core";
-import {WINE_COM_API_KEY, WINE_COM_API_URL} from "../../config";
+import {WINE_COM_API_KEY, WINE_COM_API_URL} from "../../configuration";
 import {camelCaseReviver} from "../../common/util/camelcaseReviver";
 import {WineComSearchResult} from "../WineComApiTypes";
 

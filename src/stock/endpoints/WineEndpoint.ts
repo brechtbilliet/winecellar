@@ -3,7 +3,6 @@ import * as toastr from "toastr";
 import {Injectable} from "angular2/core";
 import {Http, Response, Headers, RequestOptionsArgs} from "angular2/http";
 import {Wine} from "../entities/Wine";
-import {API_URL} from "../../config";
 import {
     DATA_WINES_ADD_ALL,
     DATA_WINES_ADD,
@@ -17,6 +16,7 @@ import {
 } from "../../common/actionTypes";
 import {Subject} from "rxjs/Subject";
 import {ApplicationState} from "../../common/state/ApplicationState";
+import {API_URL} from "../../configuration";
 
 @Injectable()
 export class WineEndpoint {

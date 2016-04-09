@@ -5,7 +5,7 @@ import {Store} from "@ngrx/store";
 import * as toastr from "toastr";
 import {Credentials} from "../types/Credentials";
 import {Account} from "../types/Account";
-import {API_URL, DEFAULT_HEADERS, LOCALSTORAGE_AUTH} from "../../config";
+import {API_URL, DEFAULT_HEADERS, LOCALSTORAGE_AUTH} from "../../configuration";
 import {
     DATA_AUTHENTICATION_SET_AUTHENTICATION,
     DATA_AUTHENTICATION_CLEAR_AUTHENTICATION,

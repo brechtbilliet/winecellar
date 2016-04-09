@@ -1,8 +1,10 @@
 var loaders = require('./loaders');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var StringReplacePlugin = require('string-replace-webpack-plugin');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+var StringReplacePlugin = require("string-replace-webpack-plugin");
+var API_KEY = process.env.npm_config_apikey;
+var BACKEND_ENV = process.env.npm_config_backendenv || "https://winecellarapp.herokuapp.com/api";
 
 module.exports = {
     entry: {
@@ -61,6 +63,26 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin('vendor', 'dev/vendor.bundle.js')
     ],
     module: {
-        loaders: loaders
+        loaders: loaders.concat([
+            {
+                test: /configuration.ts$/,
+                loader: StringReplacePlugin.replace({
+                    replacements: [
+                        {
+                            pattern: '%API_KEY%',
+                            replacement: function () {
+                                return API_KEY
+                            }
+                        },
+                        {
+                            pattern: '%BACKEND_ENV%',
+                            replacement: function () {
+                                return BACKEND_ENV
+                            }
+                        }
+                    ]
+                })
+            }
+        ])
     }
 };
