@@ -5,12 +5,11 @@ import {Control} from "angular2/common";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="form-group has-feedback" [class.has-success]="control.valid">
-            <label for="loginInput" class="col-sm-4 control-label">{{label}}</label>
+            <label class="col-sm-4 control-label">{{label}}</label>
              <div class="col-sm-8">
                 <input type="password" 
                     [ngFormControl]="control" 
                     class="form-control input-lg" 
-                    id="loginInput" 
                     placeholder="{{placeholder}}"/>
                     <span *ngIf="control.valid" 
                     class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
