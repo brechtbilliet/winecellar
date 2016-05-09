@@ -1,14 +1,12 @@
 import {Wine} from "../../stock/entities/Wine";
-import {Product} from "../../stock/WineComApiTypes";
 
 export interface ContainersState {
-    editWinePage: EditWineContainerState;
+    editStockPage: EditStockContainerState;
     application: ApplicationContainerState;
-    wineSearch: WineSearchContainerState;
     collapsableSidebar: CollapsableSidebarContainerState;
 }
 
-export interface EditWineContainerState {
+export interface EditStockContainerState {
     wine: Wine;
 }
 
@@ -18,8 +16,4 @@ export interface ApplicationContainerState {
 
 export interface CollapsableSidebarContainerState {
     isCollapsed: boolean;
-}
-
-export interface WineSearchContainerState {
-    foundWines: Array<Product>;
 }

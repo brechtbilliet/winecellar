@@ -5,12 +5,11 @@ import {Control} from "angular2/common";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="form-group has-feedback" [class.has-success]="control.valid && control.dirty">
-            <label for="loginInput" class="col-sm-4 control-label">{{label}}</label>
+            <label class="col-sm-4 control-label">{{label}}</label>
              <div class="col-sm-8">
                 <input type="text" 
                     [ngFormControl]="control" 
                     class="form-control input-lg" 
-                    id="loginInput" 
                     placeholder="{{placeholder}}"/>
                     <span *ngIf="control.valid && control.dirty" 
                     class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
@@ -19,12 +18,7 @@ import {Control} from "angular2/common";
     `
 })
 export class FormGroupTextbox {
-    @Input()
-    public control: Control;
-
-    @Input()
-    public label: string;
-
-    @Input()
-    public placeholder: string;
+    @Input() public control: Control;
+    @Input() public label: string;
+    @Input() public placeholder: string;
 }

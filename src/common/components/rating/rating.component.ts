@@ -1,8 +1,8 @@
-import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output} from "angular2/core";
+import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "angular2/core";
 @Component({
     selector: "rating",
-    changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [require("./rating.component.scss")],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <i class="fa fa-star rating" [class.fa-2x]="big" *ngFor="#i of [1,2,3,4,5]"
             [class.over]="overValue >= i" 
@@ -13,14 +13,10 @@ import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output} from "a
     `
 })
 export class Rating {
-    @Input()
-    public rating: number;
+    @Input() public rating: number;
+    @Input() public big: boolean;
 
-    @Input()
-    public big: boolean;
-
-    @Output()
-    public setRate: EventEmitter<number>;
+    @Output() public setRate: EventEmitter<number>;
 
     public overValue: number;
 

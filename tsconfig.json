@@ -7,6 +7,7 @@
     "module": "commonjs",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
     "outDir": "out"
   },
   "exclude": [
@@ -17,5 +18,5 @@
     "typings/main",
     "reports"
   ],
-  "version": "1.7.5"
+  "version": "1.8.10"
 }

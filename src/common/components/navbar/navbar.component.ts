@@ -1,5 +1,5 @@
 import {ROUTER_DIRECTIVES} from "angular2/router";
-import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "angular2/core";
+import {Component, Output, EventEmitter, Input, ChangeDetectionStrategy} from "angular2/core";
 import {Account} from "../../../authentication/types/Account";
 @Component({
     selector: "navbar",
@@ -7,7 +7,7 @@ import {Account} from "../../../authentication/types/Account";
     styles: [require("./navbar.component.scss")],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-       <nav class="navbar navbar-inverse navbar-fixed-top">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" 
@@ -48,11 +48,9 @@ import {Account} from "../../../authentication/types/Account";
         </nav>`
 })
 export class Navbar {
-    @Output()
-    public logout: EventEmitter<any>;
+    @Output() public logout: EventEmitter<any>;
 
-    @Input()
-    public account: Account;
+    @Input() public account: Account;
 
     constructor() {
         this.logout = new EventEmitter();

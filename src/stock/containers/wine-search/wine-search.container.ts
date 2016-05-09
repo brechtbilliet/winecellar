@@ -1,24 +1,18 @@
-import {Store} from "@ngrx/store";
-import "./wine-search.container.scss";
+import {Component, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy} from "angular2/core";
+import {WineComEndpoint, Product, WineComSearchResult} from "../../endpoints/wineCom.endpoint";
 import {Control} from "angular2/common";
-import {Product, WineComSearchResult} from "../../WineComApiTypes";
-import {WineComApiEndpoint} from "../../endpoints/WineComApiEndpoint";
-import {Observable} from "rxjs/Observable";
-import {
-    CONTAINER_WINESEARCH_UPDATE_FOUND_WINES,
-    CONTAINER_WINESEARCH_CLEAR_FOUND_WINES, CONTAINER_APPLICATION_ENABLE_BUSY_FLAG, CONTAINER_APPLICATION_DISABLE_BUSY_FLAG,
-} from "../../../common/actionTypes";
-import {Component, Input, EventEmitter, ElementRef, Output, ChangeDetectionStrategy} from "angular2/core";
-import {ApplicationState} from "../../../common/state/ApplicationState";
+import {Subject} from "rxjs";
+import {Subscription} from "rxjs/Subscription";
+import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
 
 @Component({
     selector: "wine-search",
     styles: [require("./wine-search.container.scss")],
-    providers: [WineComApiEndpoint],
+    providers: [WineComEndpoint, WineSearchSandbox],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="form-group has-feedback" [class.has-success]="control.valid">
-            <label for="loginInput" class="col-sm-4 control-label">
+            <label for="searchInput" class="col-sm-4 control-label">
                 Name (*)
             </label>
             <div class="col-sm-8">
@@ -31,7 +25,7 @@ import {ApplicationState} from "../../../common/state/ApplicationState";
                 <span *ngIf="control.valid" 
                     class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                 <ul class="wine-search-results">
-                    <li *ngFor="#item of foundWines$ | async" (click)="selectWine(item)">
+                    <li *ngFor="#item of foundWines$|async" (click)="selectWine(item)">
                         <img src="{{item.labels[0].url}}" alt=""/> {{item.name}} 
                     </li>
                 </ul>
@@ -39,53 +33,44 @@ import {ApplicationState} from "../../../common/state/ApplicationState";
         </div>
     `
 })
-export class WineSearch {
-    @Input()
-    public control: Control;
+export class WineSearch implements OnDestroy {
+    @Input() public control: Control;
 
-    @Output()
-    public onSelect: EventEmitter<Product>;
+    @Output()public onSelect: EventEmitter<Product>;
 
-    public foundWines$: Observable<Array<Product>>;
+    public foundWines$: Subject<Array<Product>> = new Subject();
+    private subscriptions: Array<Subscription> = [];
 
-    private previousVal: string;
-    
-    constructor(private el: ElementRef,
-                private store: Store<ApplicationState>,
-                private wineComApiEndpoint: WineComApiEndpoint) {
+    constructor(private sandbox: WineSearchSandbox) {
         this.onSelect = new EventEmitter();
-        this.foundWines$ = this.store.select((state: ApplicationState) => {
-            return state.containers.wineSearch.foundWines;
-        });
     }
 
     public selectWine(wine: Product): void {
-        this.store.dispatch({type: CONTAINER_WINESEARCH_UPDATE_FOUND_WINES, payload: []});
         this.onSelect.emit(wine);
+        this.reset();
+    }
+
+    public reset(): void {
+        this.foundWines$.next([]);
     }
 
     public ngOnInit(): void {
-        let searchElement: HTMLElement = this.el.nativeElement.querySelector("input");
-        Observable.fromEvent(searchElement, "keyup")
-            .map((e: any) => e.target.value)
+        let subscription: Subscription = this.control.valueChanges
             .do((value: string) => {
-                if (value.length <= 2) {
-                    this.store.dispatch({type: CONTAINER_WINESEARCH_CLEAR_FOUND_WINES});
+                if (value.length < 3) {
+                    this.reset();
                 }
             })
             .debounceTime(300)
-            .filter((value: string) => {
-                return value.length > 2 && this.previousVal !== value;
-            })
-            .map((value: string): any => {
-                this.store.dispatch({type: CONTAINER_APPLICATION_ENABLE_BUSY_FLAG});
-                this.previousVal = value;
-                return this.wineComApiEndpoint.search(value);
-            })
+            .filter((value: string) => value.length > 2)
+            .map((value: string) => this.sandbox.search(value))
             .switch()
-            .subscribe((resp: WineComSearchResult) => {
-                this.store.dispatch({type: CONTAINER_APPLICATION_DISABLE_BUSY_FLAG});
-                this.store.dispatch({type: CONTAINER_WINESEARCH_UPDATE_FOUND_WINES, payload: resp.products.list});
-            });
+            .map((res: WineComSearchResult) => res.products.list)
+            .subscribe(this.foundWines$);
+        this.subscriptions.push(subscription);
+    }
+
+    public ngOnDestroy(): void {
+        this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
     }
 }

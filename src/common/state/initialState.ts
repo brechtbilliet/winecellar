@@ -1,9 +1,8 @@
-import {Product} from "../../stock/WineComApiTypes";
 import {ApplicationState} from "./ApplicationState";
 
 export const INITIAL_STATE: ApplicationState = {
     containers: {
-        editWinePage: {
+        editStockPage: {
             wine: null
         },
         application: {
@@ -11,9 +10,6 @@ export const INITIAL_STATE: ApplicationState = {
         },
         collapsableSidebar: {
             isCollapsed: false
-        },
-        wineSearch: {
-            foundWines: new Array<Product>()
         }
     },
     data: {
@@ -25,20 +21,3 @@ export const INITIAL_STATE: ApplicationState = {
         wines: []
     }
 };
-
-
-// component structure myWinesPage
-// -application [Smart]
-//      -navbar [dumb]
-//      -spinner [dumb]
-//      -authentication [Smart]
-//      -protected [Smart]
-//          -myWinesPage [Smart]
-//              -defaultPage [dumb]
-//                  -collapsableSidebar [Smart]
-//                      -favorites [dumb]
-//                          -numberPicker [dumb]
-//                  -main [dumb]
-//                      -wineResults [dumb]
-//                          -numberPicker [dumb]
-//                          -rating [dumb]

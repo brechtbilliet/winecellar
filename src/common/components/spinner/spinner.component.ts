@@ -11,6 +11,5 @@ import {Component, Input, ChangeDetectionStrategy} from "angular2/core";
         </div>`
 })
 export class Spinner {
-    @Input()
-    public spin: boolean;
+    @Input() public spin: boolean;
 }

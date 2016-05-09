@@ -1,6 +1,6 @@
 import {Wine} from "../../entities/Wine";
 import {Rating} from "../../../common/components/rating/rating.component";
-import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output} from "angular2/core";
+import {Component, Input, EventEmitter, Output, ChangeDetectionStrategy} from "angular2/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 @Component({
@@ -49,17 +49,11 @@ import {NumberPicker} from "../../../common/components/number-picker/number-pick
     `
 })
 export class WineResults {
-    @Input()
-    public wines: Array<Wine>;
+    @Input() public wines: Array<Wine>;
 
-    @Output()
-    public onRemove: EventEmitter<Wine>;
-
-    @Output()
-    public onSetRate: EventEmitter<any>;
-
-    @Output()
-    public onSetStock: EventEmitter<any>;
+    @Output() public onRemove: EventEmitter<Wine>;
+    @Output() public onSetRate: EventEmitter<any>;
+    @Output() public onSetStock: EventEmitter<any>;
 
     constructor() {
         this.onRemove = new EventEmitter();

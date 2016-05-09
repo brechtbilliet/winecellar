@@ -4,26 +4,11 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var StringReplacePlugin = require("string-replace-webpack-plugin");
 var API_KEY = process.env.npm_config_apikey;
-var BACKEND_ENV = process.env.npm_config_backendenv || "https://winecellarapp.herokuapp.com/api";
 
 module.exports = {
     entry: {
         app: './src/index.ts',
-        vendor: [
-            'jquery',
-            'angular2/core',
-            'angular2/platform/browser',
-            'angular2/http',
-            'angular2/common',
-            'angular2/router',
-            '@ngrx/store',
-            'toastr',
-            'toastr/build/toastr.css',
-            'font-awesome/css/font-awesome.css',
-            'bootstrap/dist/css/bootstrap.css',
-            'rxjs',
-            'lodash'
-        ]
+        vendor: './src/vendor.ts'
     },
     output: {
         filename: './dev/[name].bundle.js',
@@ -31,8 +16,6 @@ module.exports = {
         publicPath: '/'
     },
     devServer: {
-        contentBase: 'dev',
-        hot: true,
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000
@@ -42,18 +25,16 @@ module.exports = {
         root: __dirname,
         extensions: ['', '.ts', '.js', '.json']
     },
-    resolveLoader: {
-        modulesDirectories: ['node_modules']
-    },
-    devtool: 'source-map',
+    debug: true,
+    devtool: 'cheap-module-eval-source-map',
     plugins: [
+        new StringReplacePlugin(),
         new HtmlWebpackPlugin({
             template: './src/index.html',
             inject: 'body',
             hash: true
         }),
         new OpenBrowserPlugin({url: 'http://localhost:8080'}),
-        new StringReplacePlugin(),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -72,12 +53,6 @@ module.exports = {
                             pattern: '%API_KEY%',
                             replacement: function () {
                                 return API_KEY
-                            }
-                        },
-                        {
-                            pattern: '%BACKEND_ENV%',
-                            replacement: function () {
-                                return BACKEND_ENV
                             }
                         }
                     ]

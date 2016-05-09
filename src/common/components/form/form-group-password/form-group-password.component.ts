@@ -18,12 +18,7 @@ import {Control} from "angular2/common";
     `
 })
 export class FormGroupPassword {
-    @Input()
-    public control: Control;
-
-    @Input()
-    public label: string;
-
-    @Input()
-    public placeholder: string;
+    @Input() public control: Control;
+    @Input() public label: string;
+    @Input() public placeholder: string;
 }

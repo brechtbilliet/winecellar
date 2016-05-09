@@ -1,7 +1,7 @@
 import {Reducer, Action} from "@ngrx/store";
-import {DATA_AUTHENTICATION_CLEAR_AUTHENTICATION, DATA_AUTHENTICATION_SET_AUTHENTICATION} from "../../actionTypes";
 import {INITIAL_STATE} from "../../state/initialState";
 import {AuthenticationDataState} from "../../state/DataState";
+import {DATA_AUTHENTICATION_CLEAR_AUTHENTICATION, DATA_AUTHENTICATION_SET_AUTHENTICATION} from "../../actionTypes";
 import {AuthenticationResult} from "../../../authentication/types/AuthenticationResult";
 export const authenticationReducer: Reducer<AuthenticationDataState> =
     (state: AuthenticationDataState = INITIAL_STATE.data.authentication,

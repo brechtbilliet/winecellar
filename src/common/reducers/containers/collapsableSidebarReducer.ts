@@ -1,7 +1,7 @@
 import {Reducer, Action} from "@ngrx/store";
-import {CONTAINER_COLLAPSABLESIDEBAR_TOGGLE} from "../../actionTypes";
 import {INITIAL_STATE} from "../../state/initialState";
 import {CollapsableSidebarContainerState} from "../../state/ContainersState";
+import {CONTAINER_COLLAPSABLESIDEBAR_TOGGLE} from "../../actionTypes";
 export const collapsableSidebarReducer: Reducer<CollapsableSidebarContainerState> =
     (state: CollapsableSidebarContainerState = INITIAL_STATE.containers.collapsableSidebar,
      action: Action = null) => {

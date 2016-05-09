@@ -1,10 +1,11 @@
-import {provide} from "angular2/core";
+import {WineCellarApp} from "./common/containers/application/application.container.ts";
 import {bootstrap} from "angular2/platform/browser";
 import {HTTP_PROVIDERS} from "angular2/http";
-import {ROUTER_PROVIDERS, APP_BASE_HREF, HashLocationStrategy, LocationStrategy} from "angular2/router";
-import {provideStore, usePostMiddleware, usePreMiddleware, Middleware} from "@ngrx/store";
-import {WineCellarApp} from "./common/containers/application/application.container";
+import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy, APP_BASE_HREF} from "angular2/router";
+import {provide} from "angular2/core";
 import {store} from "./common/store";
+import {provideStore, usePostMiddleware, usePreMiddleware, Middleware} from "@ngrx/store";
+import "rxjs/add/operator/do";
 
 const actionLog: Middleware = (action: any) => {
     return action.do((val: any) => {
@@ -21,8 +22,8 @@ bootstrap(WineCellarApp, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     provide(APP_BASE_HREF, {useValue: "/"}),
+    provide(LocationStrategy, {useClass: HashLocationStrategy}),
     provideStore(store),
     usePreMiddleware(actionLog),
-    usePostMiddleware(stateLog),
-    provide(LocationStrategy, {useClass: HashLocationStrategy})
+    usePostMiddleware(stateLog)
 ]);
