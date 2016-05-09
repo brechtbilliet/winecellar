@@ -13,38 +13,24 @@ import * as toastr from "toastr";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
           <form [ngFormModel]="registerForm" class="form-horizontal" (ngSubmit)="onSubmit()">
-            <form-group-textbox 
-                [label]="'First name (*)'" 
-                [control]="registerForm.controls['firstName']" 
+            <form-group-textbox [label]="'First name (*)'" [control]="registerForm.controls['firstName']" 
                 [placeholder]="'Enter first name'">
             </form-group-textbox>
-            <form-group-textbox 
-                [label]="'Last name (*)'" 
-                [control]="registerForm.controls['lastName']" 
+            <form-group-textbox [label]="'Last name (*)'"  [control]="registerForm.controls['lastName']" 
                 [placeholder]="'Enter last name'">
             </form-group-textbox>
-            <form-group-textbox 
-                [label]="'Login (*)'" 
-                [control]="registerForm.controls['login']" 
+            <form-group-textbox [label]="'Login (*)'" [control]="registerForm.controls['login']" 
                 [placeholder]="'Enter login'">
             </form-group-textbox>
-            <form-group-password 
-                [label]="'Password (*)'" 
-                [control]="registerForm.controls['password']" 
+            <form-group-password [label]="'Password (*)'" [control]="registerForm.controls['password']" 
                 [placeholder]="'Enter password'">
             </form-group-password>
-            <form-group-password 
-                [label]="'Confirm password (*)'" 
-                [control]="registerForm.controls['confirmPassword']" 
+            <form-group-password [label]="'Confirm password (*)'" [control]="registerForm.controls['confirmPassword']" 
                 [placeholder]="'Confirm your password'">
             </form-group-password>
             <form-group-footer>
-                 <button 
-                    type="submit" 
-                    [disabled]="!registerForm.valid" 
-                    class="btn btn-primary btn-block btn-lg">
-                        <i class="fa fa-user"></i>
-                        Sign up
+                <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary btn-block btn-lg">
+                    <i class="fa fa-user"></i>&nbsp;Sign up
                 </button>
             </form-group-footer>
         </form>
