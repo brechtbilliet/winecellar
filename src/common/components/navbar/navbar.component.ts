@@ -1,5 +1,5 @@
-import {ROUTER_DIRECTIVES} from "angular2/router";
-import {Component, Output, EventEmitter, Input, ChangeDetectionStrategy} from "angular2/core";
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {Component, Output, EventEmitter, Input, ChangeDetectionStrategy} from "@angular/core";
 import {Account} from "../../../authentication/types/Account";
 @Component({
     selector: "navbar",
@@ -48,13 +48,9 @@ import {Account} from "../../../authentication/types/Account";
         </nav>`
 })
 export class Navbar {
-    @Output() public logout: EventEmitter<any>;
-
     @Input() public account: Account;
 
-    constructor() {
-        this.logout = new EventEmitter();
-    }
+    @Output() public logout = new EventEmitter();
 
     public logoutClicked(): void {
         this.logout.emit(null);

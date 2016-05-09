@@ -1,6 +1,6 @@
 import {Panel} from "../../../common/components/panel/panel.component";
-import {ControlGroup, Validators, Control} from "angular2/common";
-import {Output, EventEmitter, Component, ChangeDetectionStrategy} from "angular2/core";
+import {ControlGroup, Validators, Control} from "@angular/common";
+import {Output, EventEmitter, Component, ChangeDetectionStrategy} from "@angular/core";
 import {Credentials} from "../../types/Credentials";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
 import {FormGroupPassword} from "../../../common/components/form/form-group-password/form-group-password.component";
@@ -25,12 +25,11 @@ import {FormGroupTextbox} from "../../../common/components/form/form-group-textb
        `
 })
 export class Login {
+    @Output() public authenticate = new EventEmitter<Credentials>();
+
     public loginForm: ControlGroup;
 
-    @Output() public authenticate: EventEmitter<Credentials>;
-
     constructor() {
-        this.authenticate = new EventEmitter();
         this.loginForm = new ControlGroup({
             "login": new Control("", Validators.required),
             "password": new Control("", Validators.required)

@@ -1,7 +1,7 @@
 import {Store} from "@ngrx/store";
 import * as toastr from "toastr";
-import {Injectable} from "angular2/core";
-import {Http, Response, Headers, RequestOptionsArgs} from "angular2/http";
+import {Injectable} from "@angular/core";
+import {Http, Response, Headers, RequestOptionsArgs} from "@angular/http";
 import {Wine} from "../entities/Wine";
 import {
     DATA_WINES_ADD_ALL,

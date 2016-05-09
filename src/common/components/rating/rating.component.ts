@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "angular2/core";
+import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "@angular/core";
 @Component({
     selector: "rating",
     styles: [require("./rating.component.scss")],
@@ -13,26 +13,22 @@ import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "a
     `
 })
 export class Rating {
-    @Input() public rating: number;
-    @Input() public big: boolean;
+    @Input() public rating:number;
+    @Input() public big:boolean;
 
-    @Output() public setRate: EventEmitter<number>;
+    @Output() public setRate = new EventEmitter<number>();
 
-    public overValue: number;
+    public overValue:number;
 
-    constructor() {
-        this.setRate = new EventEmitter();
-    }
-
-    public update(value: number): void {
+    public update(value:number):void {
         this.setRate.emit(value);
     }
 
-    public over(value: number): void {
+    public over(value:number):void {
         this.overValue = value;
     }
 
-    public out(): void {
+    public out():void {
         this.overValue = 0;
     }
 }

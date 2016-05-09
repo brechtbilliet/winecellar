@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from "angular2/core";
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
 @Component({
     selector: "number-picker",
     styles: [require("./number-picker.component.scss")],
@@ -16,11 +16,7 @@ import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from "a
 export class NumberPicker {
     @Input() public amount: number;
 
-    @Output() public setAmount: EventEmitter<number>;
-
-    constructor() {
-        this.setAmount = new EventEmitter();
-    }
+    @Output() public setAmount = new EventEmitter<number>();
 
     public up(): void {
         this.setAmount.emit(this.amount + 1);

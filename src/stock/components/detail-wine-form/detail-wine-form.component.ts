@@ -1,11 +1,11 @@
-import {Validators, Control, ControlGroup} from "angular2/common";
-import {EventEmitter, Output, Input, ChangeDetectionStrategy, Component} from "angular2/core";
+import {Validators, Control, ControlGroup} from "@angular/common";
+import {EventEmitter, Output, Input, ChangeDetectionStrategy, Component} from "@angular/core";
 import {Wine} from "../../entities/Wine";
 import {FormGroupTextarea} from "../../../common/components/form/form-group-textarea/form-group-textarea.component";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
 import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 import {Rating} from "../../../common/components/rating/rating.component";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {Product} from "../../endpoints/wineCom.endpoint";
 import {WineSearch} from "../../containers/wine-search/wine-search.container";
 import {FormGroupTextbox} from "../../../common/components/form/form-group-textbox/form-group-textbox.component";
@@ -63,15 +63,11 @@ import {FormGroupTextbox} from "../../../common/components/form/form-group-textb
      `
 })
 export class DetailWineForm {
-    @Output() public onSave: EventEmitter<Wine>;
-
     @Input() public wine: Wine;
+    
+    @Output() public onSave = new EventEmitter<Wine>();
 
     public wineForm: ControlGroup;
-
-    constructor() {
-        this.onSave = new EventEmitter();
-    }
 
     public ngOnInit(): void {
         this.wine = this.wine ? Object.assign({}, this.wine) : new Wine();

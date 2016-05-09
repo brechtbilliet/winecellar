@@ -1,13 +1,11 @@
-import {Injectable} from "angular2/core";
-import {Observable} from "rxjs/Observable";
+import {Injectable} from "@angular/core";
 import {ApplicationState} from "../state/ApplicationState";
 import {Store} from "@ngrx/store";
 import {CONTAINER_COLLAPSABLESIDEBAR_TOGGLE} from "../actionTypes";
 
 @Injectable()
 export class CollapsableSidebarSandbox {
-    public isCollapsed$: Observable<boolean> =
-        this.store.select((state: ApplicationState) => state.containers.collapsableSidebar.isCollapsed);
+    public isCollapsed$ = this.store.select(state => state.containers.collapsableSidebar.isCollapsed);
 
     constructor(private store: Store<ApplicationState>) {
     }

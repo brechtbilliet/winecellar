@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {AuthenticationResource} from "../resources/authentication.resource";
 import {Credentials} from "../types/Credentials";
 import {Account} from "../types/Account";

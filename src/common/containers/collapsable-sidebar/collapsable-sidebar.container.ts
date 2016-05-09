@@ -1,6 +1,5 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 import {CollapsableSidebarSandbox} from "../../sandboxes/collapsable-sidebar.sandbox.ts";
-import {Observable} from "rxjs/Observable";
 @Component({
     selector: "collapsable-sidebar",
     providers: [CollapsableSidebarSandbox],
@@ -16,7 +15,7 @@ import {Observable} from "rxjs/Observable";
     `
 })
 export class CollapsableSidebar {
-    public isCollapsed$: Observable<boolean> = this.sandbox.isCollapsed$;
+    public isCollapsed$ = this.sandbox.isCollapsed$;
     
     constructor(public sandbox: CollapsableSidebarSandbox) {
     }

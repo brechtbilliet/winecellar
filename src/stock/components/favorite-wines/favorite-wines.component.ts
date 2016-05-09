@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "angular2/core";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "@angular/core";
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import * as _ from "lodash";
 import {Wine} from "../../entities/Wine";
 import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
@@ -26,13 +26,9 @@ import {NumberPicker} from "../../../common/components/number-picker/number-pick
     `
 })
 export class FavoriteWines {
-    @Output() public onSetStock: EventEmitter<any>;
-
     @Input() public wines: Array<Wine>;
 
-    constructor() {
-        this.onSetStock = new EventEmitter();
-    }
+    @Output() public onSetStock = new EventEmitter<any>();
 
     public get favoriteWines(): Array<Wine> {
         return <Array<Wine>>_.orderBy(this.wines, ["myRating"], ["desc"]);

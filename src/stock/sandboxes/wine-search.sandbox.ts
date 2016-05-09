@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {WineComEndpoint, WineComSearchResult} from "../endpoints/wineCom.endpoint";
 import {Observable} from "rxjs/Observable";
 

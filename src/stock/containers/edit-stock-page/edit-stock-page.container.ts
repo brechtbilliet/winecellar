@@ -1,9 +1,8 @@
-import {Component, OnDestroy} from "angular2/core";
+import {Component, OnDestroy} from "@angular/core";
 import {Main} from "../../../common/components/main/main.component";
 import {DefaultPage} from "../../../common/components/default-page/default-page.component";
-import {ROUTER_DIRECTIVES, RouteParams, Router} from "angular2/router";
+import {ROUTER_DIRECTIVES, RouteParams, Router} from "@angular/router-deprecated";
 import {DetailWineForm} from "../../components/detail-wine-form/detail-wine-form.component";
-import {Observable} from "rxjs/Observable";
 import {Wine} from "../../entities/Wine";
 import {WineResource} from "../../resources/wine.resource";
 import {EditStockPageSandbox} from "../../sandboxes/edit-stock-page.sandbox";
@@ -27,7 +26,7 @@ import {EditStockPageSandbox} from "../../sandboxes/edit-stock-page.sandbox";
      `
 })
 export class EditStockPage implements OnDestroy {
-    public editWine$: Observable<Wine> = this.sandbox.editWine$;
+    public editWine$ = this.sandbox.editWine$;
 
     constructor(public sandbox: EditStockPageSandbox,
                 private routeParams: RouteParams,

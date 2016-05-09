@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit} from "@angular/core";
 import {DefaultPage} from "../../../common/components/default-page/default-page.component";
 import {Main} from "../../../common/components/main/main.component";
 import {CollapsableSidebar} from "../../../common/containers/collapsable-sidebar/collapsable-sidebar.container";
@@ -7,8 +7,8 @@ import {Wine} from "../../entities/Wine";
 import {Observable} from "rxjs/Observable";
 import {WineResults} from "../../components/wine-results/wine-results.component";
 import * as _ from "lodash";
-import {ROUTER_DIRECTIVES} from "angular2/router";
-import {Control} from "angular2/common";
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {Control} from "@angular/common";
 import {WineResource} from "../../resources/wine.resource";
 import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
 @Component({
@@ -59,8 +59,8 @@ import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
 })
 export class StockPage implements OnInit {
     public matchingWines$: Observable<Array<Wine>>;
-    public wines$: Observable<Array<Wine>> = this.sandbox.wines$;
-    public numberOfWines$: Observable<Number> = this.wines$.map((wines: Array<Wine>) => {
+    public wines$ = this.sandbox.wines$;
+    public numberOfWines$ = this.wines$.map((wines: Array<Wine>) => {
         return _.sumBy(wines, (wine: Wine) => wine.inStock);
     });
     public searchCtrl: Control = new Control("");

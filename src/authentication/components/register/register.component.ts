@@ -1,10 +1,11 @@
 import {Panel} from "../../../common/components/panel/panel.component";
-import {Component, Output, EventEmitter, ChangeDetectionStrategy} from "angular2/core";
-import {ControlGroup, Validators, Control} from "angular2/common";
+import {Component, Output, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
+import {ControlGroup, Validators, Control} from "@angular/common";
 import {Account} from "../../types/Account";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
 import {FormGroupPassword} from "../../../common/components/form/form-group-password/form-group-password.component";
 import {FormGroupTextbox} from "../../../common/components/form/form-group-textbox/form-group-textbox.component";
+import * as toastr from "toastr";
 @Component({
     selector: "register",
     directives: [FormGroupTextbox, FormGroupPassword, FormGroupFooter, Panel],
@@ -50,20 +51,15 @@ import {FormGroupTextbox} from "../../../common/components/form/form-group-textb
        `
 })
 export class Register {
-    @Output() public authenticate: EventEmitter<Account>;
+    @Output() public authenticate = new EventEmitter<Account>();
 
-    public registerForm: ControlGroup;
-
-    constructor() {
-        this.authenticate = new EventEmitter();
-        this.registerForm = new ControlGroup({
-            "firstName": new Control("", Validators.required),
-            "lastName": new Control("", Validators.required),
-            "login": new Control("", Validators.required),
-            "password": new Control("", Validators.required),
-            "confirmPassword": new Control("", Validators.required)
-        });
-    }
+    public registerForm = new ControlGroup({
+        "firstName": new Control("", Validators.required),
+        "lastName": new Control("", Validators.required),
+        "login": new Control("", Validators.required),
+        "password": new Control("", Validators.required),
+        "confirmPassword": new Control("", Validators.required)
+    });
 
     public onSubmit(): void {
         if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {

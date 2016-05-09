@@ -1,6 +1,6 @@
-import {Component, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy} from "angular2/core";
+import {Component, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy} from "@angular/core";
 import {WineComEndpoint, Product, WineComSearchResult} from "../../endpoints/wineCom.endpoint";
-import {Control} from "angular2/common";
+import {Control} from "@angular/common";
 import {Subject} from "rxjs";
 import {Subscription} from "rxjs/Subscription";
 import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
@@ -36,13 +36,12 @@ import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
 export class WineSearch implements OnDestroy {
     @Input() public control: Control;
 
-    @Output()public onSelect: EventEmitter<Product>;
+    @Output()public onSelect = new EventEmitter<Product>();
 
-    public foundWines$: Subject<Array<Product>> = new Subject();
+    public foundWines$ = new Subject<Array<Product>>();
     private subscriptions: Array<Subscription> = [];
 
     constructor(private sandbox: WineSearchSandbox) {
-        this.onSelect = new EventEmitter();
     }
 
     public selectWine(wine: Product): void {

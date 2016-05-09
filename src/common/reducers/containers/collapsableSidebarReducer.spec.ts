@@ -1,13 +1,15 @@
-import {it, describe, expect} from "angular2/testing";
 import {CollapsableSidebarContainerState} from "../../state/ContainersState";
 import {collapsableSidebarReducer} from "./collapsableSidebarReducer";
 import {CONTAINER_COLLAPSABLESIDEBAR_TOGGLE} from "../../actionTypes";
+let deepfreeze = require('deep-freeze');
+
 describe("reducer: containers > collaspableSidebarReducer", () => {
     describe("case CONTAINER_COLLAPSABLESIDEBAR_TOGGLE", () => {
         it("should return a new state with a different isCollapsed value", () => {
             let initialState: CollapsableSidebarContainerState = {
                 isCollapsed: false
             };
+            deepfreeze(initialState);
             let changedState: CollapsableSidebarContainerState =
                 collapsableSidebarReducer(initialState, {type: CONTAINER_COLLAPSABLESIDEBAR_TOGGLE});
             expect(changedState).not.toBe(initialState);
@@ -25,6 +27,7 @@ describe("reducer: containers > collaspableSidebarReducer", () => {
             let initialState: CollapsableSidebarContainerState = {
                 isCollapsed: false
             };
+            deepfreeze(initialState);
             let changedState: CollapsableSidebarContainerState = collapsableSidebarReducer(initialState, {type: null});
             expect(changedState).toBe(initialState);
         });

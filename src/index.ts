@@ -1,8 +1,9 @@
 import {WineCellarApp} from "./common/containers/application/application.container.ts";
-import {bootstrap} from "angular2/platform/browser";
-import {HTTP_PROVIDERS} from "angular2/http";
-import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy, APP_BASE_HREF} from "angular2/router";
-import {provide} from "angular2/core";
+import {bootstrap} from "@angular/platform-browser-dynamic";
+import {HTTP_PROVIDERS} from "@angular/http";
+import {ROUTER_PROVIDERS} from "@angular/router-deprecated";
+import {LocationStrategy, HashLocationStrategy, APP_BASE_HREF} from "@angular/common";
+import {provide} from "@angular/core";
 import {store} from "./common/store";
 import {provideStore, usePostMiddleware, usePreMiddleware, Middleware} from "@ngrx/store";
 import "rxjs/add/operator/do";

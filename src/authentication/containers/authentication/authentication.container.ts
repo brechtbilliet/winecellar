@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 import {Panel} from "../../../common/components/panel/panel.component";
 import {Login} from "../../components/login/login.component";
 import {Register} from "../../components/register/register.component";

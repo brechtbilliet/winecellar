@@ -1,7 +1,7 @@
 import {WINE_COM_API_URL, WINE_COM_API_KEY} from "../../configuration";
 import {Observable} from "rxjs/Observable";
-import {Http, Response} from "angular2/http";
-import {Injectable} from "angular2/core";
+import {Http, Response} from "@angular/http";
+import {Injectable} from "@angular/core";
 import {BusyHandlerService} from "../../common/services/busyHandler.service.ts";
 @Injectable()
 export class WineComEndpoint {

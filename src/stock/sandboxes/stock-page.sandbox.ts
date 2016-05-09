@@ -1,13 +1,12 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {ApplicationState} from "../../common/state/ApplicationState";
 import {Wine} from "../entities/Wine";
 import {WineResource} from "../resources/wine.resource";
-import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class StockPageSandbox {
-    public wines$: Observable<Array<Wine>> = this.store.select((state: ApplicationState) => state.data.wines);
+    public wines$ = this.store.select(state => state.data.wines);
 
     constructor(private store: Store<ApplicationState>, private wineResource: WineResource) {
     }

@@ -1,5 +1,5 @@
-import {Input, Component, ChangeDetectionStrategy} from "angular2/core";
-import {Control} from "angular2/common";
+import {Input, Component, ChangeDetectionStrategy} from "@angular/core";
+import {Control} from "@angular/common";
 @Component({
     selector: "form-group-textarea",
     changeDetection: ChangeDetectionStrategy.OnPush,

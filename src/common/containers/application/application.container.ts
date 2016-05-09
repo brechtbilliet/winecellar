@@ -1,6 +1,6 @@
-import {Title} from "angular2/src/platform/browser/title";
-import {Component, ViewEncapsulation, OnDestroy} from "angular2/core";
-import {ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
+import {Title} from "@angular/platform-browser";
+import {Component, ViewEncapsulation, OnDestroy} from "@angular/core";
+import {ROUTER_DIRECTIVES, RouteConfig} from "@angular/router-deprecated";
 import {AboutPage} from "../../../about/containers/about-page/about-page.container";
 import {EditStockPage} from "../../../stock/containers/edit-stock-page/edit-stock-page.container";
 import {AddStockPage} from "../../../stock/containers/add-stock-page/add-stock-page.container";
@@ -13,8 +13,6 @@ import "font-awesome/css/font-awesome.css";
 import {Spinner} from "../../components/spinner/spinner.component";
 import {Authentication} from "../../../authentication/containers/authentication/authentication.container";
 import {BusyHandlerService} from "../../services/busyHandler.service";
-import {Observable} from "rxjs/Observable";
-import {Account} from "../../../authentication/types/Account";
 import {AuthenticationResource} from "../../../authentication/resources/authentication.resource";
 import {WineResource} from "../../../stock/resources/wine.resource";
 import {ApplicationSandbox} from "../../sandboxes/application.sandbox";
@@ -40,9 +38,9 @@ import {Subscription} from "rxjs/Subscription";
     {path: "/about", name: "About", component: AboutPage}
 ])
 export class WineCellarApp implements OnDestroy{
-    public isAuthenticated$: Observable<boolean> = this.sandbox.isAuthenticated$;
-    public account$: Observable<Account> = this.sandbox.account$;
-    public isBusy$: Observable<boolean> = this.sandbox.isBusy$;
+    public isAuthenticated$ = this.sandbox.isAuthenticated$;
+    public account$ = this.sandbox.account$;
+    public isBusy$ = this.sandbox.isBusy$;
     private subscriptions: Array<Subscription> = [];
 
     constructor(public sandbox: ApplicationSandbox, private title: Title) {

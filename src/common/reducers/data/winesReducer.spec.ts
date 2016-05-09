@@ -1,4 +1,3 @@
-import {it, describe, expect} from "angular2/testing";
 import {INITIAL_STATE} from "../../state/initialState";
 import {Wine} from "../../../stock/entities/Wine";
 import {winesReducer} from "./winesReducer";
@@ -11,12 +10,15 @@ import {
     DATA_WINES_UPDATE_RATE,
     DATA_WINES_UPDATE_STOCK
 } from "../../actionTypes";
+let deepfreeze = require('deep-freeze');
+
 describe("reducer > data", () => {
     describe("case DATA_WINES_ADD", () => {
         it("should return a new instance with the correct state", () => {
             let initialState: Array<Wine> = INITIAL_STATE.data.wines;
             initialState.push(new Wine("initiaial", "wine"));
             let payload: Wine = new Wine();
+            deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_ADD, payload});
             expect(changedState).not.toBe(initialState);
             expect(changedState.length).toBe(2);
@@ -27,6 +29,7 @@ describe("reducer > data", () => {
         it("should return a new instance with the correct state", () => {
             let initialState: Array<Wine> = INITIAL_STATE.data.wines;
             let payload: Array<Wine> = [new Wine(), new Wine(), new Wine()];
+            deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_ADD_ALL, payload});
             expect(changedState).not.toBe(initialState);
             _.each(payload, (wine: Wine, index: number) => {
@@ -40,6 +43,7 @@ describe("reducer > data", () => {
             initialState[0]._id = "fakeid1";
             initialState[1]._id = "fakeid2";
             initialState[2]._id = "fakeid3";
+            deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {
                 type: DATA_WINES_REMOVE,
                 payload: initialState[0]._id
@@ -57,7 +61,8 @@ describe("reducer > data", () => {
             initialState[2]._id = "fakeid3";
             let updateWine: Wine = Object.assign({}, initialState[0], {
                 name: "updated"
-            })
+            });
+            deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {
                 type: DATA_WINES_UPDATE,
                 payload: {_id: initialState[0]._id, wine: updateWine}
@@ -75,6 +80,7 @@ describe("reducer > data", () => {
             initialState[1]._id = "fakeid2";
             initialState[2]._id = "fakeid3";
             let newRating: number = 5;
+            deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {
                 type: DATA_WINES_UPDATE_RATE,
                 payload: {_id: initialState[0]._id, myRating: newRating}
@@ -91,6 +97,7 @@ describe("reducer > data", () => {
             initialState[1]._id = "fakeid2";
             initialState[2]._id = "fakeid3";
             let newInStock: number = 5;
+            deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {
                 type: DATA_WINES_UPDATE_STOCK,
                 payload: {_id: initialState[0]._id, inStock: newInStock}
@@ -103,6 +110,7 @@ describe("reducer > data", () => {
     describe("case default", () => {
         it("should return the same state", () => {
             let initialState: Array<Wine> = [new Wine(), new Wine(), new Wine()];
+            deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {type: null});
             expect(changedState).toBe(initialState);
         })

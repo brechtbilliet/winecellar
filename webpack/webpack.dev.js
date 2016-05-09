@@ -8,7 +8,24 @@ var API_KEY = process.env.npm_config_apikey;
 module.exports = {
     entry: {
         app: './src/index.ts',
-        vendor: './src/vendor.ts'
+        vendor: [
+            '@ngrx/store',
+            '@angular/common',
+            '@angular/compiler',
+            '@angular/core',
+            '@angular/http',
+            '@angular/platform-browser',
+            '@angular/platform-browser-dynamic',
+            'bootstrap',
+            'jquery',
+            'lodash',
+            'rxjs',
+            'toastr',
+            '@angular/router-deprecated',
+            'bootstrap/dist/css/bootstrap.css',
+            'toastr/build/toastr.css',
+            'font-awesome/css/font-awesome.css'
+        ]
     },
     output: {
         filename: './dev/[name].bundle.js',
