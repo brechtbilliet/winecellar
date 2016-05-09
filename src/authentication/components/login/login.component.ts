@@ -12,14 +12,10 @@ import {FormGroupTextbox} from "../../../common/components/form/form-group-textb
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <form [ngFormModel]="loginForm" class="form-horizontal" (ngSubmit)="onSubmit()">
-            <form-group-textbox [label]="'Login (*)'" [control]="loginForm.controls['login']" [placeholder]="'Enter login'">
-            </form-group-textbox>
-            <form-group-password [label]="'Password (*)'" [control]="loginForm.controls['password']" [placeholder]="'Enter password'">
-            </form-group-password>
+            <form-group-textbox [label]="'Login (*)'" [control]="loginForm.controls['login']" [placeholder]="'Enter login'"></form-group-textbox>
+            <form-group-password [label]="'Password (*)'" [control]="loginForm.controls['password']" [placeholder]="'Enter password'"></form-group-password>
             <form-group-footer>
-                 <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block btn-lg">
-                    <i class="fa fa-sign-in"></i>&nbsp;Sign in
-                </button>
+                 <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block btn-lg"><i class="fa fa-sign-in"></i>&nbsp;Sign in</button>
             </form-group-footer>
         </form>
        `
@@ -27,16 +23,12 @@ import {FormGroupTextbox} from "../../../common/components/form/form-group-textb
 export class Login {
     @Output() public authenticate = new EventEmitter<Credentials>();
 
-    public loginForm: ControlGroup;
+    public loginForm = new ControlGroup({
+        "login": new Control("", Validators.required),
+        "password": new Control("", Validators.required)
+    });
 
-    constructor() {
-        this.loginForm = new ControlGroup({
-            "login": new Control("", Validators.required),
-            "password": new Control("", Validators.required)
-        });
-    }
-
-    public onSubmit(): void {
+    public onSubmit():void {
         this.authenticate.emit(this.loginForm.value);
     }
 }

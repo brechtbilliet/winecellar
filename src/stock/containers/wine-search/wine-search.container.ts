@@ -1,14 +1,14 @@
 import {Component, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy} from "@angular/core";
-import {WineComEndpoint, Product, WineComSearchResult} from "../../endpoints/wineCom.endpoint";
 import {Control} from "@angular/common";
 import {Subject} from "rxjs";
 import {Subscription} from "rxjs/Subscription";
 import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
+import {WineComService, Product, WineComSearchResult} from "../../services/wineCom.service";
 
 @Component({
     selector: "wine-search",
     styles: [require("./wine-search.container.scss")],
-    providers: [WineComEndpoint, WineSearchSandbox],
+    providers: [WineComService, WineSearchSandbox],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="form-group has-feedback" [class.has-success]="control.valid">
@@ -16,16 +16,11 @@ import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
                 Name (*)
             </label>
             <div class="col-sm-8">
-                <input type="text" 
-                    [ngFormControl]="control" 
-                    class="form-control input-lg" 
-                    id="searchInput" 
-                    autocomplete="off"
-                    placeholder="Name"/>
-                <span *ngIf="control.valid" 
-                    class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                <input type="text" [ngFormControl]="control" class="form-control input-lg" id="searchInput" 
+                    autocomplete="off" placeholder="Name"/>
+                <span *ngIf="control.valid" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                 <ul class="wine-search-results">
-                    <li *ngFor="#item of foundWines$|async" (click)="selectWine(item)">
+                    <li *ngFor="let item of foundWines$|async" (click)="selectWine(item)">
                         <img src="{{item.labels[0].url}}" alt=""/> {{item.name}} 
                     </li>
                 </ul>
@@ -70,6 +65,6 @@ export class WineSearch implements OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
+        this.subscriptions.forEach(sub => sub.unsubscribe());
     }
 }

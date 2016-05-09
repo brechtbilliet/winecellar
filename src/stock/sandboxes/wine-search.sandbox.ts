@@ -1,13 +1,13 @@
 import {Injectable} from "@angular/core";
-import {WineComEndpoint, WineComSearchResult} from "../endpoints/wineCom.endpoint";
 import {Observable} from "rxjs/Observable";
+import {WineComSearchResult, WineComService} from "../services/wineCom.service";
 
 @Injectable()
 export class WineSearchSandbox {
-    constructor(private wineComEndpoint: WineComEndpoint) {
+    constructor(private wineComService: WineComService) {
     }
 
     public search(term: string): Observable<WineComSearchResult> {
-        return this.wineComEndpoint.search(term);
+        return this.wineComService.search(term);
     }
 }

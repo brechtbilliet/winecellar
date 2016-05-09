@@ -13,13 +13,13 @@ import "font-awesome/css/font-awesome.css";
 import {Spinner} from "../../components/spinner/spinner.component";
 import {Authentication} from "../../../authentication/containers/authentication/authentication.container";
 import {BusyHandlerService} from "../../services/busyHandler.service";
-import {AuthenticationResource} from "../../../authentication/resources/authentication.resource";
-import {WineResource} from "../../../stock/resources/wine.resource";
 import {ApplicationSandbox} from "../../sandboxes/application.sandbox";
 import {Subscription} from "rxjs/Subscription";
+import {AuthenticationService} from "../../../authentication/services/authentication.service";
+import {WineService} from "../../../stock/services/wine.service";
 @Component({
     selector: "application",
-    providers: [Title, ApplicationSandbox, AuthenticationResource, WineResource, BusyHandlerService],
+    providers: [Title, ApplicationSandbox, AuthenticationService, WineService, BusyHandlerService],
     directives: [ROUTER_DIRECTIVES, Navbar, Spinner, Authentication],
     encapsulation: ViewEncapsulation.None,
     styles: [require("./application.container.scss")],
@@ -41,6 +41,7 @@ export class WineCellarApp implements OnDestroy{
     public isAuthenticated$ = this.sandbox.isAuthenticated$;
     public account$ = this.sandbox.account$;
     public isBusy$ = this.sandbox.isBusy$;
+    
     private subscriptions: Array<Subscription> = [];
 
     constructor(public sandbox: ApplicationSandbox, private title: Title) {

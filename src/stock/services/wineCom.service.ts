@@ -4,7 +4,7 @@ import {Http, Response} from "@angular/http";
 import {Injectable} from "@angular/core";
 import {BusyHandlerService} from "../../common/services/busyHandler.service.ts";
 @Injectable()
-export class WineComEndpoint {
+export class WineComService {
     constructor(private http: Http, private busyHandler: BusyHandlerService) {
     }
 

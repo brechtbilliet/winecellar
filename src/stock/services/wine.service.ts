@@ -18,7 +18,7 @@ import {BusyHandlerService} from "../../common/services/busyHandler.service";
 import {Observable} from "rxjs";
 
 @Injectable()
-export class WineResource {
+export class WineService {
     constructor(private store: Store<ApplicationState>, private busyHandler: BusyHandlerService,
                 private http: Http) {
     }

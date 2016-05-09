@@ -4,12 +4,12 @@ import {Login} from "../../components/login/login.component";
 import {Register} from "../../components/register/register.component";
 import {Account} from "../../types/Account";
 import {Credentials} from "../../types/Credentials";
-import {AuthenticationResource} from "../../resources/authentication.resource.ts";
 import {AuthenticationSandbox} from "../../sandboxes/authentication.sandbox";
+import {AuthenticationService} from "../../services/authentication.service";
 @Component({
     selector: "authentication",
     directives: [Login, Register, Panel],
-    providers: [AuthenticationResource, AuthenticationSandbox],
+    providers: [AuthenticationService, AuthenticationSandbox],
     template: `
        <div class="container">
            <panel [header]="'You need authentication'">

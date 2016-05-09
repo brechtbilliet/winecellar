@@ -1,18 +1,18 @@
 import {Injectable} from "@angular/core";
-import {AuthenticationResource} from "../resources/authentication.resource";
 import {Credentials} from "../types/Credentials";
 import {Account} from "../types/Account";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Injectable()
 export class AuthenticationSandbox {
-    constructor(private authenticationResource: AuthenticationResource) {
+    constructor(private authenticationService: AuthenticationService) {
     }
 
     public login(credentials: Credentials): void {
-        this.authenticationResource.authenticate(credentials);
+        this.authenticationService.authenticate(credentials);
     }
 
     public register(account: Account): void {
-        this.authenticationResource.register(account);
+        this.authenticationService.register(account);
     }
 }

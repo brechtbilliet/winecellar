@@ -13,9 +13,9 @@ import {NumberPicker} from "../../../common/components/number-picker/number-pick
             <h2><i class="fa fa-star"></i>&nbsp;Favorites</h2>
             <table class="table table-striped">
                 <tbody>
-                    <tr *ngFor="#wine of favoriteWines">
+                    <tr *ngFor="let wine of favoriteWines">
                         <td style="min-width:70px;">
-                            <number-picker [amount]="wine.inStock" (setAmount)="setStock(wine, $event)"></number-picker>
+                            <number-picker [amount]="wine.inStock" (setAmount)="onSetStock(wine, $event)"></number-picker>
                         </td>
                         <td style="max-width: 200px;">{{wine.name}}</td>
                         <td>{{wine.myRating}}/5</td>
@@ -28,13 +28,13 @@ import {NumberPicker} from "../../../common/components/number-picker/number-pick
 export class FavoriteWines {
     @Input() public wines: Array<Wine>;
 
-    @Output() public onSetStock = new EventEmitter<any>();
+    @Output() public setStock = new EventEmitter<{wine: Wine, value: number}>();
 
     public get favoriteWines(): Array<Wine> {
-        return <Array<Wine>>_.orderBy(this.wines, ["myRating"], ["desc"]);
+        return _.orderBy(this.wines, ["myRating"], ["desc"]);
     }
 
-    public setStock(wine: Wine, value: number): void {
-        this.onSetStock.emit({wine, value});
+    public onSetStock(wine: Wine, value: number): void {
+        this.setStock.emit({wine, value});
     }
 }

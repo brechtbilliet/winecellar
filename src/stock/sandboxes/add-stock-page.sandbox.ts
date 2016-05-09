@@ -1,13 +1,13 @@
 import {Injectable} from "@angular/core";
-import {WineResource} from "../resources/wine.resource";
 import {Wine} from "../entities/Wine";
+import {WineService} from "../services/wine.service";
 
 @Injectable()
 export class AddStockPageSandbox {
-    constructor(private wineResource: WineResource) {
+    constructor(private wineService: WineService) {
     }
 
     public addWine(wine: Wine): void {
-        this.wineResource.add(wine);
+        this.wineService.add(wine);
     }
 }

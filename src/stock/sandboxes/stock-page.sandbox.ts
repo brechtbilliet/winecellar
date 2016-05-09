@@ -2,24 +2,24 @@ import {Injectable} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {ApplicationState} from "../../common/state/ApplicationState";
 import {Wine} from "../entities/Wine";
-import {WineResource} from "../resources/wine.resource";
+import {WineService} from "../services/wine.service";
 
 @Injectable()
 export class StockPageSandbox {
     public wines$ = this.store.select(state => state.data.wines);
 
-    constructor(private store: Store<ApplicationState>, private wineResource: WineResource) {
+    constructor(private store: Store<ApplicationState>, private wineService: WineService) {
     }
 
     public removeWine(wine: Wine): void {
-        this.wineResource.remove(wine);
+        this.wineService.remove(wine);
     }
 
     public setRate(wine: Wine, rate: number): void {
-        this.wineResource.setRate(wine, rate);
+        this.wineService.setRate(wine, rate);
     }
 
     public setStock(wine: Wine, inStock: number): void {
-        this.wineResource.setStock(wine, inStock);
+        this.wineService.setStock(wine, inStock);
     }
 }

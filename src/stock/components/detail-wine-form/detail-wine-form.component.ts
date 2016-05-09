@@ -6,71 +6,51 @@ import {FormGroupFooter} from "../../../common/components/form/form-group-footer
 import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 import {Rating} from "../../../common/components/rating/rating.component";
 import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
-import {Product} from "../../endpoints/wineCom.endpoint";
 import {WineSearch} from "../../containers/wine-search/wine-search.container";
 import {FormGroupTextbox} from "../../../common/components/form/form-group-textbox/form-group-textbox.component";
+import {Product} from "../../services/wineCom.service";
+import {FormGroupContent} from "../../../common/components/form/form-group-content/form-group-content.component";
 @Component({
     selector: "detail-wine-form",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    directives: [FormGroupTextbox, WineSearch, FormGroupTextarea, FormGroupFooter, ROUTER_DIRECTIVES, Rating, NumberPicker],
+    directives: [FormGroupTextbox, WineSearch, FormGroupTextarea, FormGroupFooter, ROUTER_DIRECTIVES, Rating, NumberPicker, FormGroupContent],
     template: `
         <form [ngFormModel]="wineForm" class="form-horizontal col-sm-12" (ngSubmit)="onSubmit()">
             <wine-search [control]="wineForm.controls['name']" (onSelect)="selectWine($event)"></wine-search>    
-            <form-group-textarea 
-                [label]="'Description'" 
-                [control]="wineForm.controls['description']" 
+            <form-group-textarea [label]="'Description'" [control]="wineForm.controls['description']" 
                 [placeholder]="'Enter description'">
             </form-group-textarea>    
-          
-            <form-group-textbox 
-                [label]="'Region'" 
-                [control]="wineForm.controls['region']" 
-                [placeholder]="'Enter region'">
+            <form-group-textbox [label]="'Region'" [control]="wineForm.controls['region']" [placeholder]="'Enter region'">
             </form-group-textbox>    
-            <form-group-textbox 
-                [label]="'Price'" 
-                [control]="wineForm.controls['price']" 
-                [placeholder]="'Enter price'">
+            <form-group-textbox [label]="'Price'" [control]="wineForm.controls['price']" [placeholder]="'Enter price'">
             </form-group-textbox>    
-            <div class="form-group has-feedback">
-                 <label class="col-sm-4 control-label">Rating</label>
-                 <div class="col-sm-8">
-                    <rating [big]="true" [rating]="wine.myRating" (setRate)="setRate($event)"></rating>
-                </div>
-            </div>
-            <div class="form-group has-feedback">
-                 <label class="col-sm-4 control-label">Number in stock</label>
-                 <div class="col-sm-8">
-                    <number-picker [amount]="wine.inStock" (setAmount)="setInStock($event)"></number-picker>
-                </div>
-            </div>
+            <form-group-content [label]="'Rating'">
+                <rating [big]="true" [rating]="wine.myRating" (setRate)="setRate($event)"></rating>
+            </form-group-content>
+            <form-group-content [label]="'Number in stock'">
+                <number-picker [amount]="wine.inStock" (setAmount)="setInStock($event)"></number-picker>
+            </form-group-content>
             <div class="form-group has-feedback">
                  <div class=" col-sm-offset-4 col-sm-8">
                     <img src="{{wine.image}}" alt=""/>
                 </div>
             </div>
             <form-group-footer>
-                 <button 
-                    type="submit" 
-                    [disabled]="!wineForm.valid" 
-                    class="btn btn-primary btn-lg">
-                    <i class="fa fa-save"></i>&nbsp;Save wine
-                </button>
-                <a [routerLink]="['MyWines']"
-                    class="btn btn-warning btn-lg"><i class="fa fa-undo"></i>&nbsp;Cancel</a>
+                 <button type="submit" [disabled]="!wineForm.valid"  class="btn btn-primary btn-lg">
+                     <i class="fa fa-save"></i>&nbsp;Save wine
+                 </button>
+                 <a [routerLink]="['MyWines']" class="btn btn-warning btn-lg"><i class="fa fa-undo"></i>&nbsp;Cancel</a>
             </form-group-footer>
         </form>
      `
 })
 export class DetailWineForm {
-    @Input() public wine: Wine;
-    
+    @Input() public wine: Wine = this.wine ? Object.assign({}, this.wine) : new Wine();
+
     @Output() public onSave = new EventEmitter<Wine>();
 
     public wineForm: ControlGroup;
-
     public ngOnInit(): void {
-        this.wine = this.wine ? Object.assign({}, this.wine) : new Wine();
         this.wineForm = new ControlGroup({
             "name": new Control(this.wine.name, Validators.required),
             "description": new Control(this.wine.description),
