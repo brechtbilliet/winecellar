@@ -33,6 +33,7 @@ module.exports = {
         publicPath: '/'
     },
     devServer: {
+        hot: true,
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000

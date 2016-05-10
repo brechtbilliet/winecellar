@@ -17,14 +17,16 @@ function dataReducer(state:IDataState = INITIAL_STATE.data, action:any = null):I
     switch (action.type) {
         case DATA_AUTHENTICATION_SET_AUTHENTICATION:
         case DATA_AUTHENTICATION_CLEAR_AUTHENTICATION:
-            return Object.assign({}, state, {authentication: authenticationReducer(state.authentication, action)});
         case DATA_WINES_ADD:
         case DATA_WINES_ADD_ALL:
         case DATA_WINES_REMOVE:
         case DATA_WINES_UPDATE:
         case DATA_WINES_UPDATE_RATE:
         case DATA_WINES_UPDATE_STOCK:
-            return Object.assign({}, state, {wines: winesReducer(state.wines, action)});
+            return {
+                authentication:authenticationReducer(state.authentication, action),
+                wines: winesReducer(state.wines, action)
+            }
     }
     return state;
 }
@@ -33,12 +35,14 @@ function containersReducer(state:ContainersState = INITIAL_STATE.containers,
     switch (action.type) {
         case CONTAINER_EDITSTOCKPAGE_CLEAR_WINE:
         case CONTAINER_EDITSTOCKPAGE_SET_WINE:
-            return Object.assign({}, state, {editStockPage: editStockReducer(state.editStockPage, action)});
         case CONTAINER_COLLAPSABLESIDEBAR_TOGGLE:
-            return Object.assign({}, state, {collapsableSidebar: collapsableSidebarReducer(state.collapsableSidebar, action)});
         case CONTAINER_APPLICATION_DISABLE_BUSY_FLAG:
         case CONTAINER_APPLICATION_ENABLE_BUSY_FLAG:
-            return Object.assign({}, state, {application: applicationReducer(state.application, action)});
+            return {
+                editStockPage: editStockReducer(state.editStockPage, action),
+                collapsableSidebar: collapsableSidebarReducer(state.collapsableSidebar, action),
+                application: applicationReducer(state.application, action),
+            }
     }
     return state;
 }
