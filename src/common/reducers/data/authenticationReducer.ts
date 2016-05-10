@@ -8,7 +8,7 @@ export const authenticationReducer: Reducer<AuthenticationDataState> =
      action: Action = null) => {
         switch (action.type) {
             case DATA_AUTHENTICATION_SET_AUTHENTICATION:
-                let payload: AuthenticationResult = action.payload;
+                let payload:AuthenticationResult = action.payload;
                 return <AuthenticationDataState> Object.assign({}, state, {
                     isAuthenticated: true,
                     jwtToken: payload.token,
@@ -27,4 +27,4 @@ export const authenticationReducer: Reducer<AuthenticationDataState> =
             default:
                 return state;
         }
-    }
+    };
