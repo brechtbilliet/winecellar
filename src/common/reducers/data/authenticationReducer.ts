@@ -9,7 +9,7 @@ export const authenticationReducer: Reducer<AuthenticationDataState> =
         switch (action.type) {
             case DATA_AUTHENTICATION_SET_AUTHENTICATION:
                 let payload:AuthenticationResult = action.payload;
-                return <AuthenticationDataState> Object.assign({}, state, {
+                return {
                     isAuthenticated: true,
                     jwtToken: payload.token,
                     account: {
@@ -17,13 +17,13 @@ export const authenticationReducer: Reducer<AuthenticationDataState> =
                         lastName: payload.lastName,
                         login: payload.login
                     }
-                });
+                };
             case DATA_AUTHENTICATION_CLEAR_AUTHENTICATION:
-                return <AuthenticationDataState> Object.assign({}, state, {
+                return {
                     isAuthenticated: false,
                     jwtToken: null,
                     account: null
-                });
+                };
             default:
                 return state;
         }

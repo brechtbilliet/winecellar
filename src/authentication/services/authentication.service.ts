@@ -23,7 +23,7 @@ export class AuthenticationService {
         this.handleAuthenticationResult(
             this.http
                 .post(API_URL + "/authentication/login", JSON.stringify(credentials), {headers: DEFAULT_HEADERS})
-                .map(response => response.json()));
+                .map((resp: Response) => resp.json()))
     }
 
     public register(account:Account):void {

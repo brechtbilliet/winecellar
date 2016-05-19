@@ -11,29 +11,26 @@ import {
 } from "../../actionTypes";
 export const winesReducer: Reducer<Array<Wine>> = (state: Array<Wine> = INITIAL_STATE.data.wines,
                                                    action: Action = null) => {
+    let _id: string, inStock: number, myRating: number, wine: Wine, wines: Array<Wine>;
     switch (action.type) {
         case DATA_WINES_ADD:
-            return [...state, action.payload];
+            ({wine} = action.payload);
+            return [...state, wine];
         case DATA_WINES_ADD_ALL:
-            return [...action.payload];
+            ({wines} = action.payload);
+            return [...wines];
         case DATA_WINES_REMOVE:
-            return state.filter((item: Wine) => item._id !== action.payload);
+            ({_id} = action.payload);
+            return state.filter(item => item._id !== _id);
         case DATA_WINES_UPDATE:
-            return state.map((item: Wine) => {
-                return item._id === action.payload._id ? Object.assign({}, action.payload.wine, {}) : item;
-            });
+            ({wine, _id} = action.payload);
+            return state.map(item => item._id === _id ? Object.assign({}, wine) : item);
         case DATA_WINES_UPDATE_RATE:
-            return <Array<Wine>> state.map((item: Wine) => {
-                return item._id === action.payload._id ? Object.assign({}, item, {
-                    myRating: action.payload.myRating
-                }) : item;
-            });
+            ({_id, myRating} = action.payload);
+            return state.map(item => item._id === _id ? Object.assign({}, item, {myRating}) : item);
         case DATA_WINES_UPDATE_STOCK:
-            return <Array<Wine>> state.map((item: Wine) => {
-                return item._id === action.payload._id ? Object.assign({}, item, {
-                    inStock: action.payload.inStock
-                }) : item;
-            });
+            ({_id, inStock} = action.payload);
+            return state.map(item => item._id === _id ? Object.assign({}, item, {inStock}) : item);
         default:
             return state;
     }

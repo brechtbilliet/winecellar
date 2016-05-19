@@ -17,22 +17,22 @@ describe("reducer > data", () => {
         it("should return a new instance with the correct state", () => {
             let initialState: Array<Wine> = INITIAL_STATE.data.wines;
             initialState.push(new Wine("initiaial", "wine"));
-            let payload: Wine = new Wine();
+            let payload = {wine: new Wine()};
             deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_ADD, payload});
             expect(changedState).not.toBe(initialState);
             expect(changedState.length).toBe(2);
-            expect(changedState[1]).toBe(payload);
+            expect(changedState[1]).toBe(payload.wine);
         })
     });
     describe("case DATA_WINES_ADD_ALL", () => {
         it("should return a new instance with the correct state", () => {
             let initialState: Array<Wine> = INITIAL_STATE.data.wines;
-            let payload: Array<Wine> = [new Wine(), new Wine(), new Wine()];
+            let payload = {wines:[new Wine(), new Wine(), new Wine()]};
             deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_ADD_ALL, payload});
             expect(changedState).not.toBe(initialState);
-            _.each(payload, (wine: Wine, index: number) => {
+            _.each(payload.wines, (wine: Wine, index: number) => {
                 expect(wine).toBe(changedState[index]);
             })
         });
@@ -46,7 +46,7 @@ describe("reducer > data", () => {
             deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {
                 type: DATA_WINES_REMOVE,
-                payload: initialState[0]._id
+                payload: {_id: initialState[0]._id}
             });
             expect(changedState).not.toBe(initialState);
             expect(changedState.length).toBe(2);

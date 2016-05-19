@@ -25,8 +25,8 @@ export class WineService {
     public add(wine:Wine):void {
         this.busyHandler.handle(this.http.post(API_URL + "/wines", JSON.stringify(wine), this.getHttpOptions())
             .map((res:Response) => res.json()))
-            .subscribe((payload:Wine) => {
-                this.store.dispatch({type: DATA_WINES_ADD, payload});
+            .subscribe((wine:Wine) => {
+                this.store.dispatch({type: DATA_WINES_ADD, payload: {wine}});
             }, (resp:Response) => this.onError(resp));
     }
 
@@ -41,7 +41,7 @@ export class WineService {
     public remove(wine:Wine):void {
         this.busyHandler.handle(this.http.delete(API_URL + "/wines/" + wine._id, this.getHttpOptions()))
             .subscribe(() => {
-                this.store.dispatch({type: DATA_WINES_REMOVE, payload: wine._id});
+                this.store.dispatch({type: DATA_WINES_REMOVE, payload: {_id: wine._id}});
             }, (resp:Response) => this.onError(resp));
     }
 
@@ -49,7 +49,7 @@ export class WineService {
         this.busyHandler.handle(this.http.get(API_URL + "/wines", this.getHttpOptions())
             .map((res:Response) => res.json()))
             .subscribe((wines:Array<Wine>) => {
-                this.store.dispatch({type: DATA_WINES_ADD_ALL, payload: wines});
+                this.store.dispatch({type: DATA_WINES_ADD_ALL, payload: {wines}});
             }, (resp:Response) => this.onError(resp));
     }
 
