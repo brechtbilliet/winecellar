@@ -16,7 +16,7 @@ describe("reducer: containers > applicationReducer", () => {
         });
     });
     describe("case CONTAINER_APPLICATION_DISABLE_BUSY_FLAG", () => {
-        it("should return a new applicationstate with the isBusyflag to true", () => {
+        it("should return a new applicationstate with the isBusyflag to false", () => {
             let initialState: ApplicationContainerState = {
                 isBusy: false
             };
