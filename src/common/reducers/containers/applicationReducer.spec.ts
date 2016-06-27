@@ -1,7 +1,7 @@
 import {applicationReducer} from "./applicationReducer";
 import {ApplicationContainerState} from "../../state/ContainersState";
 import {CONTAINER_APPLICATION_ENABLE_BUSY_FLAG, CONTAINER_APPLICATION_DISABLE_BUSY_FLAG} from "../../actionTypes";
-let deepfreeze = require('deep-freeze');
+let deepfreeze = require("deep-freeze");
 
 describe("reducer: containers > applicationReducer", () => {
     describe("case CONTAINER_APPLICATION_ENABLE_BUSY_FLAG", () => {
@@ -16,7 +16,7 @@ describe("reducer: containers > applicationReducer", () => {
         });
     });
     describe("case CONTAINER_APPLICATION_DISABLE_BUSY_FLAG", () => {
-        it("should return a new applicationstate with the isBusyflag to false", () => {
+        it("should return a new applicationstate with the isBusyflag to true", () => {
             let initialState: ApplicationContainerState = {
                 isBusy: false
             };

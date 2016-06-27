@@ -1,9 +1,8 @@
-import {Component, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy} from "@angular/core";
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
 import {Control} from "@angular/common";
-import {Subject} from "rxjs";
-import {Subscription} from "rxjs/Subscription";
-import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
+import {Subject, Observable} from "rxjs";
 import {WineComService, Product, WineComSearchResult} from "../../services/wineCom.service";
+import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
 
 @Component({
     selector: "wine-search",
@@ -20,7 +19,7 @@ import {WineComService, Product, WineComSearchResult} from "../../services/wineC
                     autocomplete="off" placeholder="Name"/>
                 <span *ngIf="control.valid" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                 <ul class="wine-search-results">
-                    <li *ngFor="let item of foundWines$|async" (click)="selectWine(item)">
+                    <li *ngFor="let item of winesToShow$|async" (click)="selectWine(item)">
                         <img src="{{item.labels[0].url}}" alt=""/> {{item.name}} 
                     </li>
                 </ul>
@@ -28,43 +27,34 @@ import {WineComService, Product, WineComSearchResult} from "../../services/wineC
         </div>
     `
 })
-export class WineSearch implements OnDestroy {
+export class WineSearch {
     @Input() public control: Control;
+    @Output() public onSelect = new EventEmitter<Product>();
 
-    @Output()public onSelect = new EventEmitter<Product>();
+    public winesToShow$: Observable<Array<Product>>;
+    private foundWineName: string;
+    private reset$ = new Subject<boolean>();
 
-    public foundWines$ = new Subject<Array<Product>>();
-    private subscriptions: Array<Subscription> = [];
-
-    constructor(private sandbox: WineSearchSandbox) {
+    constructor(private sb: WineSearchSandbox) {
     }
 
     public selectWine(wine: Product): void {
+        this.foundWineName = wine.name;
         this.onSelect.emit(wine);
-        this.reset();
-    }
-
-    public reset(): void {
-        this.foundWines$.next([]);
+        this.reset$.next(true);
     }
 
     public ngOnInit(): void {
-        let subscription: Subscription = this.control.valueChanges
-            .do((value: string) => {
-                if (value.length < 3) {
-                    this.reset();
-                }
-            })
+        let wines$ = this.control.valueChanges
+            .do(value => this.reset$.next(value.length < 3))
             .debounceTime(300)
-            .filter((value: string) => value.length > 2)
-            .map((value: string) => this.sandbox.search(value))
+            .filter(value => value.length > 2 && value !== this.foundWineName)
+            .map(value => this.sb.search(value))
             .switch()
-            .map((res: WineComSearchResult) => res.products.list)
-            .subscribe(this.foundWines$);
-        this.subscriptions.push(subscription);
-    }
+            .map((res: WineComSearchResult) => res.products.list).cache();
 
-    public ngOnDestroy(): void {
-        this.subscriptions.forEach(sub => sub.unsubscribe());
+        this.winesToShow$ = Observable.combineLatest(wines$, this.reset$, (wines: Array<Product>, clear: boolean) => {
+            return clear ? [] : wines;
+        });
     }
 }

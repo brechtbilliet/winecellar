@@ -1,6 +1,6 @@
 import {ContainersState} from "./ContainersState";
-import {IDataState} from "./DataState";
+import {DataState} from "./DataState";
 export interface ApplicationState {
     containers: ContainersState;
-    data: IDataState;
+    data: DataState;
 }

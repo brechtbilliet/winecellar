@@ -1,5 +1,6 @@
 @import "../../../colors";
-.spinner{
+
+.spinner {
   width: 70px;
   height: 60px;
   position: fixed;
@@ -7,11 +8,12 @@
   left: 0;
   right: 0;
   margin: auto;
-  z-index:999999;
+  z-index: 999999;
   -webkit-user-select: none;
   opacity: 0;
 }
-.spinner.active{
+
+.spinner.active {
   opacity: 1;
 }
 
@@ -37,16 +39,21 @@
 }
 
 @-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
+  0%, 80%, 100% {
+    -webkit-transform: scale(0)
+  }
+  40% {
+    -webkit-transform: scale(1.0)
+  }
 }
 
 @keyframes sk-bouncedelay {
   0%, 80%, 100% {
     -webkit-transform: scale(0);
     transform: scale(0);
-  } 40% {
-      -webkit-transform: scale(1.0);
-      transform: scale(1.0);
-    }
+  }
+  40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
 }

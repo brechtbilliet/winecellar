@@ -1,13 +1,16 @@
 import {DATA_AUTHENTICATION_SET_AUTHENTICATION, DATA_AUTHENTICATION_CLEAR_AUTHENTICATION} from "../../actionTypes";
 import {authenticationReducer} from "./authenticationReducer";
 import {AuthenticationDataState} from "../../state/DataState";
-import {INITIAL_STATE} from "../../state/initialState";
-let deepfreeze = require('deep-freeze');
+let deepfreeze = require("deep-freeze");
 
 describe("reducer: data > authenticationReducer", () => {
     describe("case DATA_AUTHENTICATION_SET_AUTHENTICATION", () => {
         it("should return a new instance with the correct state", () => {
-            let initialState: AuthenticationDataState = INITIAL_STATE.data.authentication;
+            let initialState: AuthenticationDataState = {
+                isAuthenticated: false,
+                jwtToken: "",
+                account: null
+            };
             let payload: any = {token: "token", firstName: "firstname", lastName: "lastname", login: "login"};
             deepfreeze(initialState);
             let changedState: AuthenticationDataState =

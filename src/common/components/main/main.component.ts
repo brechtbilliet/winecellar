@@ -4,4 +4,5 @@ import {Component} from "@angular/core";
     styles: [require("./main.component.scss")],
     template: `<ng-content></ng-content>`
 })
-export class Main {}
+export class Main {
+}

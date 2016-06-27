@@ -4,8 +4,8 @@ import {Account} from "../../../authentication/types/Account";
 @Component({
     selector: "navbar",
     directives: [ROUTER_DIRECTIVES],
-    styles: [require("./navbar.component.scss")],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    styles: [require("./navbar.component.scss")],
     template: `
       <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
@@ -29,7 +29,7 @@ import {Account} from "../../../authentication/types/Account";
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="navbar-text hidden-sm hidden-xs hidden-md">
-                            Welcome {{account.firstName}} {{account.lastName}}
+                            Welcome {{account?.firstName}} {{account?.lastName}}
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 

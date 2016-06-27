@@ -1,32 +1,33 @@
 @import "../../../colors";
-.wine-search-results{
+
+.wine-search-results {
   margin: 0px;
   position: absolute;
   z-index: 999;
-  display:block;
+  display: block;
   width: 100%;
   left: -25px;
   li {
     list-style-type: none;
-    display:block;
+    display: block;
     padding: 5px;
     padding-left: 30px;
-    cursor:pointer;
+    cursor: pointer;
     margin: 0;
-    &:nth-child(even){
+    &:nth-child(even) {
       background: #f1f1f1;
-      &:hover{
+      &:hover {
         background: $color-purple;
       }
     }
-    &:nth-child(odd){
+    &:nth-child(odd) {
       background: #fff;
-      &:hover{
+      &:hover {
         background: $color-purple;
       }
     }
-    border-top:1px solid #ccc;
-    border-left:1px solid #ccc;
-    border-right:1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
   }
 }

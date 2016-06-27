@@ -1,60 +1,52 @@
-import {Http, Response} from "@angular/http";
 import {Injectable} from "@angular/core";
-import * as toastr from "toastr";
 import {Credentials} from "../types/Credentials";
-import {Account} from "../types/Account";
-import {Store} from "@ngrx/store";
+import {Response, Http} from "@angular/http";
 import {AuthenticationResult} from "../types/AuthenticationResult";
+import {Account} from "../types/Account";
 import {API_URL, DEFAULT_HEADERS, LOCALSTORAGE_AUTH} from "../../configuration";
-import {
-    DATA_AUTHENTICATION_CLEAR_AUTHENTICATION,
-    DATA_AUTHENTICATION_SET_AUTHENTICATION
-} from "../../common/actionTypes";
+import * as toastr from "toastr";
 import {ApplicationState} from "../../common/state/ApplicationState";
+import {Store} from "@ngrx/store";
 import {BusyHandlerService} from "../../common/services/busyHandler.service";
-import {Observable} from "rxjs/Observable";
-
+import {Observable} from "rxjs/Rx";
+import {clearAuthentication, setAuthentication} from "../../common/actionCreators";
 @Injectable()
 export class AuthenticationService {
-    constructor(private busyHandler:BusyHandlerService, private http:Http, private store:Store<ApplicationState>) {
+    constructor(private http: Http, private store: Store<ApplicationState>, private busyHandlerService: BusyHandlerService) {
     }
 
-    public authenticate(credentials:Credentials):void {
+    public authenticate(credentials: Credentials): void {
         this.handleAuthenticationResult(
-            this.http
-                .post(API_URL + "/authentication/login", JSON.stringify(credentials), {headers: DEFAULT_HEADERS})
-                .map((resp: Response) => resp.json()))
+            this.http.post(API_URL + "/authentication/login", JSON.stringify(credentials), {headers: DEFAULT_HEADERS})
+        );
     }
 
-    public register(account:Account):void {
+    public register(account: Account): void {
         this.handleAuthenticationResult(
-            this.http
-                .post(API_URL + "/authentication/register", JSON.stringify(account), {headers: DEFAULT_HEADERS})
-                .map((response:Response) => response.json()));
+            this.http.post(API_URL + "/authentication/register", JSON.stringify(account), {headers: DEFAULT_HEADERS})
+        );
     }
 
-    public logout():void {
-        this.store.dispatch({type: DATA_AUTHENTICATION_CLEAR_AUTHENTICATION});
-        window.localStorage.removeItem(LOCALSTORAGE_AUTH);
+    public logout(): void {
+        localStorage.removeItem(LOCALSTORAGE_AUTH);
+        this.store.dispatch(clearAuthentication());
     }
 
-    public checkInitialAuthentication():void {
+    public checkInitialAuthentication(): void {
         let localStorageObj = window.localStorage.getItem(LOCALSTORAGE_AUTH);
         if (localStorageObj) {
-            this.store.dispatch({
-                type: DATA_AUTHENTICATION_SET_AUTHENTICATION,
-                payload: JSON.parse(localStorageObj)
-            });
+            this.store.dispatch(setAuthentication(JSON.parse(localStorageObj)));
         }
     }
 
-    private handleAuthenticationResult(obs$:Observable<AuthenticationResult>):void {
-        this.busyHandler.handle(obs$).subscribe((result:AuthenticationResult) => {
+    private handleAuthenticationResult(obs$: Observable<Response>): void {
+        this.busyHandlerService.handle(obs$).map(resp => resp.json()).subscribe((result: AuthenticationResult) => {
             window.localStorage.setItem(LOCALSTORAGE_AUTH, JSON.stringify(result));
-            this.store.dispatch({type: DATA_AUTHENTICATION_SET_AUTHENTICATION, payload: result});
+            this.store.dispatch(setAuthentication(result));
             toastr.success("successfully logged in!");
-        }, (errorResponse:Response) => {
+        }, (errorResponse: Response) => {
             toastr.error(errorResponse.json().error);
         });
     }
+
 }

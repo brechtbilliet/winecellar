@@ -1,7 +1,6 @@
 var loaders = require('./loaders');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var StringReplacePlugin = require("string-replace-webpack-plugin");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 var API_KEY = process.env.npm_config_apikey;
@@ -30,23 +29,14 @@ module.exports = {
     },
     output: {
         filename: './[name].bundle.js',
-        path: 'dev',
+        path: 'dist',
         publicPath: '/'
-    },
-    devServer: {
-        hot: true,
-        watchOptions: {
-            aggregateTimeout: 300,
-            poll: 1000
-        }
     },
     resolve: {
         root: __dirname,
         extensions: ['', '.ts', '.js', '.json']
     },
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
-    // devtool: 'source-map',
     plugins: [
         new CopyWebpackPlugin([
             {from: 'node_modules/core-js/client/shim.min.js', to: 'node_modules/core-js/client/shim.min.js'},
@@ -59,7 +49,6 @@ module.exports = {
             inject: 'body',
             hash: true
         }),
-        new OpenBrowserPlugin({url: 'http://localhost:8080'}),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',

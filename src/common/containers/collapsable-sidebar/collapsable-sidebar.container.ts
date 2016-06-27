@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {CollapsableSidebarSandbox} from "../../sandboxes/collapsable-sidebar.sandbox.ts";
+import {CollapsableSidebarSandbox} from "../../sandboxes/collapsable-sidebar.sandbox";
 @Component({
     selector: "collapsable-sidebar",
     providers: [CollapsableSidebarSandbox],
@@ -16,7 +16,7 @@ import {CollapsableSidebarSandbox} from "../../sandboxes/collapsable-sidebar.san
 })
 export class CollapsableSidebar {
     public isCollapsed$ = this.sandbox.isCollapsed$;
-    
+
     constructor(public sandbox: CollapsableSidebarSandbox) {
     }
 

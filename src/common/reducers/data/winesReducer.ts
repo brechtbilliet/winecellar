@@ -1,16 +1,15 @@
-import {Reducer, Action} from "@ngrx/store";
+import {Action} from "@ngrx/store";
 import {Wine} from "../../../stock/entities/Wine";
-import {INITIAL_STATE} from "../../state/initialState";
 import {
-    DATA_WINES_ADD,
-    DATA_WINES_ADD_ALL,
     DATA_WINES_REMOVE,
+    DATA_WINES_ADD_ALL,
     DATA_WINES_UPDATE,
     DATA_WINES_UPDATE_RATE,
-    DATA_WINES_UPDATE_STOCK
+    DATA_WINES_UPDATE_STOCK,
+    DATA_WINES_ADD
 } from "../../actionTypes";
-export const winesReducer: Reducer<Array<Wine>> = (state: Array<Wine> = INITIAL_STATE.data.wines,
-                                                   action: Action = null) => {
+export function winesReducer(state: Array<Wine> = [],
+                             action: Action = null): Array<Wine> {
     let _id: string, inStock: number, myRating: number, wine: Wine, wines: Array<Wine>;
     switch (action.type) {
         case DATA_WINES_ADD:

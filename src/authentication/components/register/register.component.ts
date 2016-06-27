@@ -1,31 +1,29 @@
-import {Panel} from "../../../common/components/panel/panel.component";
-import {Component, Output, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
-import {ControlGroup, Validators, Control} from "@angular/common";
+import {Component, Output} from "@angular/core";
+import {EventEmitter} from "@angular/router-deprecated/src/facade/async";
 import {Account} from "../../types/Account";
+import {Validators, Control, ControlGroup} from "@angular/common";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
 import {FormGroupPassword} from "../../../common/components/form/form-group-password/form-group-password.component";
 import {FormGroupTextbox} from "../../../common/components/form/form-group-textbox/form-group-textbox.component";
-import * as toastr from "toastr";
 @Component({
     selector: "register",
-    directives: [FormGroupTextbox, FormGroupPassword, FormGroupFooter, Panel],
     styles: [require("./register.component.scss")],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    directives: [FormGroupTextbox, FormGroupPassword, FormGroupFooter],
     template: `
-          <form [ngFormModel]="registerForm" class="form-horizontal" (ngSubmit)="onSubmit()">
-            <form-group-textbox [label]="'First name (*)'" [control]="registerForm.controls['firstName']" 
+        <form class="form-horizontal" (ngSubmit)="onSubmit()">
+            <form-group-textbox [label]="'First name (*)'" [control]="registerForm.controls.firstName" 
                 [placeholder]="'Enter first name'">
             </form-group-textbox>
-            <form-group-textbox [label]="'Last name (*)'"  [control]="registerForm.controls['lastName']" 
+            <form-group-textbox [label]="'Last name (*)'"  [control]="registerForm.controls.lastName" 
                 [placeholder]="'Enter last name'">
             </form-group-textbox>
-            <form-group-textbox [label]="'Login (*)'" [control]="registerForm.controls['login']" 
+            <form-group-textbox [label]="'Login (*)'" [control]="registerForm.controls.login" 
                 [placeholder]="'Enter login'">
             </form-group-textbox>
-            <form-group-password [label]="'Password (*)'" [control]="registerForm.controls['password']" 
+            <form-group-password [label]="'Password (*)'" [control]="registerForm.controls.password" 
                 [placeholder]="'Enter password'">
             </form-group-password>
-            <form-group-password [label]="'Confirm password (*)'" [control]="registerForm.controls['confirmPassword']" 
+            <form-group-password [label]="'Confirm password (*)'" [control]="registerForm.controls.confirmPassword" 
                 [placeholder]="'Confirm your password'">
             </form-group-password>
             <form-group-footer>
@@ -37,7 +35,8 @@ import * as toastr from "toastr";
        `
 })
 export class Register {
-    @Output() public authenticate = new EventEmitter<Account>();
+    @Output()
+    public authenticate = new EventEmitter<Account>();
 
     public registerForm = new ControlGroup({
         "firstName": new Control("", Validators.required),

@@ -1,21 +1,22 @@
 @import "../../../colors";
+
 :host {
   min-width: 78px;
   display: block;
   .btn {
     float: left;
   }
-  .btn-primary{
+  .btn-primary {
     background-color: $color-purple-light;
     border: none;
-    &:hover{
+    &:hover {
       background-color: $color-purple;
     }
   }
   .amount {
     width: 30px;
-    display:block;
-    text-align:center;
+    display: block;
+    text-align: center;
     float: left;
   }
 }

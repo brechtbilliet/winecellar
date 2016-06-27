@@ -4,7 +4,7 @@ import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "@
     styles: [require("./rating.component.scss")],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <i class="fa fa-star rating" [class.fa-2x]="big" *ngFor="#i of [1,2,3,4,5]"
+        <i class="fa fa-star rating" [class.fa-2x]="big" *ngFor="let i of [1,2,3,4,5]"
             [class.over]="overValue >= i" 
             [class.starred]="rating >= i" 
             (mouseover)="over(i)" 
@@ -13,22 +13,22 @@ import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "@
     `
 })
 export class Rating {
-    @Input() public rating:number;
-    @Input() public big:boolean;
+    @Input() public rating: number;
+    @Input() public big: boolean;
 
     @Output() public setRate = new EventEmitter<number>();
 
-    public overValue:number;
+    public overValue: number;
 
-    public update(value:number):void {
+    public update(value: number): void {
         this.setRate.emit(value);
     }
 
-    public over(value:number):void {
+    public over(value: number): void {
         this.overValue = value;
     }
 
-    public out():void {
+    public out(): void {
         this.overValue = 0;
     }
 }

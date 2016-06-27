@@ -1,7 +1,7 @@
 import {CollapsableSidebarContainerState} from "../../state/ContainersState";
 import {collapsableSidebarReducer} from "./collapsableSidebarReducer";
 import {CONTAINER_COLLAPSABLESIDEBAR_TOGGLE} from "../../actionTypes";
-let deepfreeze = require('deep-freeze');
+let deepfreeze = require("deep-freeze");
 
 describe("reducer: containers > collaspableSidebarReducer", () => {
     describe("case CONTAINER_COLLAPSABLESIDEBAR_TOGGLE", () => {

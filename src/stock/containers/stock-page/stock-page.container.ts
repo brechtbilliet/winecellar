@@ -1,24 +1,24 @@
-import {Component, OnInit} from "@angular/core";
-import {DefaultPage} from "../../../common/components/default-page/default-page.component";
+import {Component} from "@angular/core";
+import {Panel} from "../../../common/components/panel/panel.component";
 import {Main} from "../../../common/components/main/main.component";
-import {CollapsableSidebar} from "../../../common/containers/collapsable-sidebar/collapsable-sidebar.container";
-import {FavoriteWines} from "../../components/favorite-wines/favorite-wines.component";
-import {Wine} from "../../entities/Wine";
-import {Observable} from "rxjs/Observable";
+import {DefaultPage} from "../../../common/components/default-page/default-page.component";
 import {WineResults} from "../../components/wine-results/wine-results.component";
-import * as _ from "lodash";
-import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {CollapsableSidebar} from "../../../common/containers/collapsable-sidebar/collapsable-sidebar.container";
 import {Control} from "@angular/common";
+import {Wine} from "../../entities/Wine";
+import * as _ from "lodash";
+import {Observable} from "rxjs/Rx";
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {FavoriteWines} from "../../components/favorite-wines/favorite-wines.component";
 import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
-import {WineService} from "../../services/wine.service";
 @Component({
     selector: "stock-page",
-    providers: [WineService, StockPageSandbox],
-    directives: [ROUTER_DIRECTIVES, DefaultPage, Main, CollapsableSidebar, FavoriteWines, WineResults],
+    directives: [Panel, DefaultPage, Main, CollapsableSidebar, FavoriteWines, WineResults, ROUTER_DIRECTIVES],
+    providers: [StockPageSandbox],
     template: `
         <default-page>
             <collapsable-sidebar class="hidden-sm hidden-xs">
-                <favorite-wines (setStock)="onSetStock($event)" [wines]="wines$ | async">
+                <favorite-wines (setStock)="onSetStock($event)" [wines]="favoriteWines$ | async">
                 </favorite-wines>
             </collapsable-sidebar>
             <main>
@@ -30,7 +30,7 @@ import {WineService} from "../../services/wine.service";
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <a [routerLink]="['AddWine']" class="btn btn-primary btn-lg btn-block">
+                        <a  class="btn btn-primary btn-lg btn-block" [routerLink]="['/AddWine']">
                             <i class="fa fa-plus-circle"></i>&nbsp;Add
                         </a>
                     </div>
@@ -60,26 +60,26 @@ import {WineService} from "../../services/wine.service";
 export class StockPage {
     public searchCtrl = new Control("");
 
-    public wines$ = this.sandbox.wines$;
-    public numberOfWines$ = this.wines$.map(wines => _.sumBy(wines, (wine:Wine) => wine.inStock));
-    public matchingWines$ = Observable.combineLatest(this.searchCtrl.valueChanges.startWith(""), this.wines$)
-        .map((resp:[string, Array<Wine>]) => {
-            let term = resp[0].toLowerCase(), wines = resp[1];
+    public wines$ = this.sb.wines$;
+    public favoriteWines$ = this.wines$.map(wines => _.orderBy(wines, ["myRating"], ["desc"]));
+    public numberOfWines$ = this.wines$.map(wines => _.sumBy(wines, (wine: Wine) => wine.inStock));
+    public matchingWines$ = Observable.combineLatest(
+        this.searchCtrl.valueChanges.startWith(""), this.wines$, (term: string, wines: Array<Wine>) => {
             return wines.filter(wine => wine.name.toLowerCase().indexOf(term) > -1);
         });
 
-    constructor(public sandbox:StockPageSandbox) {
+    constructor(private sb: StockPageSandbox) {
     }
 
-    public onRemove(wine:Wine):void {
-        this.sandbox.removeWine(wine);
+    public onRemove(wine: Wine): void {
+        this.sb.removeWine(wine);
     }
 
-    public onSetRate(item: {wine: Wine, value: number}):void {
-        this.sandbox.setRate(item.wine, item.value);
+    public onSetRate(item: {wine: Wine, value: number}): void {
+        this.sb.setRate(item.wine, item.value);
     }
 
-    public onSetStock(item: {wine: Wine, value: number}):void {
-        this.sandbox.setStock(item.wine, item.value);
+    public onSetStock(item: {wine: Wine, value: number}): void {
+        this.sb.setStock(item.wine, item.value);
     }
 }

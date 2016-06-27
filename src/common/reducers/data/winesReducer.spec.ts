@@ -1,4 +1,3 @@
-import {INITIAL_STATE} from "../../state/initialState";
 import {Wine} from "../../../stock/entities/Wine";
 import {winesReducer} from "./winesReducer";
 import * as _ from "lodash";
@@ -10,12 +9,12 @@ import {
     DATA_WINES_UPDATE_RATE,
     DATA_WINES_UPDATE_STOCK
 } from "../../actionTypes";
-let deepfreeze = require('deep-freeze');
+let deepfreeze = require("deep-freeze");
 
 describe("reducer > data", () => {
     describe("case DATA_WINES_ADD", () => {
         it("should return a new instance with the correct state", () => {
-            let initialState: Array<Wine> = INITIAL_STATE.data.wines;
+            let initialState: Array<Wine> = [];
             initialState.push(new Wine("initiaial", "wine"));
             let payload = {wine: new Wine()};
             deepfreeze(initialState);
@@ -23,18 +22,18 @@ describe("reducer > data", () => {
             expect(changedState).not.toBe(initialState);
             expect(changedState.length).toBe(2);
             expect(changedState[1]).toBe(payload.wine);
-        })
+        });
     });
     describe("case DATA_WINES_ADD_ALL", () => {
         it("should return a new instance with the correct state", () => {
-            let initialState: Array<Wine> = INITIAL_STATE.data.wines;
-            let payload = {wines:[new Wine(), new Wine(), new Wine()]};
+            let initialState: Array<Wine> = [];
+            let payload = {wines: [new Wine(), new Wine(), new Wine()]};
             deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {type: DATA_WINES_ADD_ALL, payload});
             expect(changedState).not.toBe(initialState);
             _.each(payload.wines, (wine: Wine, index: number) => {
                 expect(wine).toBe(changedState[index]);
-            })
+            });
         });
     });
     describe("case DATA_WINES_REMOVE", () => {
@@ -50,7 +49,7 @@ describe("reducer > data", () => {
             });
             expect(changedState).not.toBe(initialState);
             expect(changedState.length).toBe(2);
-            expect(_.filter(changedState, (wine: Wine) => wine._id === initialState[0]._id).length).toBe(0)
+            expect(_.filter(changedState, (wine: Wine) => wine._id === initialState[0]._id).length).toBe(0);
         });
     });
     describe("case DATA_WINES_UPDATE", () => {
@@ -113,6 +112,6 @@ describe("reducer > data", () => {
             deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {type: null});
             expect(changedState).toBe(initialState);
-        })
-    })
+        });
+    });
 });

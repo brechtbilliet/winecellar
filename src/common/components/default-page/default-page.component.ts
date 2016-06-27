@@ -5,4 +5,5 @@ import {Component} from "@angular/core";
     styles: [require("./default-page.component.scss")],
     template: `<ng-content></ng-content>`
 })
-export class DefaultPage {}
+export class DefaultPage {
+}

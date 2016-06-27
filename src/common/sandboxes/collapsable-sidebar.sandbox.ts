@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ApplicationState} from "../state/ApplicationState";
 import {Store} from "@ngrx/store";
-import {CONTAINER_COLLAPSABLESIDEBAR_TOGGLE} from "../actionTypes";
+import {toggleSidebar} from "../actionCreators";
 
 @Injectable()
 export class CollapsableSidebarSandbox {
@@ -11,6 +11,6 @@ export class CollapsableSidebarSandbox {
     }
 
     public toggleSidebar(): void {
-        this.store.dispatch({type: CONTAINER_COLLAPSABLESIDEBAR_TOGGLE});
+        this.store.dispatch(toggleSidebar());
     }
 }
