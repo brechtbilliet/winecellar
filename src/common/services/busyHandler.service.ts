@@ -12,11 +12,10 @@ export class BusyHandlerService {
     constructor(private store: Store<ApplicationState>) {
     }
 
-    public handle(obs: Observable<any>): Observable<any> {
+    handle(obs: Observable<any>): Observable<any> {
         let subject: Subject<any> = new Subject();
         obs.subscribe(subject);
         if (this.activeCalls === 0) {
-            
             this.store.dispatch(enableBusy());
         }
         this.activeCalls++;

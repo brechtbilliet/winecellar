@@ -8,11 +8,11 @@ export class AuthenticationSandbox {
     constructor(private authenticationService: AuthenticationService) {
     }
 
-    public login(credentials: Credentials): void {
+    login(credentials: Credentials): void {
         this.authenticationService.authenticate(credentials);
     }
 
-    public register(account: Account): void {
+    register(account: Account): void {
         this.authenticationService.register(account);
     }
 }

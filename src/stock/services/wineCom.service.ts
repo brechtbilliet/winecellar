@@ -3,12 +3,13 @@ import {Observable} from "rxjs/Observable";
 import {Http, Response} from "@angular/http";
 import {Injectable} from "@angular/core";
 import {BusyHandlerService} from "../../common/services/busyHandler.service.ts";
+
 @Injectable()
 export class WineComService {
     constructor(private http: Http, private busyHandler: BusyHandlerService) {
     }
 
-    public search(query: string): Observable<WineComSearchResult> {
+    search(query: string): Observable<WineComSearchResult> {
         return this.busyHandler.handle(this.http
             .get(WINE_COM_API_URL + "catalog?apikey=" + WINE_COM_API_KEY + "&search=" + query)
             .map((resp: Response) => JSON.parse(JSON.stringify(resp.json()), camelCaseReviver)));

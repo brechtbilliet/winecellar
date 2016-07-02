@@ -15,12 +15,12 @@ import {CollapsableSidebarSandbox} from "../../sandboxes/collapsable-sidebar.san
     `
 })
 export class CollapsableSidebar {
-    public isCollapsed$ = this.sandbox.isCollapsed$;
+    isCollapsed$ = this.sandbox.isCollapsed$;
 
     constructor(public sandbox: CollapsableSidebarSandbox) {
     }
 
-    public toggle(): void {
+    toggle(): void {
         this.sandbox.toggleSidebar();
     }
 }

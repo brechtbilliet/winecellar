@@ -22,20 +22,20 @@ import {AuthenticationSandbox} from "../../sandboxes/authentication.sandbox";
       `
 })
 export class Authentication {
-    public curTab: number = 0;
+    curTab: number = 0;
 
     constructor(private sb: AuthenticationSandbox) {
     }
 
-    public enableTab(tabIndex: number): void {
+    enableTab(tabIndex: number): void {
         this.curTab = tabIndex;
     }
 
-    public login(credentials: Credentials): void {
+    login(credentials: Credentials): void {
         this.sb.login(credentials);
     }
 
-    public register(account: Account): void {
+    register(account: Account): void {
         this.sb.register(account);
     }
 }

@@ -27,14 +27,14 @@ import {FormGroupTextbox} from "../../../common/components/form/form-group-textb
 })
 export class Login {
     @Output()
-    public authenticate = new EventEmitter<Credentials>();
+    authenticate = new EventEmitter<Credentials>();
 
-    public loginForm = new ControlGroup({
+    loginForm = new ControlGroup({
         "login": new Control("", Validators.required),
         "password": new Control("", Validators.required)
     });
 
-    public onSubmit(): void {
+    onSubmit(): void {
         this.authenticate.emit(this.loginForm.value);
     }
 }

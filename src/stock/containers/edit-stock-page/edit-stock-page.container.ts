@@ -26,15 +26,15 @@ import {StockService} from "../../services/stock.service";
      `
 })
 export class EditStockPage {
-    public id = this.routeParams.get("id");
-    public editWine$ = this.sb.fetchWine(this.id).publishLast().refCount();
+    id = this.routeParams.get("id");
+    editWine$ = this.sb.fetchWine(this.id).publishLast().refCount();
 
     constructor(public sb: EditStockPageSandbox,
                 private routeParams: RouteParams,
                 private router: Router) {
     }
 
-    public onSave(wine: Wine): void {
+    onSave(wine: Wine): void {
         this.sb.updateWine(this.id, wine);
         this.router.navigateByUrl("/stock");
     }

@@ -12,5 +12,5 @@ import {Input, Component, ChangeDetectionStrategy} from "@angular/core";
     `
 })
 export class FormGroupContent {
-    @Input() public label:string;
+    @Input() label:string;
 }

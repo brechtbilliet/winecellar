@@ -7,7 +7,7 @@ export class AddStockPageSandbox {
     constructor(private sb: StockService) {
     }
 
-    public addWine(wine: Wine): void {
+    addWine(wine: Wine): void {
         this.sb.add(wine);
     }
 }

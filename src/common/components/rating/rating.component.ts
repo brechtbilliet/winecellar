@@ -13,22 +13,21 @@ import {Component, EventEmitter, Output, Input, ChangeDetectionStrategy} from "@
     `
 })
 export class Rating {
-    @Input() public rating: number;
-    @Input() public big: boolean;
+    @Input() rating: number;
+    @Input() big: boolean;
+    @Output() setRate = new EventEmitter<number>();
 
-    @Output() public setRate = new EventEmitter<number>();
+    overValue: number;
 
-    public overValue: number;
-
-    public update(value: number): void {
+    update(value: number): void {
         this.setRate.emit(value);
     }
 
-    public over(value: number): void {
+    over(value: number): void {
         this.overValue = value;
     }
 
-    public out(): void {
+    out(): void {
         this.overValue = 0;
     }
 }

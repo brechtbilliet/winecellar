@@ -15,24 +15,24 @@ export class AuthenticationService {
     constructor(private http: Http, private store: Store<ApplicationState>, private busyHandlerService: BusyHandlerService) {
     }
 
-    public authenticate(credentials: Credentials): void {
+    authenticate(credentials: Credentials): void {
         this.handleAuthenticationResult(
             this.http.post(API_URL + "/authentication/login", JSON.stringify(credentials), {headers: DEFAULT_HEADERS})
         );
     }
 
-    public register(account: Account): void {
+    register(account: Account): void {
         this.handleAuthenticationResult(
             this.http.post(API_URL + "/authentication/register", JSON.stringify(account), {headers: DEFAULT_HEADERS})
         );
     }
 
-    public logout(): void {
+    logout(): void {
         localStorage.removeItem(LOCALSTORAGE_AUTH);
         this.store.dispatch(clearAuthentication());
     }
 
-    public checkInitialAuthentication(): void {
+    checkInitialAuthentication(): void {
         let localStorageObj = window.localStorage.getItem(LOCALSTORAGE_AUTH);
         if (localStorageObj) {
             this.store.dispatch(setAuthentication(JSON.parse(localStorageObj)));

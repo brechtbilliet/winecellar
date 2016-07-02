@@ -18,7 +18,7 @@ import {Control} from "@angular/common";
     `
 })
 export class FormGroupTextbox {
-    @Input() public control: Control;
-    @Input() public label: string;
-    @Input() public placeholder: string;
+    @Input() control: Control;
+    @Input() label: string;
+    @Input() placeholder: string;
 }

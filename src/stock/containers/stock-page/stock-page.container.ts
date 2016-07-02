@@ -58,28 +58,28 @@ import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
      `
 })
 export class StockPage {
-    public searchCtrl = new Control("");
+    searchCtrl = new Control("");
 
-    public wines$ = this.sb.wines$;
-    public favoriteWines$ = this.wines$.map(wines => _.orderBy(wines, ["myRating"], ["desc"]));
-    public numberOfWines$ = this.wines$.map(wines => _.sumBy(wines, (wine: Wine) => wine.inStock));
-    public matchingWines$ = Observable.combineLatest(
-        this.searchCtrl.valueChanges.startWith(""), this.wines$, (term: string, wines: Array<Wine>) => {
+    wines$ = this.sb.wines$;
+    favoriteWines$ = this.wines$.map(wines => _.orderBy(wines, ["myRating"], ["desc"]));
+    numberOfWines$ = this.wines$.map(wines => _.sumBy(wines, (wine: Wine) => wine.inStock));
+    matchingWines$ = Observable.combineLatest(this.searchCtrl.valueChanges.startWith(""), this.wines$,
+        (term: string, wines: Array<Wine>) => {
             return wines.filter(wine => wine.name.toLowerCase().indexOf(term) > -1);
         });
 
     constructor(private sb: StockPageSandbox) {
     }
 
-    public onRemove(wine: Wine): void {
+    onRemove(wine: Wine): void {
         this.sb.removeWine(wine);
     }
 
-    public onSetRate(item: {wine: Wine, value: number}): void {
+    onSetRate(item: {wine: Wine, value: number}): void {
         this.sb.setRate(item.wine, item.value);
     }
 
-    public onSetStock(item: {wine: Wine, value: number}): void {
+    onSetStock(item: {wine: Wine, value: number}): void {
         this.sb.setStock(item.wine, item.value);
     }
 }

@@ -5,23 +5,23 @@ import {AuthenticationService} from "../../authentication/services/authenticatio
 import {StockService} from "../../stock/services/stock.service";
 @Injectable()
 export class ApplicationSandbox {
-    public isAuthenticated$ = this.store.select(state => state.data.authentication.isAuthenticated);
-    public isBusy$ = this.store.select(state => state.containers.application.isBusy);
-    public account$ = this.store.select(state => state.data.authentication.account);
+    isAuthenticated$ = this.store.select(state => state.data.authentication.isAuthenticated);
+    isBusy$ = this.store.select(state => state.containers.application.isBusy);
+    account$ = this.store.select(state => state.data.authentication.account);
 
     constructor(private store: Store<ApplicationState>, private authenticationService: AuthenticationService,
                 private stockService: StockService) {
     }
 
-    public loadAuthentication(): void {
+    loadAuthentication(): void {
         this.authenticationService.checkInitialAuthentication();
     }
 
-    public logout(): void {
+    logout(): void {
         this.authenticationService.logout();
     }
 
-    public loadWines(): void {
+    loadWines(): void {
         this.stockService.load();
     }
 }

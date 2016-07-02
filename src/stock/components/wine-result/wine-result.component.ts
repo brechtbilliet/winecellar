@@ -30,21 +30,20 @@ import {NumberPicker} from "../../../common/components/number-picker/number-pick
     `
 })
 export class WineResult {
-    @Input("wineResult") public wine: Wine;
+    @Input("wineResult") wine: Wine;
+    @Output() remove = new EventEmitter();
+    @Output() setRate = new EventEmitter<number>();
+    @Output() setStock = new EventEmitter<number>();
 
-    @Output() public remove = new EventEmitter();
-    @Output() public setRate = new EventEmitter<number>();
-    @Output() public setStock = new EventEmitter<number>();
-
-    public onSetRate(value: number): void {
+    onSetRate(value: number): void {
         this.setRate.emit(value);
     }
 
-    public onSetStock(value: number): void {
+    onSetStock(value: number): void {
         this.setStock.emit(value);
     }
 
-    public onRemove(): void {
+    onRemove(): void {
         this.remove.emit(null);
     }
 }

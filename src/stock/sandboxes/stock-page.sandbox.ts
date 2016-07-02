@@ -6,20 +6,20 @@ import {StockService} from "../services/stock.service";
 
 @Injectable()
 export class StockPageSandbox {
-    public wines$ = this.store.select(state => state.data.wines);
+    wines$ = this.store.select(state => state.data.wines);
 
     constructor(private store: Store<ApplicationState>, private stockService: StockService) {
     }
 
-    public removeWine(wine: Wine): void {
+    removeWine(wine: Wine): void {
         this.stockService.remove(wine);
     }
 
-    public setRate(wine: Wine, rate: number): void {
+    setRate(wine: Wine, rate: number): void {
         this.stockService.setRate(wine, rate);
     }
 
-    public setStock(wine: Wine, inStock: number): void {
+    setStock(wine: Wine, inStock: number): void {
         this.stockService.setStock(wine, inStock);
     }
 }

@@ -26,10 +26,10 @@ import {NumberPicker} from "../../../common/components/number-picker/number-pick
         `
 })
 export class FavoriteWines {
-    @Input() public wines: Array<Wine>;
-    @Output() public setStock = new EventEmitter<{wine: Wine, value: number}>();
+    @Input() wines: Array<Wine>;
+    @Output() setStock = new EventEmitter<{wine: Wine, value: number}>();
 
-    public onSetStock(wine: Wine, value: number): void {
+    onSetStock(wine: Wine, value: number): void {
         this.setStock.emit({wine, value});
     }
 }

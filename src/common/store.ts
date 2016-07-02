@@ -43,7 +43,6 @@ let reducerComposer: any = {
             ],
             reducer: winesReducer
         }
-
     },
     containers: {
         collapsableSidebar: {

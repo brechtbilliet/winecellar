@@ -37,21 +37,20 @@ import {ApplicationSandbox} from "../../sandboxes/application.sandbox";
     {path: "/about", name: "About", component: AboutPage}
 ])
 export class WineCellarApp {
-    public isAuthenticated$ = this.sb.isAuthenticated$.do((isAuthenticated: boolean) => {
+    account$ = this.sb.account$;
+    isBusy$ = this.sb.isBusy$;
+    isAuthenticated$ = this.sb.isAuthenticated$.do((isAuthenticated: boolean) => {
         if (isAuthenticated) {
             this.sb.loadWines();
         }
     }).cache();
-
-    public account$ = this.sb.account$;
-    public isBusy$ = this.sb.isBusy$;
 
     constructor(private title: Title, public sb: ApplicationSandbox) {
         this.title.setTitle("Winecellar application");
         sb.loadAuthentication();
     }
 
-    public logout(): void {
+    logout(): void {
         this.sb.logout();
     }
 }

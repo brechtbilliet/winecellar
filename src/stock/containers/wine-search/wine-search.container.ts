@@ -28,23 +28,24 @@ import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
     `
 })
 export class WineSearch {
-    @Input() public control: Control;
-    @Output() public onSelect = new EventEmitter<Product>();
+    @Input() control: Control;
+    @Output() onSelect = new EventEmitter<Product>();
 
-    public winesToShow$: Observable<Array<Product>>;
+    winesToShow$: Observable<Array<Product>>;
+
     private foundWineName: string;
     private reset$ = new Subject<boolean>();
 
     constructor(private sb: WineSearchSandbox) {
     }
 
-    public selectWine(wine: Product): void {
+    selectWine(wine: Product): void {
         this.foundWineName = wine.name;
         this.onSelect.emit(wine);
         this.reset$.next(true);
     }
 
-    public ngOnInit(): void {
+    ngOnInit(): void {
         let wines$ = this.control.valueChanges
             .do(value => this.reset$.next(value.length < 3))
             .debounceTime(300)

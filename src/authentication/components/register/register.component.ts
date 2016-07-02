@@ -36,17 +36,17 @@ import {FormGroupTextbox} from "../../../common/components/form/form-group-textb
 })
 export class Register {
     @Output()
-    public authenticate = new EventEmitter<Account>();
+    authenticate = new EventEmitter<Account>();
 
-    public registerForm = new ControlGroup({
-        "firstName": new Control("", Validators.required),
-        "lastName": new Control("", Validators.required),
-        "login": new Control("", Validators.required),
-        "password": new Control("", Validators.required),
-        "confirmPassword": new Control("", Validators.required)
+    registerForm = new ControlGroup({
+        firstName: new Control("", Validators.required),
+        lastName: new Control("", Validators.required),
+        login: new Control("", Validators.required),
+        password: new Control("", Validators.required),
+        confirmPassword: new Control("", Validators.required)
     });
 
-    public onSubmit(): void {
+    onSubmit(): void {
         if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
             toastr.error("Passwords don't match");
         } else {

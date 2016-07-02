@@ -5,12 +5,12 @@ import {toggleSidebar} from "../actionCreators";
 
 @Injectable()
 export class CollapsableSidebarSandbox {
-    public isCollapsed$ = this.store.select(state => state.containers.collapsableSidebar.isCollapsed);
+    isCollapsed$ = this.store.select(state => state.containers.collapsableSidebar.isCollapsed);
 
     constructor(private store: Store<ApplicationState>) {
     }
 
-    public toggleSidebar(): void {
+    toggleSidebar(): void {
         this.store.dispatch(toggleSidebar());
     }
 }

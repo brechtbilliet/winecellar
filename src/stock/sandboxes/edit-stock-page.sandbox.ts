@@ -8,11 +8,11 @@ export class EditStockPageSandbox {
     constructor(private StockService: StockService) {
     }
 
-    public updateWine(id: string, wine: Wine): void {
+    updateWine(id: string, wine: Wine): void {
         this.StockService.update(id, wine);
     }
 
-    public fetchWine(id: string): Observable<Wine> {
+    fetchWine(id: string): Observable<Wine> {
         return this.StockService.fetchWine(id);
     }
 }

@@ -29,7 +29,7 @@ export class AddStockPage {
     constructor(private sb: AddStockPageSandbox, private router: Router) {
     }
 
-    public onSave(wine: Wine): void {
+    onSave(wine: Wine): void {
         this.sb.addWine(wine);
         this.router.navigateByUrl("/stock");
     }

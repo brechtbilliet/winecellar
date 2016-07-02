@@ -1,5 +1,5 @@
 export class Wine {
-    public _id: string;
+    _id: string;
 
     constructor(public name: string = "",
                 public description: string = "",

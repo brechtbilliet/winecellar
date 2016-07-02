@@ -31,11 +31,10 @@ import {WineResult} from "../wine-result/wine-result.component";
     `
 })
 export class WineResults {
-    @Input() public wines: Array<Wine>;
-
-    @Output() public remove = new EventEmitter<Wine>();
-    @Output() public setRate = new EventEmitter<{wine: Wine, value: Number}>();
-    @Output() public setStock = new EventEmitter<{wine: Wine, value: Number}>();
+    @Input() wines: Array<Wine>;
+    @Output() remove = new EventEmitter<Wine>();
+    @Output() setRate = new EventEmitter<{wine: Wine, value: Number}>();
+    @Output() setStock = new EventEmitter<{wine: Wine, value: Number}>();
 
     public onSetRate(wine: Wine, value: number): void {
         this.setRate.emit({wine, value});
