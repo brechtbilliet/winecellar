@@ -1,5 +1,5 @@
 import {Input, Component, ChangeDetectionStrategy} from "@angular/core";
-import {Control} from "@angular/common";
+import {FormControl} from "@angular/forms";
 @Component({
     selector: "form-group-textbox",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +18,7 @@ import {Control} from "@angular/common";
     `
 })
 export class FormGroupTextbox {
-    @Input() control: Control;
+    @Input() control: FormControl;
     @Input() label: string;
     @Input() placeholder: string;
 }
