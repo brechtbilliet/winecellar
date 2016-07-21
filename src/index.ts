@@ -10,6 +10,7 @@ import {useLogMonitor} from "@ngrx/store-log-monitor";
 import {AppRoutes} from "./common/routes";
 import {provideRouter} from "@angular/router";
 import {provideForms} from "@angular/forms";
+import {AuthenticatedGuard} from "./common/authenticated.guard";
 
 
 bootstrap(WineCellarApp, [
@@ -19,6 +20,7 @@ bootstrap(WineCellarApp, [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     provideForms(),
     provideStore(store),
+    AuthenticatedGuard,
     instrumentStore({
         monitor: useLogMonitor({
             visible: false,
