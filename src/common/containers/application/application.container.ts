@@ -16,13 +16,15 @@ import {StockService} from "../../../stock/services/stock.service";
 import {EditStockPage} from "../../../stock/containers/edit-stock-page/edit-stock-page.container";
 import {AddStockPage} from "../../../stock/containers/add-stock-page/add-stock-page.container";
 import {ApplicationSandbox} from "../../sandboxes/application.sandbox";
+import {StoreLogMonitorComponent} from "@ngrx/store-log-monitor";
 @Component({
     selector: "application",
     providers: [Title, AuthenticationService, BusyHandlerService, StockService, ApplicationSandbox],
-    directives: [ROUTER_DIRECTIVES, Navbar, Authentication, Spinner],
+    directives: [StoreLogMonitorComponent, ROUTER_DIRECTIVES, Navbar, Authentication, Spinner],
     encapsulation: ViewEncapsulation.None,
     styles: [require("./application.container.scss")],
     template: `
+        <ngrx-store-log-monitor toggleCommand="ctrl-t" positionCommand="ctrl-m"></ngrx-store-log-monitor>
         <navbar [account]="account$|async" (logout)="logout()" [hidden]="!(isAuthenticated$|async)"></navbar>
         <authentication *ngIf="!(isAuthenticated$|async)"></authentication>
         <router-outlet *ngIf="isAuthenticated$|async"></router-outlet>

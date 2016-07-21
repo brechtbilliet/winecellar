@@ -79,14 +79,16 @@ export class StockService {
     }
 
     private getHttpOptions(): RequestOptionsArgs {
+        let state: ApplicationState;
+        this.store.take(1).subscribe(s => state = s);
+
         return {
             headers: new Headers({
-                "authorization": "Bearer " + this.store.getState().data.authentication.jwtToken,
+                "authorization": "Bearer " + state.data.authentication.jwtToken,
                 "Content-Type": "application/json"
             })
         };
     }
-
     private onError(resp: Response): void {
         toastr.error(resp.json().error);
     }
