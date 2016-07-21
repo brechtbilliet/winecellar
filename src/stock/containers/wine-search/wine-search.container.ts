@@ -1,8 +1,8 @@
 import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
-import {Control} from "@angular/common";
 import {Subject, Observable} from "rxjs";
 import {WineComService, Product, WineComSearchResult} from "../../services/wineCom.service";
 import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
+import {FormControl} from "@angular/forms";
 
 @Component({
     selector: "wine-search",
@@ -28,7 +28,7 @@ import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
     `
 })
 export class WineSearch {
-    @Input() control: Control;
+    @Input() control: FormControl;
     @Output() onSelect = new EventEmitter<Product>();
 
     winesToShow$: Observable<Array<Product>>;
