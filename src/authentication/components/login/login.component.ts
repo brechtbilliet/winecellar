@@ -10,7 +10,7 @@ import {FormBuilder, Validators} from "@angular/forms";
     providers: [FormBuilder],
     directives: [FormGroupTextbox, FormGroupPassword, FormGroupFooter],
     template: `
-        <form class="form-horizontal" (ngSubmit)="onSubmit()">
+        <form class="form-horizontal">
             <form-group-textbox [label]="'Login (*)'"
                                 [control]="loginForm.controls.login" [placeholder]="'Enter login'">
             </form-group-textbox>
@@ -18,7 +18,7 @@ import {FormBuilder, Validators} from "@angular/forms";
                                  [placeholder]="'Enter password'">
             </form-group-password>
             <form-group-footer>
-                <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block btn-lg"><i
+                <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block btn-lg" (click)="onSubmit()"><i
                         class="fa fa-sign-in"></i>&nbsp;Sign in
                 </button>
             </form-group-footer>

@@ -2,12 +2,8 @@ import {Action} from "@ngrx/store";
 import {AuthenticationDataState} from "../../state/DataState";
 import {DATA_AUTHENTICATION_SET_AUTHENTICATION, DATA_AUTHENTICATION_CLEAR_AUTHENTICATION} from "../../actionTypes";
 import {AuthenticationResult} from "../../../authentication/types/AuthenticationResult";
-let authenticationState: AuthenticationDataState = {
-    isAuthenticated: false,
-    jwtToken: "",
-    account: null
-}
-export function authenticationReducer(state: AuthenticationDataState = authenticationState,
+
+export function authenticationReducer(state: AuthenticationDataState,
                                       action: Action = null): AuthenticationDataState {
     switch (action.type) {
         case DATA_AUTHENTICATION_SET_AUTHENTICATION:
