@@ -1,12 +1,13 @@
 import {Component, Output, EventEmitter} from "@angular/core";
 import {Credentials} from "../../types/Credentials";
-import {Validators, Control, ControlGroup} from "@angular/common";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
 import {FormGroupPassword} from "../../../common/components/form/form-group-password/form-group-password.component";
 import {FormGroupTextbox} from "../../../common/components/form/form-group-textbox/form-group-textbox.component";
+import {FormBuilder, Validators} from "@angular/forms";
 @Component({
     selector: "login",
     styles: [require("./login.component.scss")],
+    providers: [FormBuilder],
     directives: [FormGroupTextbox, FormGroupPassword, FormGroupFooter],
     template: `
         <form class="form-horizontal" (ngSubmit)="onSubmit()">
@@ -28,10 +29,13 @@ export class Login {
     @Output()
     authenticate = new EventEmitter<Credentials>();
 
-    loginForm = new ControlGroup({
-        "login": new Control("", Validators.required),
-        "password": new Control("", Validators.required)
+    loginForm = this.formBuilder.group({
+        login: ["", Validators.required],
+        password: ["", Validators.required]
     });
+
+    constructor(private formBuilder: FormBuilder) {
+    }
 
     onSubmit(): void {
         this.authenticate.emit(this.loginForm.value);

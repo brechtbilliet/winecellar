@@ -23,7 +23,9 @@ import {ROUTER_DIRECTIVES} from "@angular/router";
         <ngrx-store-log-monitor toggleCommand="ctrl-t" positionCommand="ctrl-m"></ngrx-store-log-monitor>
         <navbar [account]="account$|async" (logout)="logout()" [hidden]="!(isAuthenticated$|async)"></navbar>
         <authentication *ngIf="!(isAuthenticated$|async)"></authentication>
-        <router-outlet *ngIf="isAuthenticated$|async"></router-outlet>
+        <div  [hidden]="!(isAuthenticated$|async)">
+            <router-outlet></router-outlet>
+        </div>
         <spinner [spin]="isBusy$|async"></spinner>
     `
 })

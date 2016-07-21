@@ -10,12 +10,14 @@ import {provideStore} from "@ngrx/store";
 import {useLogMonitor} from "@ngrx/store-log-monitor";
 import {AppRoutes} from "./common/routes";
 import {provideRouter} from "@angular/router";
+import {provideForms} from "@angular/forms";
 
 
 bootstrap(WineCellarApp, [
     provideRouter(AppRoutes),
     HTTP_PROVIDERS,
     provide(APP_BASE_HREF, {useValue: "/"}),
+    provideForms(),
     provide(LocationStrategy, {useClass: HashLocationStrategy}),
     provideStore(store),
     instrumentStore({
@@ -24,4 +26,5 @@ bootstrap(WineCellarApp, [
             position: "right"
         })
     }),
-]);
+])
+.catch((err: any) => console.error(err));

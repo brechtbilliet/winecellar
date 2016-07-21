@@ -6,17 +6,18 @@ import {FormGroupFooter} from "../../../common/components/form/form-group-footer
 import {Rating} from "../../../common/components/rating/rating.component";
 import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 import {Wine} from "../../entities/Wine";
-import {ControlGroup, Validators, Control} from "@angular/common";
 import {WineSearch} from "../../containers/wine-search/wine-search.container";
 import {Product} from "../../services/wineCom.service";
 import {ROUTER_DIRECTIVES} from "@angular/router";
+import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormBuilder, Validators} from "@angular/forms";
 @Component({
     selector: "detail-wine-form",
+    providers: [FormBuilder],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    directives: [FormGroupTextbox, FormGroupTextarea, FormGroupFooter, ROUTER_DIRECTIVES,
+    directives: [REACTIVE_FORM_DIRECTIVES, FormGroupTextbox, FormGroupTextarea, FormGroupFooter, ROUTER_DIRECTIVES,
         Rating, NumberPicker, FormGroupContent, WineSearch],
     template: `
-<form class="form-horizontal col-sm-12" (ngSubmit)="onSubmit()">
+<form [formGroup]="wineForm" class="form-horizontal col-sm-12" (ngSubmit)="onSubmit()">
     <wine-search [control]="wineForm.controls.name" (onSelect)="selectWine($event)"></wine-search>
     <form-group-textarea [label]="'Description'" [control]="wineForm.controls.description"
                          [placeholder]="'Enter description'">
@@ -50,14 +51,18 @@ export class DetailWineForm implements OnInit {
     @Input() wine = new Wine();
     @Output() onSave = new EventEmitter<Wine>();
 
-    wineForm: ControlGroup;
+    constructor(private formBuilder: FormBuilder) {
+
+    }
+
+    wineForm: FormGroup;
 
     ngOnInit(): void {
-        this.wineForm = new ControlGroup({
-            name: new Control(this.wine.name, Validators.required),
-            description: new Control(this.wine.description),
-            region: new Control(this.wine.region),
-            price: new Control(this.wine.price)
+        this.wineForm = this.formBuilder.group({
+            name: [this.wine.name, Validators.required],
+            description: [this.wine.description],
+            region: [this.wine.region],
+            price: [this.wine.price]
         });
     }
 
@@ -74,10 +79,10 @@ export class DetailWineForm implements OnInit {
     }
 
     selectWine(wine: Product): void {
-        (<Control>this.wineForm.controls["name"]).updateValue(wine.name);
-        (<Control>this.wineForm.controls["description"]).updateValue(wine.description);
-        (<Control>this.wineForm.controls["price"]).updateValue(wine.priceRetail);
-        (<Control>this.wineForm.controls["region"]).updateValue(wine.appellation.region.name);
-        this.wine.image = wine.labels.length > 0 ? wine.labels[0].url : null;
+        // (<Control>this.wineForm.controls["name"]).updateValue(wine.name);
+        // (<Control>this.wineForm.controls["description"]).updateValue(wine.description);
+        // (<Control>this.wineForm.controls["price"]).updateValue(wine.priceRetail);
+        // (<Control>this.wineForm.controls["region"]).updateValue(wine.appellation.region.name);
+        // this.wine.image = wine.labels.length > 0 ? wine.labels[0].url : null;
     }
 }

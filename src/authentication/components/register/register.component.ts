@@ -1,12 +1,13 @@
 import {Component, Output, EventEmitter} from "@angular/core";
 import {Account} from "../../types/Account";
-import {Validators, Control, ControlGroup} from "@angular/common";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
 import {FormGroupPassword} from "../../../common/components/form/form-group-password/form-group-password.component";
 import {FormGroupTextbox} from "../../../common/components/form/form-group-textbox/form-group-textbox.component";
+import {FormBuilder, Validators} from "@angular/forms";
 @Component({
     selector: "register",
     styles: [require("./register.component.scss")],
+    providers: [FormBuilder],
     directives: [FormGroupTextbox, FormGroupPassword, FormGroupFooter],
     template: `
         <form class="form-horizontal" (ngSubmit)="onSubmit()">
@@ -37,13 +38,16 @@ export class Register {
     @Output()
     authenticate = new EventEmitter<Account>();
 
-    registerForm = new ControlGroup({
-        firstName: new Control("", Validators.required),
-        lastName: new Control("", Validators.required),
-        login: new Control("", Validators.required),
-        password: new Control("", Validators.required),
-        confirmPassword: new Control("", Validators.required)
+    registerForm = this.formBuilder.group({
+        firstName: ["", Validators.required],
+        lastName: ["", Validators.required],
+        login: ["", Validators.required],
+        password: ["", Validators.required],
+        confirmPassword: ["", Validators.required]
     });
+
+    constructor(private formBuilder: FormBuilder) {
+    }
 
     onSubmit(): void {
         if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
