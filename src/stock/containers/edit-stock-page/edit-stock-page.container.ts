@@ -1,11 +1,11 @@
 import {Component} from "@angular/core";
 import {Main} from "../../../common/components/main/main.component";
 import {DefaultPage} from "../../../common/components/default-page/default-page.component";
-import {ROUTER_DIRECTIVES, RouteParams, Router} from "@angular/router-deprecated";
 import {DetailWineForm} from "../../components/detail-wine-form/detail-wine-form.component";
 import {Wine} from "../../entities/Wine";
 import {EditStockPageSandbox} from "../../sandboxes/edit-stock-page.sandbox";
 import {StockService} from "../../services/stock.service";
+import {ActivatedRoute, ROUTER_DIRECTIVES, Router} from "@angular/router";
 @Component({
     selector: "edit-stock-page",
     providers: [EditStockPageSandbox, StockService],
@@ -26,11 +26,11 @@ import {StockService} from "../../services/stock.service";
      `
 })
 export class EditStockPage {
-    id = this.routeParams.get("id");
+    id = this.route.snapshot.params["id"];
     editWine$ = this.sb.fetchWine(this.id).publishLast().refCount();
 
     constructor(public sb: EditStockPageSandbox,
-                private routeParams: RouteParams,
+                private route: ActivatedRoute,
                 private router: Router) {
     }
 

@@ -1,16 +1,15 @@
-import {Component, ChangeDetectionStrategy, Input, Output, OnInit} from "@angular/core";
+import {Component, ChangeDetectionStrategy, Input, Output, OnInit, EventEmitter} from "@angular/core";
 import {FormGroupContent} from "../../../common/components/form/form-group-content/form-group-content.component";
 import {FormGroupTextbox} from "../../../common/components/form/form-group-textbox/form-group-textbox.component";
 import {FormGroupTextarea} from "../../../common/components/form/form-group-textarea/form-group-textarea.component";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
-import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {Rating} from "../../../common/components/rating/rating.component";
 import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 import {Wine} from "../../entities/Wine";
-import {EventEmitter} from "@angular/router-deprecated/src/facade/async";
 import {ControlGroup, Validators, Control} from "@angular/common";
 import {WineSearch} from "../../containers/wine-search/wine-search.container";
 import {Product} from "../../services/wineCom.service";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 @Component({
     selector: "detail-wine-form",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,7 +41,7 @@ import {Product} from "../../services/wineCom.service";
         <button type="submit" [disabled]="!wineForm.valid" class="btn btn-primary btn-lg">
             <i class="fa fa-save"></i>&nbsp;Save wine
         </button>
-        <a [routerLink]="['MyWines']" class="btn btn-warning btn-lg"><i class="fa fa-undo"></i>&nbsp;Cancel</a>
+        <a [routerLink]="['/stock']" class="btn btn-warning btn-lg"><i class="fa fa-undo"></i>&nbsp;Cancel</a>
     </form-group-footer>
 </form>
      `

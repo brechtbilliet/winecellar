@@ -22,7 +22,7 @@ module.exports = {
             'lodash',
             'rxjs',
             'toastr',
-            '@angular/router-deprecated',
+            '@angular/router',
             'bootstrap/dist/css/bootstrap.css',
             'toastr/build/toastr.css',
             'font-awesome/css/font-awesome.css'

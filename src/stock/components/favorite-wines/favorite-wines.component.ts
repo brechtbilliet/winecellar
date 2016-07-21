@@ -1,6 +1,5 @@
-import {Component, Input, Output, ChangeDetectionStrategy} from "@angular/core";
+import {Component, Input, Output, ChangeDetectionStrategy, EventEmitter} from "@angular/core";
 import {Wine} from "../../entities/Wine";
-import {EventEmitter} from "@angular/router-deprecated/src/facade/async";
 import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 
 @Component({

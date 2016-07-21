@@ -3,7 +3,7 @@ import {Main} from "../../../common/components/main/main.component";
 import {DefaultPage} from "../../../common/components/default-page/default-page.component";
 import {DetailWineForm} from "../../components/detail-wine-form/detail-wine-form.component";
 import {StockService} from "../../services/stock.service";
-import {Router} from "@angular/router-deprecated";
+import {Router} from "@angular/router";
 import {Wine} from "../../entities/Wine";
 import {AddStockPageSandbox} from "../../sandboxes/add-stock-page.sandbox";
 @Component({

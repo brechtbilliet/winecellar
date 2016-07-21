@@ -8,9 +8,9 @@ import {Control} from "@angular/common";
 import {Wine} from "../../entities/Wine";
 import * as _ from "lodash";
 import {Observable} from "rxjs/Rx";
-import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {FavoriteWines} from "../../components/favorite-wines/favorite-wines.component";
 import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 @Component({
     selector: "stock-page",
     directives: [Panel, DefaultPage, Main, CollapsableSidebar, FavoriteWines, WineResults, ROUTER_DIRECTIVES],
@@ -30,7 +30,7 @@ import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <a  class="btn btn-primary btn-lg btn-block" [routerLink]="['/AddWine']">
+                        <a  class="btn btn-primary btn-lg btn-block" [routerLink]="['/stock/add']">
                             <i class="fa fa-plus-circle"></i>&nbsp;Add
                         </a>
                     </div>

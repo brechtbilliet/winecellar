@@ -1,9 +1,8 @@
-import {Component, Output, Input, ChangeDetectionStrategy} from "@angular/core";
-import {EventEmitter} from "@angular/router-deprecated/src/facade/async";
+import {Component, Output, Input, ChangeDetectionStrategy, EventEmitter} from "@angular/core";
 import {Wine} from "../../entities/Wine";
-import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {Rating} from "../../../common/components/rating/rating.component";
 import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 @Component({
     selector: "[wineResult]",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,7 +19,7 @@ import {NumberPicker} from "../../../common/components/number-picker/number-pick
         <td>
              <div class="pull-right">
                 <div class="btn-group">
-                    <a class="btn btn-lg btn-primary" [routerLink]="['/EditWine', {id: wine._id}]">
+                    <a class="btn btn-lg btn-primary" [routerLink]="['/stock', wine._id]">
                         <i class="fa fa-pencil"></i>
                     </a>
                     <button class="btn btn-lg btn-danger" (click)="onRemove(wine)"><i class="fa fa-trash-o"></i></button>

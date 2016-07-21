@@ -1,6 +1,5 @@
-import {Component, Output, Input, ChangeDetectionStrategy} from "@angular/core";
+import {Component, Output, Input, ChangeDetectionStrategy, EventEmitter} from "@angular/core";
 import {Wine} from "../../entities/Wine";
-import {EventEmitter} from "@angular/router-deprecated/src/facade/async";
 import {WineResult} from "../wine-result/wine-result.component";
 @Component({
     selector: "wine-results",

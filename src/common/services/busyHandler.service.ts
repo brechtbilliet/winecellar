@@ -1,4 +1,3 @@
-import {CONTAINER_APPLICATION_DISABLE_BUSY_FLAG, CONTAINER_APPLICATION_ENABLE_BUSY_FLAG} from "../actionTypes";
 import {Subject, Observable} from "rxjs/Rx";
 import {ApplicationState} from "../state/ApplicationState";
 import {Store} from "@ngrx/store";

@@ -1,5 +1,4 @@
-import {Component, Output} from "@angular/core";
-import {EventEmitter} from "@angular/router-deprecated/src/facade/async";
+import {Component, Output, EventEmitter} from "@angular/core";
 import {Credentials} from "../../types/Credentials";
 import {Validators, Control, ControlGroup} from "@angular/common";
 import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
