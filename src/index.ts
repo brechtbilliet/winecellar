@@ -1,7 +1,6 @@
 import {WineCellarApp} from "./common/containers/application/application.container.ts";
 import {bootstrap} from "@angular/platform-browser-dynamic";
 import {HashLocationStrategy, LocationStrategy, APP_BASE_HREF} from "@angular/common";
-import {provide} from "@angular/core";
 import "rxjs/add/operator/do";
 import {store} from "./common/store";
 import {HTTP_PROVIDERS} from "@angular/http";
