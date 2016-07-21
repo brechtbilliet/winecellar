@@ -16,9 +16,9 @@ import {provideForms} from "@angular/forms";
 bootstrap(WineCellarApp, [
     provideRouter(AppRoutes),
     HTTP_PROVIDERS,
-    provide(APP_BASE_HREF, {useValue: "/"}),
+    {provide: APP_BASE_HREF, useValue: "/"},
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     provideForms(),
-    provide(LocationStrategy, {useClass: HashLocationStrategy}),
     provideStore(store),
     instrumentStore({
         monitor: useLogMonitor({
