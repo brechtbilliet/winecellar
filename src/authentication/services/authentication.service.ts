@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Credentials} from "../types/Credentials";
-import {Response, Http} from "@angular/http";
+import {Response, Http, RequestOptionsArgs, Headers, RequestOptions} from "@angular/http";
 import {AuthenticationResult} from "../types/AuthenticationResult";
 import {Account} from "../types/Account";
-import {API_URL, DEFAULT_HEADERS, LOCALSTORAGE_AUTH} from "../../configuration";
+import {API_URL, LOCALSTORAGE_AUTH} from "../../configuration";
 import * as toastr from "toastr";
 import {ApplicationState} from "../../common/state/ApplicationState";
 import {Store} from "@ngrx/store";
@@ -17,13 +17,13 @@ export class AuthenticationService {
 
     authenticate(credentials: Credentials): void {
         this.handleAuthenticationResult(
-            this.http.post(API_URL + "/authentication/login", JSON.stringify(credentials), {headers: DEFAULT_HEADERS})
+            this.http.post(API_URL + "/authentication/login", JSON.stringify(credentials), this.postPutHttpOptions())
         );
     }
 
     register(account: Account): void {
         this.handleAuthenticationResult(
-            this.http.post(API_URL + "/authentication/register", JSON.stringify(account), {headers: DEFAULT_HEADERS})
+            this.http.post(API_URL + "/authentication/register", JSON.stringify(account), this.postPutHttpOptions())
         );
     }
 
@@ -47,6 +47,13 @@ export class AuthenticationService {
         }, (errorResponse: Response) => {
             toastr.error(errorResponse.json().error);
         });
+    }
+
+    private postPutHttpOptions(): RequestOptionsArgs {
+        let headers = new Headers({
+            "Content-Type": "application/json"
+        });
+        return new RequestOptions({ headers: headers });
     }
 
 }

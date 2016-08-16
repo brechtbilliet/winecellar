@@ -10,7 +10,7 @@ import {FormBuilder, Validators} from "@angular/forms";
     providers: [FormBuilder],
     directives: [FormGroupTextbox, FormGroupPassword, FormGroupFooter],
     template: `
-        <form class="form-horizontal">
+        <div class="form-horizontal">
             <form-group-textbox [label]="'First name (*)'" [control]="registerForm.controls.firstName" 
                 [placeholder]="'Enter first name'">
             </form-group-textbox>
@@ -31,7 +31,7 @@ import {FormBuilder, Validators} from "@angular/forms";
                     <i class="fa fa-user"></i>&nbsp;Sign up
                 </button>
             </form-group-footer>
-        </form>
+        </div>
        `
 })
 export class Register {

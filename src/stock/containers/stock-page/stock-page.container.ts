@@ -4,13 +4,13 @@ import {Main} from "../../../common/components/main/main.component";
 import {DefaultPage} from "../../../common/components/default-page/default-page.component";
 import {WineResults} from "../../components/wine-results/wine-results.component";
 import {CollapsableSidebar} from "../../../common/containers/collapsable-sidebar/collapsable-sidebar.container";
-import {Control} from "@angular/common";
 import {Wine} from "../../entities/Wine";
 import * as _ from "lodash";
 import {Observable} from "rxjs/Rx";
 import {FavoriteWines} from "../../components/favorite-wines/favorite-wines.component";
 import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
 import {ROUTER_DIRECTIVES} from "@angular/router";
+import {Control} from "@angular/common";
 @Component({
     selector: "stock-page",
     directives: [Panel, DefaultPage, Main, CollapsableSidebar, FavoriteWines, WineResults, ROUTER_DIRECTIVES],
@@ -25,7 +25,7 @@ import {ROUTER_DIRECTIVES} from "@angular/router";
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <input type="text" class="form-control input-lg" [ngFormControl]="searchCtrl"/>
+                            <input type="text" class="form-control input-lg" [formControl]="searchCtrl"/>
                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
@@ -45,8 +45,7 @@ import {ROUTER_DIRECTIVES} from "@angular/router";
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <wine-results 
-                            [wines]="matchingWines$| async" 
+                        <wine-results [wines]="matchingWines$|async"
                             (remove)="onRemove($event)" 
                             (setRate)="onSetRate($event)" 
                             (setStock)="onSetStock($event)">

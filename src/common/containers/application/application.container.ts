@@ -13,19 +13,17 @@ import {StockService} from "../../../stock/services/stock.service";
 import {ApplicationSandbox} from "../../sandboxes/application.sandbox";
 import {StoreLogMonitorComponent} from "@ngrx/store-log-monitor";
 import {ROUTER_DIRECTIVES} from "@angular/router";
+import {REACTIVE_FORM_DIRECTIVES} from "@angular/forms";
 @Component({
     selector: "application",
     providers: [Title, AuthenticationService, BusyHandlerService, StockService, ApplicationSandbox],
-    directives: [StoreLogMonitorComponent, ROUTER_DIRECTIVES, Navbar, Authentication, Spinner],
+    directives: [REACTIVE_FORM_DIRECTIVES, StoreLogMonitorComponent, ROUTER_DIRECTIVES, Navbar, Authentication, Spinner],
     encapsulation: ViewEncapsulation.None,
     styles: [require("./application.container.scss")],
     template: `
-        <ngrx-store-log-monitor toggleCommand="ctrl-t" positionCommand="ctrl-m"></ngrx-store-log-monitor>
         <navbar [account]="account$|async" (logout)="logout()" [hidden]="!(isAuthenticated$|async)"></navbar>
         <authentication *ngIf="!(isAuthenticated$|async)"></authentication>
-        <div  [hidden]="!(isAuthenticated$|async)">
-            <router-outlet></router-outlet>
-        </div>
+        <div [hidden]="!(isAuthenticated$|async)"><router-outlet></router-outlet></div>
         <spinner [spin]="isBusy$|async"></spinner>
     `
 })

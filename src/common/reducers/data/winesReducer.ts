@@ -1,5 +1,4 @@
 import {Action} from "@ngrx/store";
-import {Wine} from "../../../stock/entities/Wine";
 import {
     DATA_WINES_REMOVE,
     DATA_WINES_ADD_ALL,
@@ -8,6 +7,7 @@ import {
     DATA_WINES_UPDATE_STOCK,
     DATA_WINES_ADD
 } from "../../actionTypes";
+import {Wine} from "../../../stock/entities/Wine";
 export function winesReducer(state: Array<Wine>,
                              action: Action = null): Array<Wine> {
     let _id: string, inStock: number, myRating: number, wine: Wine, wines: Array<Wine>;

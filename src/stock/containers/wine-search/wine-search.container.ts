@@ -15,7 +15,7 @@ import {FormControl} from "@angular/forms";
                 Name (*)
             </label>
             <div class="col-sm-8">
-                <input type="text" [ngFormControl]="control" class="form-control input-lg" id="searchInput" 
+                <input type="text" [formControl]="control" class="form-control input-lg" id="searchInput" 
                     autocomplete="off" placeholder="Name"/>
                 <span *ngIf="control.valid" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                 <ul class="wine-search-results">

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "typings install",
-    "start": "webpack-dev-server --config webpack/webpack.dev.js --inline --hot --open",
-    "build": "webpack --config webpack/webpack.build.js -p",
+    "start": "webpack-dev-server --config webpack/webpack.dev.js --inline --hot --progress --open",
+    "build": "webpack --config webpack/webpack.build.js -p --progress",
     "deploy": "npm run build && surge --project dist --domain winecellar.surge.sh",
     "test": "karma start"
   },
@@ -54,14 +54,14 @@
     "webpack-dev-server": "1.14.1"
   },
   "dependencies": {
-    "@angular/common": "2.0.0-rc.4",
-    "@angular/compiler": "2.0.0-rc.4",
-    "@angular/core": "2.0.0-rc.4",
-    "@angular/forms": "0.2.0",
-    "@angular/http": "2.0.0-rc.1",
-    "@angular/platform-browser": "2.0.0-rc.4",
-    "@angular/platform-browser-dynamic": "2.0.0-rc.4",
-    "@angular/router": "3.0.0-beta.2",
+    "@angular/common": "2.0.0-rc.5",
+    "@angular/compiler": "2.0.0-rc.5",
+    "@angular/core": "2.0.0-rc.5",
+    "@angular/forms": "0.3.0",
+    "@angular/http": "2.0.0-rc.5",
+    "@angular/platform-browser": "2.0.0-rc.5",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.5",
+    "@angular/router": "3.0.0-rc.1",
     "@ngrx/core": "1.0.1",
     "@ngrx/store": "2.0.1",
     "@ngrx/store-devtools": "2.0.0-beta.1",

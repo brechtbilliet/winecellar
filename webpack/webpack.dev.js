@@ -10,7 +10,7 @@ module.exports = {
     entry: {
         app: './src/index.ts',
         vendor: [
-            '@ngrx/store',
+            // '@ngrx/store',
             '@angular/common',
             '@angular/compiler',
             '@angular/core',
@@ -34,6 +34,7 @@ module.exports = {
         publicPath: '/'
     },
     devServer: {
+        historyApiFallback: true,
         hot: true,
         watchOptions: {
             aggregateTimeout: 300,
@@ -45,8 +46,8 @@ module.exports = {
         extensions: ['', '.ts', '.js', '.json']
     },
     debug: true,
-    devtool: 'cheap-module-eval-source-map',
-    // devtool: 'source-map',
+    // devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     plugins: [
         new CopyWebpackPlugin([
             {from: 'node_modules/core-js/client/shim.min.js', to: 'node_modules/core-js/client/shim.min.js'},
