@@ -1,9 +1,7 @@
-import {ROUTER_DIRECTIVES} from "@angular/router";
 import {Component, Output, EventEmitter, Input, ChangeDetectionStrategy} from "@angular/core";
 import {Account} from "../../../authentication/types/Account";
 @Component({
     selector: "navbar",
-    directives: [ROUTER_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [require("./navbar.component.scss")],
     template: `

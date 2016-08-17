@@ -2,7 +2,6 @@ import {Component} from "@angular/core";
 import {CollapsableSidebarSandbox} from "../../sandboxes/collapsable-sidebar.sandbox";
 @Component({
     selector: "collapsable-sidebar",
-    providers: [CollapsableSidebarSandbox],
     styles: [require("./collapsable-sidebar.container.scss")],
     template: `
         <div class="collapsable-part" [class.is-collapsed]="isCollapsed$|async">

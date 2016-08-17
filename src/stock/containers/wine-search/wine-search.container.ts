@@ -1,13 +1,12 @@
 import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
 import {Subject, Observable} from "rxjs";
-import {WineComService, Product, WineComSearchResult} from "../../services/wineCom.service";
+import {Product, WineComSearchResult} from "../../services/wineCom.service";
 import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
 import {FormControl} from "@angular/forms";
 
 @Component({
     selector: "wine-search",
     styles: [require("./wine-search.container.scss")],
-    providers: [WineComService, WineSearchSandbox],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="form-group has-feedback" [class.has-success]="control.valid">

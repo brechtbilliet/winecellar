@@ -1,9 +1,8 @@
 import {Component, Input, ChangeDetectionStrategy} from "@angular/core";
-import {FormControl, REACTIVE_FORM_DIRECTIVES} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 @Component({
     selector: "form-group-password",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    directives: [REACTIVE_FORM_DIRECTIVES],
     template: `
         <div class="form-group has-feedback" [class.has-success]="control.valid">
              <label class="col-sm-4 control-label">{{label}}</label>

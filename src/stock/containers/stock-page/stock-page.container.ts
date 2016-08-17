@@ -1,20 +1,11 @@
 import {Component} from "@angular/core";
-import {Panel} from "../../../common/components/panel/panel.component";
-import {Main} from "../../../common/components/main/main.component";
-import {DefaultPage} from "../../../common/components/default-page/default-page.component";
-import {WineResults} from "../../components/wine-results/wine-results.component";
-import {CollapsableSidebar} from "../../../common/containers/collapsable-sidebar/collapsable-sidebar.container";
 import {Wine} from "../../entities/Wine";
 import * as _ from "lodash";
 import {Observable} from "rxjs/Rx";
-import {FavoriteWines} from "../../components/favorite-wines/favorite-wines.component";
 import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
-import {ROUTER_DIRECTIVES} from "@angular/router";
 import {Control} from "@angular/common";
 @Component({
     selector: "stock-page",
-    directives: [Panel, DefaultPage, Main, CollapsableSidebar, FavoriteWines, WineResults, ROUTER_DIRECTIVES],
-    providers: [StockPageSandbox],
     template: `
         <default-page>
             <collapsable-sidebar class="hidden-sm hidden-xs">

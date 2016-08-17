@@ -1,14 +1,9 @@
 import {Component, Output, EventEmitter} from "@angular/core";
 import {Credentials} from "../../types/Credentials";
-import {FormGroupFooter} from "../../../common/components/form/form-group-footer/form-group-footer.component";
-import {FormGroupPassword} from "../../../common/components/form/form-group-password/form-group-password.component";
-import {FormGroupTextbox} from "../../../common/components/form/form-group-textbox/form-group-textbox.component";
 import {FormBuilder, Validators} from "@angular/forms";
 @Component({
     selector: "login",
     styles: [require("./login.component.scss")],
-    providers: [FormBuilder],
-    directives: [FormGroupTextbox, FormGroupPassword, FormGroupFooter],
     template: `
         <div class="form-horizontal">
             <form-group-textbox [label]="'Login (*)'"

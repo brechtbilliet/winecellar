@@ -1,15 +1,9 @@
 import {Component} from "@angular/core";
-import {Main} from "../../../common/components/main/main.component";
-import {DefaultPage} from "../../../common/components/default-page/default-page.component";
-import {DetailWineForm} from "../../components/detail-wine-form/detail-wine-form.component";
-import {StockService} from "../../services/stock.service";
 import {Router} from "@angular/router";
 import {Wine} from "../../entities/Wine";
 import {AddStockPageSandbox} from "../../sandboxes/add-stock-page.sandbox";
 @Component({
     selector: "add-stock-page",
-    directives: [DetailWineForm, DefaultPage, Main],
-    providers: [StockService, AddStockPageSandbox],
     template: `
        <default-page>
             <main>

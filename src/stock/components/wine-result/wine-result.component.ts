@@ -1,12 +1,8 @@
 import {Component, Output, Input, ChangeDetectionStrategy, EventEmitter} from "@angular/core";
 import {Wine} from "../../entities/Wine";
-import {Rating} from "../../../common/components/rating/rating.component";
-import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
-import {ROUTER_DIRECTIVES} from "@angular/router";
 @Component({
     selector: "[wineResult]",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    directives: [ROUTER_DIRECTIVES, NumberPicker, Rating],
     template: `
         <td><img src="{{wine.image}}"></td>
         <td>{{wine.name}}</td>

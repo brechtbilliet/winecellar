@@ -1,11 +1,9 @@
 import {Component, Input, Output, ChangeDetectionStrategy, EventEmitter} from "@angular/core";
 import {Wine} from "../../entities/Wine";
-import {NumberPicker} from "../../../common/components/number-picker/number-picker.component";
 
 @Component({
     selector: "favorite-wines",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    directives: [NumberPicker],
     styles: [require("./favorite-wines.component.scss")],
     template: `    
     <div>

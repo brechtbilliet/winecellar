@@ -1,15 +1,9 @@
 import {Component} from "@angular/core";
-import {Panel} from "../../../common/components/panel/panel.component";
 import {Account} from "../../types/Account";
 import {Credentials} from "../../types/Credentials";
-import {AuthenticationService} from "../../services/authentication.service";
-import {Register} from "../../components/register/register.component";
-import {Login} from "../../components/login/login.component";
 import {AuthenticationSandbox} from "../../sandboxes/authentication.sandbox";
 @Component({
     selector: "authentication",
-    directives: [Panel, Login, Register],
-    providers: [AuthenticationService, AuthenticationSandbox],
     template: `
     <div class="container">
         <panel [header]="'You are not authenticated!'">
