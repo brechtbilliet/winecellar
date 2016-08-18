@@ -18,6 +18,8 @@ import {CollapsableSidebarSandbox} from "./sandboxes/collapsable-sidebar.sandbox
 import {BusyHandlerService} from "./services/busyHandler.service";
 import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
+import {AuthenticatedGuard} from "./authenticated.guard";
+import {UnauthenticatedGuard} from "./unauthenticated.guard";
 
 @NgModule({
     imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterModule, HttpModule],
@@ -25,7 +27,7 @@ import {ReactiveFormsModule, FormsModule} from "@angular/forms";
         Main, Navbar, NumberPicker, Panel, Rating, Spinner, CollapsableSidebar],
     exports: [DefaultPage, FormGroupContent, FormGroupFooter, FormGroupPassword, FormGroupTextarea, FormGroupTextbox,
         Main, Navbar, NumberPicker, Panel, Rating, Spinner, CollapsableSidebar],
-    providers: [CollapsableSidebarSandbox, BusyHandlerService]
+    providers: [CollapsableSidebarSandbox, BusyHandlerService, AuthenticatedGuard, UnauthenticatedGuard]
 })
 export class CommonLogicModule {
 }

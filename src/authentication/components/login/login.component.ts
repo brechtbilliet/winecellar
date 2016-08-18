@@ -5,7 +5,7 @@ import {FormBuilder, Validators} from "@angular/forms";
     selector: "login",
     styles: [require("./login.component.scss")],
     template: `
-        <div class="form-horizontal">
+        <form [formGroup]="loginForm" class="form-horizontal">
             <form-group-textbox [label]="'Login (*)'"
                                 [control]="loginForm.controls.login" [placeholder]="'Enter login'">
             </form-group-textbox>
@@ -13,12 +13,12 @@ import {FormBuilder, Validators} from "@angular/forms";
                                  [placeholder]="'Enter password'">
             </form-group-password>
             <form-group-footer>
-                <button type="button" [disabled]="!loginForm.valid" class="btn btn-primary btn-block btn-lg" (click)="onSubmit()">
+                <button type="submit" [disabled]="!loginForm.valid" (click)="onSubmit()" class="btn btn-primary btn-block btn-lg">
                     <i class="fa fa-sign-in"></i>&nbsp;Sign in
                 </button>
             </form-group-footer>
-        </div>
-               `
+        </form>
+`
 })
 export class Login {
     @Output() authenticate = new EventEmitter<Credentials>();

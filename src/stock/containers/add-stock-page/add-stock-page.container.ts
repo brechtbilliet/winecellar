@@ -25,6 +25,6 @@ export class AddStockPage {
 
     onSave(wine: Wine): void {
         this.sb.addWine(wine);
-        this.router.navigateByUrl("/stock");
+        this.router.navigate(["/stock"]);
     }
 }

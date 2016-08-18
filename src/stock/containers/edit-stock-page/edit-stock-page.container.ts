@@ -30,6 +30,6 @@ export class EditStockPage {
 
     onSave(wine: Wine): void {
         this.sb.updateWine(this.id, wine);
-        this.router.navigateByUrl("/stock");
+        this.router.navigate(["/stock"]);
     }
 }

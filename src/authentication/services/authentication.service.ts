@@ -15,14 +15,14 @@ export class AuthenticationService {
     constructor(private http: Http, private store: Store<ApplicationState>, private busyHandlerService: BusyHandlerService) {
     }
 
-    authenticate(credentials: Credentials): void {
-        this.handleAuthenticationResult(
+    authenticate(credentials: Credentials): Observable<AuthenticationResult> {
+        return this.handleAuthenticationResult(
             this.http.post(API_URL + "/authentication/login", JSON.stringify(credentials), this.postPutHttpOptions())
         );
     }
 
-    register(account: Account): void {
-        this.handleAuthenticationResult(
+    register(account: Account): Observable<AuthenticationResult> {
+        return this.handleAuthenticationResult(
             this.http.post(API_URL + "/authentication/register", JSON.stringify(account), this.postPutHttpOptions())
         );
     }
@@ -39,21 +39,23 @@ export class AuthenticationService {
         }
     }
 
-    private handleAuthenticationResult(obs$: Observable<Response>): void {
-        this.busyHandlerService.handle(obs$).map(resp => resp.json()).subscribe((result: AuthenticationResult) => {
+    private handleAuthenticationResult(obs$: Observable<Response>): Observable<AuthenticationResult> {
+        let res = this.busyHandlerService.handle(obs$).map(resp => resp.json());
+        res.subscribe((result: AuthenticationResult) => {
             window.localStorage.setItem(LOCALSTORAGE_AUTH, JSON.stringify(result));
             this.store.dispatch(setAuthentication(result));
             toastr.success("successfully logged in!");
         }, (errorResponse: Response) => {
             toastr.error(errorResponse.json().error);
         });
+        return res;
     }
 
     private postPutHttpOptions(): RequestOptionsArgs {
         let headers = new Headers({
             "Content-Type": "application/json"
         });
-        return new RequestOptions({ headers: headers });
+        return new RequestOptions({headers: headers});
     }
 
 }

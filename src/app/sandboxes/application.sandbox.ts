@@ -13,7 +13,7 @@ export class ApplicationSandbox {
                 private stockService: StockService) {
     }
 
-    loadAuthentication(): void {
+    checkInitialAuthentication(): void {
         this.authenticationService.checkInitialAuthentication();
     }
 

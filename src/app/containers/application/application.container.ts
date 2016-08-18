@@ -1,10 +1,12 @@
 import {Title} from "@angular/platform-browser";
-import {Component, ViewEncapsulation} from "@angular/core";
+import {Component, ViewEncapsulation, OnInit, OnDestroy} from "@angular/core";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "toastr/build/toastr.css";
 import "font-awesome/css/font-awesome.css";
 import {ApplicationSandbox} from "../../sandboxes/application.sandbox";
+import {Router} from "@angular/router";
+import {Subscription} from "rxjs/Rx";
 @Component({
     selector: "application",
     encapsulation: ViewEncapsulation.None,
@@ -12,27 +14,39 @@ import {ApplicationSandbox} from "../../sandboxes/application.sandbox";
     providers: [Title],
     template: `
         <navbar [account]="account$|async" (logout)="logout()" [hidden]="!(isAuthenticated$|async)"></navbar>
-        <authentication *ngIf="!(isAuthenticated$|async)"></authentication>
-        <div [hidden]="!(isAuthenticated$|async)"><router-outlet></router-outlet></div>
+        <router-outlet></router-outlet>
         <spinner [spin]="isBusy$|async"></spinner>
-        <ngrx-store-log-monitor toggleCommand="ctrl-t" positionCommand="ctrl-m"></ngrx-store-log-monitor>
+        <!--<ngrx-store-log-monitor toggleCommand="ctrl-t" positionCommand="ctrl-m"></ngrx-store-log-monitor>-->
     `
 })
-export class WineCellarApp {
+export class WineCellarApp implements OnInit, OnDestroy {
     account$ = this.sb.account$;
     isBusy$ = this.sb.isBusy$;
-    isAuthenticated$ = this.sb.isAuthenticated$.do((isAuthenticated: boolean) => {
-        if (isAuthenticated) {
-            this.sb.loadWines();
-        }
-    }).cache();
+    isAuthenticated$ = this.sb.isAuthenticated$;
 
-    constructor(private title: Title, public sb: ApplicationSandbox) {
+    private subscriptions: Array<Subscription> = [];
+
+    constructor(private title: Title, private sb: ApplicationSandbox, private router: Router) {
         this.title.setTitle("Winecellar application");
-        setTimeout(() => {sb.loadAuthentication()});
+    }
+
+    ngOnInit(): void {
+        this.sb.checkInitialAuthentication();
+        this.sb.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
+            if (isAuthenticated) {
+                this.sb.loadWines();
+            } else {
+                this.router.navigate(["/authentication"]);
+            }
+        });
     }
 
     logout(): void {
         this.sb.logout();
+        this.router.navigate(["/authentication"]);
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(sub => sub.unsubscribe());
     }
 }

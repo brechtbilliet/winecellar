@@ -3,7 +3,7 @@ import {Wine} from "../../entities/Wine";
 import * as _ from "lodash";
 import {Observable} from "rxjs/Rx";
 import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
-import {Control} from "@angular/common";
+import {FormControl} from "@angular/forms";
 @Component({
     selector: "stock-page",
     template: `
@@ -48,7 +48,7 @@ import {Control} from "@angular/common";
      `
 })
 export class StockPage {
-    searchCtrl = new Control("");
+    searchCtrl = new FormControl("");
 
     wines$ = this.sb.wines$;
     favoriteWines$ = this.wines$.map(wines => _.orderBy(wines, ["myRating"], ["desc"]));
