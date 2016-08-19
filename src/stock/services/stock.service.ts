@@ -23,30 +23,27 @@ export class StockService {
     }
 
     add(wine: Wine): void {
-        this.busyHandler.handle(this.http.post(API_URL + "/wines", JSON.stringify(wine), this.postPutHttpOptions())
-            .map((res: Response) => res.json()))
-            .subscribe((resp: Wine) => {
-                this.store.dispatch(addWine(resp));
-            }, (resp: Response) => this.onError(resp));
+        let result$ = this.http.post(`${API_URL}/wines`, wine, this.authorizedHttpOptions()).share().map((res: Response) => res.json());
+        this.busyHandler.handle(result$);
+        result$.subscribe(resp => this.store.dispatch(addWine(resp)), resp => this.onError(resp));
     }
 
     update(id: string, wine: Wine): void {
-        this.busyHandler.handle(this.http.put(API_URL + "/wines/" + id, JSON.stringify(wine), this.postPutHttpOptions())
-            .map((res: Response) => res.json()))
-            .subscribe(() => {
-                this.store.dispatch(updateWine(id, wine));
-            }, (resp: Response) => this.onError(resp));
+        let result$ = this.http.put(`${API_URL}/wines/${id}`, wine, this.authorizedHttpOptions()).share()
+            .map((res: Response) => res.json());
+        this.busyHandler.handle(result$);
+        result$.subscribe(resp => this.store.dispatch(updateWine(id, wine)), resp => this.onError(resp));
     }
 
     remove(wine: Wine): void {
-        this.busyHandler.handle(this.http.delete(API_URL + "/wines/" + wine._id, this.getRemoveHttpOptions()))
+        this.busyHandler.handle(this.http.delete(API_URL + "/wines/" + wine._id, this.authorizedHttpOptions()))
             .subscribe(() => {
                 this.store.dispatch(removeWine(wine._id));
             }, (resp: Response) => this.onError(resp));
     }
 
     load(): void {
-        this.busyHandler.handle(this.http.get(API_URL + "/wines", this.getRemoveHttpOptions()))
+        this.busyHandler.handle(this.http.get(API_URL + "/wines", this.authorizedHttpOptions()))
             .map(response => response.json())
             .subscribe((wines: Array<Wine>) => {
                 this.store.dispatch(addAllWines(wines));
@@ -54,14 +51,14 @@ export class StockService {
     }
 
     fetchWine(id: string): Observable<Wine> {
-        return this.busyHandler.handle(this.http.get(API_URL + "/wines/" + id, this.getRemoveHttpOptions())
+        return this.busyHandler.handle(this.http.get(API_URL + "/wines/" + id, this.authorizedHttpOptions())
             .map((res: Response) => res.json()));
     }
 
     setRate(wine: Wine, myRating: number): void {
         let newWine: Wine = Object.assign({}, wine, {myRating: myRating});
         this.busyHandler.handle(
-            this.http.put(API_URL + "/wines/" + wine._id, JSON.stringify(newWine), this.postPutHttpOptions())
+            this.http.put(API_URL + "/wines/" + wine._id, newWine, this.authorizedHttpOptions())
                 .map((res: Response) => res.json()))
             .subscribe(() => {
                 this.store.dispatch(updateRateWine(wine._id, myRating));
@@ -71,31 +68,20 @@ export class StockService {
     setStock(wine: Wine, inStock: number): void {
         let newWine: Wine = <Wine> Object.assign({}, wine, {inStock: inStock});
         this.busyHandler.handle(
-            this.http.put(API_URL + "/wines/" + wine._id, JSON.stringify(newWine), this.postPutHttpOptions())
+            this.http.put(API_URL + "/wines/" + wine._id, newWine, this.authorizedHttpOptions())
                 .map((res: Response) => res.json()))
             .subscribe(() => {
                 this.store.dispatch(updateStockWine(wine._id, inStock));
             }, (resp: Response) => this.onError(resp));
     }
 
-    private postPutHttpOptions(): RequestOptionsArgs {
-        let state: ApplicationState;
-        this.store.take(1).subscribe(s => state = s);
-        let headers = new Headers({
-            "authorization": "Bearer " + state.data.authentication.jwtToken,
-            "Content-Type": "application/json"
-        });
-        return new RequestOptions({ headers: headers });
-    }
-
-
-    private getRemoveHttpOptions(): RequestOptionsArgs {
+    private authorizedHttpOptions(): RequestOptionsArgs {
         let state: ApplicationState;
         this.store.take(1).subscribe(s => state = s);
         let headers = new Headers({
             "authorization": "Bearer " + state.data.authentication.jwtToken
         });
-        return new RequestOptions({ headers: headers });
+        return new RequestOptions({headers: headers});
     }
 
     private onError(resp: Response): void {
