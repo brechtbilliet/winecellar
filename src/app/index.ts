@@ -1,10 +1,9 @@
 import {routing} from "./routes";
-import {AuthenticatedGuard} from "../common/authenticated.guard";
 import {BrowserModule} from "@angular/platform-browser";
-import {WineCellarApp} from "./containers/application/application.container";
+import {ApplicationContainer} from "./containers/application/application.container";
 import {NgModule} from "@angular/core";
 import {StoreLogMonitorComponent} from "@ngrx/store-log-monitor";
-import {ApplicationSandbox} from "./sandboxes/application.sandbox";
+import {AppSandbox} from "./app.sandbox";
 import {store} from "../common/store";
 import {StoreModule} from "@ngrx/store";
 import {CommonLogicModule} from "../common/index";
@@ -13,10 +12,10 @@ import {AuthenticationModule} from "../authentication/index";
 import {AboutModule} from "../about/index";
 @NgModule({
     imports: [BrowserModule, StoreModule.provideStore(store), AboutModule, AuthenticationModule, CommonLogicModule, StockModule, routing],
-    declarations: [WineCellarApp, StoreLogMonitorComponent],
-    bootstrap: [WineCellarApp],
+    declarations: [ApplicationContainer, StoreLogMonitorComponent],
+    bootstrap: [ApplicationContainer],
     providers: [
-        ApplicationSandbox,
+        AppSandbox,
         // instrumentStore({
         //     monitor: useLogMonitor({
         //         visible: false,

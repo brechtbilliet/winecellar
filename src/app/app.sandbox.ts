@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import {ApplicationState} from "../../common/state/ApplicationState";
+import {ApplicationState} from "../common/state/ApplicationState";
 import {Store} from "@ngrx/store";
-import {AuthenticationService} from "../../authentication/services/authentication.service";
-import {StockService} from "../../stock/services/stock.service";
+import {AuthenticationService} from "../authentication/services/authentication.service";
+import {StockService} from "../stock/services/stock.service";
 @Injectable()
-export class ApplicationSandbox {
+export class AppSandbox {
     isAuthenticated$ = this.store.select(state => state.data.authentication.isAuthenticated);
     isBusy$ = this.store.select(state => state.containers.application.isBusy);
     account$ = this.store.select(state => state.data.authentication.account);

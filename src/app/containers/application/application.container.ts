@@ -4,7 +4,7 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "toastr/build/toastr.css";
 import "font-awesome/css/font-awesome.css";
-import {ApplicationSandbox} from "../../sandboxes/application.sandbox";
+import {AppSandbox} from "../../app.sandbox";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs/Rx";
 @Component({
@@ -19,14 +19,14 @@ import {Subscription} from "rxjs/Rx";
         <!--<ngrx-store-log-monitor toggleCommand="ctrl-t" positionCommand="ctrl-m"></ngrx-store-log-monitor>-->
     `
 })
-export class WineCellarApp implements OnInit, OnDestroy {
+export class ApplicationContainer implements OnInit, OnDestroy {
     account$ = this.sb.account$;
     isBusy$ = this.sb.isBusy$;
     isAuthenticated$ = this.sb.isAuthenticated$;
 
     private subscriptions: Array<Subscription> = [];
 
-    constructor(private title: Title, private sb: ApplicationSandbox, private router: Router) {
+    constructor(private title: Title, private sb: AppSandbox, private router: Router) {
         this.title.setTitle("Winecellar application");
     }
 

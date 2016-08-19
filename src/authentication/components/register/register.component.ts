@@ -29,7 +29,7 @@ import {FormBuilder, Validators} from "@angular/forms";
         </div>
        `
 })
-export class Register {
+export class RegisterComponent {
     @Output()
     authenticate = new EventEmitter<Account>();
 

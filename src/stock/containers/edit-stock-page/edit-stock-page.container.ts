@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {Wine} from "../../entities/Wine";
-import {EditStockPageSandbox} from "../../sandboxes/edit-stock-page.sandbox";
 import {ActivatedRoute, Router} from "@angular/router";
+import {StockSandbox} from "../../stock.sandbox";
 @Component({
     selector: "edit-stock-page",
     template: `
@@ -19,11 +19,11 @@ import {ActivatedRoute, Router} from "@angular/router";
     </default-page>
      `
 })
-export class EditStockPage {
+export class EditStockPageContainer {
     id = this.route.snapshot.params["id"];
     editWine$ = this.sb.fetchWine(this.id).publishLast().refCount();
 
-    constructor(public sb: EditStockPageSandbox,
+    constructor(public sb: StockSandbox,
                 private route: ActivatedRoute,
                 private router: Router) {
     }

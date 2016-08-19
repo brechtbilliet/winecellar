@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {Credentials} from "../types/Credentials";
-import {Account} from "../types/Account";
-import {AuthenticationService} from "../services/authentication.service";
-import {AuthenticationResult} from "../types/AuthenticationResult";
+import {Credentials} from "./types/Credentials";
+import {Account} from "./types/Account";
+import {AuthenticationService} from "./services/authentication.service";
+import {AuthenticationResult} from "./types/AuthenticationResult";
 import {Observable} from "rxjs/Rx";
 
 @Injectable()

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {CollapsableSidebarSandbox} from "../../sandboxes/collapsable-sidebar.sandbox";
+import {CommonSandbox} from "../../common.sandbox";
 @Component({
     selector: "collapsable-sidebar",
     styles: [require("./collapsable-sidebar.container.scss")],
@@ -13,10 +13,10 @@ import {CollapsableSidebarSandbox} from "../../sandboxes/collapsable-sidebar.san
         </div>
     `
 })
-export class CollapsableSidebar {
+export class CollapsableSidebarContainer {
     isCollapsed$ = this.sandbox.isCollapsed$;
 
-    constructor(public sandbox: CollapsableSidebarSandbox) {
+    constructor(public sandbox: CommonSandbox) {
     }
 
     toggle(): void {

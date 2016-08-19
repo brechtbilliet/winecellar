@@ -14,6 +14,6 @@ import {Component, Input, ChangeDetectionStrategy} from "@angular/core";
         </div>
     `
 })
-export class Panel {
+export class PanelComponent {
     @Input() header: string;
 }

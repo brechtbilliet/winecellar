@@ -1,8 +1,8 @@
 import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
 import {Subject, Observable} from "rxjs";
 import {Product, WineComSearchResult} from "../../services/wineCom.service";
-import {WineSearchSandbox} from "../../sandboxes/wine-search.sandbox";
 import {FormControl} from "@angular/forms";
+import {StockSandbox} from "../../stock.sandbox";
 
 @Component({
     selector: "wine-search",
@@ -26,7 +26,7 @@ import {FormControl} from "@angular/forms";
         </div>
     `
 })
-export class WineSearch {
+export class WineSearchContainer {
     @Input() control: FormControl;
     @Output() onSelect = new EventEmitter<Product>();
 
@@ -35,7 +35,7 @@ export class WineSearch {
     private foundWineName: string;
     private reset$ = new Subject<boolean>();
 
-    constructor(private sb: WineSearchSandbox) {
+    constructor(private sb: StockSandbox) {
     }
 
     selectWine(wine: Product): void {

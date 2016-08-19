@@ -2,8 +2,8 @@ import {Component} from "@angular/core";
 import {Wine} from "../../entities/Wine";
 import * as _ from "lodash";
 import {Observable} from "rxjs/Rx";
-import {StockPageSandbox} from "../../sandboxes/stock-page.sandbox";
 import {FormControl} from "@angular/forms";
+import {StockSandbox} from "../../stock.sandbox";
 @Component({
     selector: "stock-page",
     template: `
@@ -47,7 +47,7 @@ import {FormControl} from "@angular/forms";
         </default-page>
      `
 })
-export class StockPage {
+export class StockPageContainer {
     searchCtrl = new FormControl("");
 
     wines$ = this.sb.wines$;
@@ -58,7 +58,7 @@ export class StockPage {
             return wines.filter(wine => wine.name.toLowerCase().indexOf(term) > -1);
         });
 
-    constructor(private sb: StockPageSandbox) {
+    constructor(private sb: StockSandbox) {
     }
 
     onRemove(wine: Wine): void {

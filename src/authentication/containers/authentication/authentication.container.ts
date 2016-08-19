@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from "@angular/core";
 import {Account} from "../../types/Account";
 import {Credentials} from "../../types/Credentials";
-import {AuthenticationSandbox} from "../../sandboxes/authentication.sandbox";
+import {AuthenticationSandbox} from "../../authentication.sandbox";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs/Rx";
 @Component({
@@ -17,7 +17,7 @@ import {Subscription} from "rxjs/Rx";
     </div>
       `
 })
-export class Authentication implements OnDestroy {
+export class AuthenticationContainer implements OnDestroy {
     curTab: number = 0;
 
     subscriptions: Array<Subscription> = [];
@@ -30,15 +30,15 @@ export class Authentication implements OnDestroy {
     }
 
     login(credentials: Credentials): void {
-        this.sb.login(credentials).subscribe(() => {
+        this.subscriptions.push(this.sb.login(credentials).subscribe(() => {
             this.router.navigate(["/"]);
-        });
+        }));
     }
 
     register(account: Account): void {
-        this.sb.register(account).subscribe(() => {
+        this.subscriptions.push(this.sb.register(account).subscribe(() => {
             this.router.navigate(["/"]);
-        });
+        }));
     }
 
     ngOnDestroy(): void {

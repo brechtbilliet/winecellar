@@ -45,7 +45,7 @@ import {Account} from "../../../authentication/types/Account";
             </div>
         </nav>`
 })
-export class Navbar {
+export class NavbarComponent {
     @Input() account: Account;
     @Output() logout = new EventEmitter();
 

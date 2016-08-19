@@ -37,7 +37,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
         </form>
      `
 })
-export class DetailWineForm implements OnInit {
+export class DetailWineFormComponent implements OnInit {
     @Input() wine = new Wine();
     @Output() onSave = new EventEmitter<Wine>();
 

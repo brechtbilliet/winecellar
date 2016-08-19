@@ -27,7 +27,7 @@ import {Wine} from "../../entities/Wine";
         </table>
     `
 })
-export class WineResults {
+export class WineResultsComponent {
     @Input() wines: Array<Wine>;
     @Output() remove = new EventEmitter<Wine>();
     @Output() setRate = new EventEmitter<{wine: Wine, value: Number}>();

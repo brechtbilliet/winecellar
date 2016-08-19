@@ -28,5 +28,5 @@ import {Component} from "@angular/core";
         </default-page>
      `
 })
-export class AboutPage {
+export class AboutPageContainer {
 }

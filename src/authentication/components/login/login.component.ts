@@ -20,7 +20,7 @@ import {FormBuilder, Validators} from "@angular/forms";
         </form>
 `
 })
-export class Login {
+export class LoginComponent {
     @Output() authenticate = new EventEmitter<Credentials>();
 
     loginForm = this.formBuilder.group({

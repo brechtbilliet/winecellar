@@ -13,7 +13,7 @@ import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from "@
         </button>
     `
 })
-export class NumberPicker {
+export class NumberPickerComponent {
     @Input() amount: number;
     @Output() setAmount = new EventEmitter<number>();
 

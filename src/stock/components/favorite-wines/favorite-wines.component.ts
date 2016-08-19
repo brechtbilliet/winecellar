@@ -22,7 +22,7 @@ import {Wine} from "../../entities/Wine";
     </div>
         `
 })
-export class FavoriteWines {
+export class FavoriteWinesComponent {
     @Input() wines: Array<Wine>;
     @Output() setStock = new EventEmitter<{wine: Wine, value: number}>();
 

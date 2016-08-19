@@ -10,6 +10,6 @@ import {Component, Input, ChangeDetectionStrategy} from "@angular/core";
             <div class="bounce3"></div>
         </div>`
 })
-export class Spinner {
+export class SpinnerComponent {
     @Input() spin: boolean;
 }
