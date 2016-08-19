@@ -8,16 +8,13 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <form [formGroup]="wineForm" class="form-horizontal col-sm-12" (ngSubmit)="onSubmit()">
-            <wine-search [control]="wineForm.controls.name" (onSelect)="selectWine($event)"></wine-search>
+            <wine-search [control]="wineForm.controls.name" (select)="selectWine($event)"></wine-search>
             <form-group-textarea [label]="'Description'" [control]="wineForm.controls.description"
                                  [placeholder]="'Enter description'">
-                    
             </form-group-textarea>
             <form-group-textbox [label]="'Region'" [control]="wineForm.controls.region" [placeholder]="'Enter region'">
-        
             </form-group-textbox>
             <form-group-textbox [label]="'Price'" [control]="wineForm.controls.price" [placeholder]="'Enter price'">
-        
             </form-group-textbox>
             <form-group-content [label]="'Rating'">
                 <rating [big]="true" [rating]="wine.myRating" (setRate)="setRate($event)"></rating>
@@ -69,10 +66,12 @@ export class DetailWineFormComponent implements OnInit {
     }
 
     selectWine(wine: Product): void {
-        // (<Control>this.wineForm.controls["name"]).updateValue(wine.name);
-        // (<Control>this.wineForm.controls["description"]).updateValue(wine.description);
-        // (<Control>this.wineForm.controls["price"]).updateValue(wine.priceRetail);
-        // (<Control>this.wineForm.controls["region"]).updateValue(wine.appellation.region.name);
-        // this.wine.image = wine.labels.length > 0 ? wine.labels[0].url : null;
+        this.wineForm.setValue({
+            name: wine.name,
+            description: wine.description,
+            price: wine.priceRetail,
+            region: wine.appellation ? wine.appellation.region.name : ""
+        });
+        this.wine.image = wine.labels.length > 0 ? wine.labels[0].url : null;
     }
 }

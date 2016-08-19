@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
-import {Subject, Observable} from "rxjs";
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnDestroy, OnInit} from "@angular/core";
+import {Subject, Subscription} from "rxjs";
 import {Product, WineComSearchResult} from "../../services/wineCom.service";
 import {FormControl} from "@angular/forms";
 import {StockSandbox} from "../../stock.sandbox";
@@ -26,35 +26,43 @@ import {StockSandbox} from "../../stock.sandbox";
         </div>
     `
 })
-export class WineSearchContainer {
+export class WineSearchContainer implements OnDestroy, OnInit {
     @Input() control: FormControl;
-    @Output() onSelect = new EventEmitter<Product>();
+    @Output() select = new EventEmitter<Product>();
 
-    winesToShow$: Observable<Array<Product>>;
+    winesToShow$ = Subject.create();
 
     private foundWineName: string;
-    private reset$ = new Subject<boolean>();
+    private subscriptions: Array<Subscription> = [];
 
     constructor(private sb: StockSandbox) {
     }
 
     selectWine(wine: Product): void {
         this.foundWineName = wine.name;
-        this.onSelect.emit(wine);
-        this.reset$.next(true);
+        this.select.emit(wine);
+        this.winesToShow$.next([]); // clear
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(sub => sub.unsubscribe());
     }
 
     ngOnInit(): void {
-        let wines$ = this.control.valueChanges
-            .do(value => this.reset$.next(value.length < 3))
+        let subscription = this.control.valueChanges
+            .do((value: string) => {
+                if (value.length < 3) {
+                    this.winesToShow$.next([]); // clear
+                }
+            })
             .debounceTime(300)
+            .distinctUntilChanged()
             .filter(value => value.length > 2 && value !== this.foundWineName)
-            .map(value => this.sb.search(value))
-            .switch()
-            .map((res: WineComSearchResult) => res.products.list).cache();
-
-        this.winesToShow$ = Observable.combineLatest(wines$, this.reset$, (wines: Array<Product>, clear: boolean) => {
-            return clear ? [] : wines;
-        });
+            .switchMap(value => this.sb.search(value))
+            .map((res: WineComSearchResult) => res.products.list)
+            .subscribe((wines: Array<Product>) => {
+                this.winesToShow$.next(wines);
+            });
+        this.subscriptions.push(subscription);
     }
 }
