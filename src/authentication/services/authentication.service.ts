@@ -17,13 +17,13 @@ export class AuthenticationService {
 
     authenticate(credentials: Credentials): Observable<AuthenticationResult> {
         return this.handleAuthenticationResult(
-            this.http.post(API_URL + "/authentication/login", JSON.stringify(credentials), this.postPutHttpOptions())
+            this.http.post(`${API_URL}/authentication/login`, credentials).share().map(resp => resp.json())
         );
     }
 
     register(account: Account): Observable<AuthenticationResult> {
         return this.handleAuthenticationResult(
-            this.http.post(API_URL + "/authentication/register", JSON.stringify(account), this.postPutHttpOptions())
+            this.http.post(`${API_URL}/authentication/register`, account).share().map(resp => resp.json())
         );
     }
 
@@ -39,23 +39,15 @@ export class AuthenticationService {
         }
     }
 
-    private handleAuthenticationResult(obs$: Observable<Response>): Observable<AuthenticationResult> {
-        let res = this.busyHandlerService.handle(obs$).map(resp => resp.json());
-        res.subscribe((result: AuthenticationResult) => {
-            window.localStorage.setItem(LOCALSTORAGE_AUTH, JSON.stringify(result));
-            this.store.dispatch(setAuthentication(result));
-            toastr.success("successfully logged in!");
-        }, (errorResponse: Response) => {
-            toastr.error(errorResponse.json().error);
-        });
-        return res;
+    private handleAuthenticationResult(obs$: Observable<AuthenticationResult>): Observable<AuthenticationResult> {
+        this.busyHandlerService.handle(obs$);
+        obs$.subscribe((result: AuthenticationResult) => {
+                window.localStorage.setItem(LOCALSTORAGE_AUTH, JSON.stringify(result));
+                this.store.dispatch(setAuthentication(result));
+                toastr.success("successfully logged in!");
+            }, (errorResponse: Response) => {
+                toastr.error(errorResponse.json().error);
+            });
+        return obs$;
     }
-
-    private postPutHttpOptions(): RequestOptionsArgs {
-        let headers = new Headers({
-            "Content-Type": "application/json"
-        });
-        return new RequestOptions({headers: headers});
-    }
-
 }
