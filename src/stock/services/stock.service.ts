@@ -29,50 +29,42 @@ export class StockService {
     }
 
     update(id: string, wine: Wine): void {
-        let result$ = this.http.put(`${API_URL}/wines/${id}`, wine, this.authorizedHttpOptions()).share()
-            .map((res: Response) => res.json());
+        let result$ = this.http.put(`${API_URL}/wines/${id}`, wine, this.authorizedHttpOptions()).share();
         this.busyHandler.handle(result$);
         result$.subscribe(resp => this.store.dispatch(updateWine(id, wine)), resp => this.onError(resp));
     }
 
     remove(wine: Wine): void {
-        this.busyHandler.handle(this.http.delete(API_URL + "/wines/" + wine._id, this.authorizedHttpOptions()))
-            .subscribe(() => {
-                this.store.dispatch(removeWine(wine._id));
-            }, (resp: Response) => this.onError(resp));
+        let result$ = this.http.delete(`${API_URL}/wines/${wine._id}`, this.authorizedHttpOptions()).share();
+        this.busyHandler.handle(result$);
+        result$.subscribe(() => this.store.dispatch(removeWine(wine._id)), (resp: Response) => this.onError(resp));
     }
 
     load(): void {
-        this.busyHandler.handle(this.http.get(API_URL + "/wines", this.authorizedHttpOptions()))
-            .map(response => response.json())
-            .subscribe((wines: Array<Wine>) => {
-                this.store.dispatch(addAllWines(wines));
-            }, (resp: Response) => this.onError(resp));
+        let result$ = this.http.get(`${API_URL}/wines`, this.authorizedHttpOptions()).share()
+            .map((res: Response) => res.json());
+        this.busyHandler.handle(result$);
+        result$.subscribe(wines => this.store.dispatch(addAllWines(wines)), (resp: Response) => this.onError(resp));
     }
 
     fetchWine(id: string): Observable<Wine> {
-        return this.busyHandler.handle(this.http.get(API_URL + "/wines/" + id, this.authorizedHttpOptions())
-            .map((res: Response) => res.json()));
+        let result$ = this.http.get(`${API_URL}/wines/${id}`, this.authorizedHttpOptions()).share()
+            .map((res: Response) => res.json());
+        this.busyHandler.handle(result$);
+        return result$;
     }
 
     setRate(wine: Wine, myRating: number): void {
         let newWine: Wine = Object.assign({}, wine, {myRating: myRating});
-        this.busyHandler.handle(
-            this.http.put(API_URL + "/wines/" + wine._id, newWine, this.authorizedHttpOptions())
-                .map((res: Response) => res.json()))
-            .subscribe(() => {
-                this.store.dispatch(updateRateWine(wine._id, myRating));
-            }, (resp: Response) => this.onError(resp));
+        let result$ = this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).share();
+        this.busyHandler.handle(result$);
+        result$.subscribe(() => this.store.dispatch(updateRateWine(wine._id, myRating)), (resp: Response) => this.onError(resp));
     }
 
     setStock(wine: Wine, inStock: number): void {
-        let newWine: Wine = <Wine> Object.assign({}, wine, {inStock: inStock});
-        this.busyHandler.handle(
-            this.http.put(API_URL + "/wines/" + wine._id, newWine, this.authorizedHttpOptions())
-                .map((res: Response) => res.json()))
-            .subscribe(() => {
-                this.store.dispatch(updateStockWine(wine._id, inStock));
-            }, (resp: Response) => this.onError(resp));
+        let newWine: Wine = Object.assign({}, wine, {inStock: inStock});
+        let result$ = this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).share();
+        result$.subscribe(() => this.store.dispatch(updateStockWine(wine._id, inStock)), (resp: Response) => this.onError(resp));
     }
 
     private authorizedHttpOptions(): RequestOptionsArgs {
