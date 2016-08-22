@@ -19,7 +19,6 @@ import {BusyHandlerService} from "./services/busyHandler.service";
 import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {AuthenticatedGuard} from "./authenticated.guard";
-import {UnauthenticatedGuard} from "./unauthenticated.guard";
 
 @NgModule({
     imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterModule, HttpModule],
@@ -27,7 +26,7 @@ import {UnauthenticatedGuard} from "./unauthenticated.guard";
         MainComponent, NavbarComponent, NumberPickerComponent, PanelComponent, Rating, SpinnerComponent, CollapsableSidebarContainer],
     exports: [DefaultPageComponent, FormGroupContent, FormGroupFooter, FormGroupPassword, FormGroupTextarea, FormGroupTextbox,
         MainComponent, NavbarComponent, NumberPickerComponent, PanelComponent, Rating, SpinnerComponent, CollapsableSidebarContainer],
-    providers: [CommonSandbox, BusyHandlerService, AuthenticatedGuard, UnauthenticatedGuard]
+    providers: [CommonSandbox, BusyHandlerService, AuthenticatedGuard]
 })
 export class CommonLogicModule {
 }

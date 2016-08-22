@@ -1,5 +1,5 @@
 import {Title} from "@angular/platform-browser";
-import {Component, ViewEncapsulation, OnInit, OnDestroy} from "@angular/core";
+import {Component, ViewEncapsulation, OnInit, OnDestroy, ChangeDetectorRef} from "@angular/core";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "toastr/build/toastr.css";
@@ -35,8 +35,6 @@ export class ApplicationContainer implements OnInit, OnDestroy {
         this.sb.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
             if (isAuthenticated) {
                 this.sb.loadWines();
-            } else {
-                this.router.navigate(["/authentication"]);
             }
         });
     }
