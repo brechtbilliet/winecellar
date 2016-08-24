@@ -42,5 +42,7 @@ function wineReducer(state: Wine, action: Action) {
         case DATA_WINES_UPDATE_STOCK:
             ({wine, inStock} = action.payload);
             return Object.assign({}, wine, {inStock: inStock});
+        default:
+            return state;
     }
 }
