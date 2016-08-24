@@ -1,6 +1,7 @@
 import {DATA_AUTHENTICATION_SET_AUTHENTICATION, DATA_AUTHENTICATION_CLEAR_AUTHENTICATION} from "../../actionTypes";
 import {authenticationReducer} from "./authentication.reducer";
 import {AuthenticationDataState} from "../../state/DataState";
+import {Dispatcher} from "@ngrx/store";
 let deepfreeze = require("deep-freeze");
 
 describe("reducer: data > authenticationReducer", () => {
@@ -54,6 +55,14 @@ describe("reducer: data > authenticationReducer", () => {
             deepfreeze(initialState);
             let changedState: AuthenticationDataState = authenticationReducer(initialState, {type: null});
             expect(changedState).toBe(initialState);
+        });
+    });
+    describe("case @ngrx/store/init", () => {
+        it("should return the default value", () => {
+            let changedState: AuthenticationDataState = authenticationReducer(undefined, {type: Dispatcher.INIT});
+            expect(changedState.isAuthenticated).toBeFalsy();
+            expect(changedState.account).toBeUndefined();
+            expect(changedState.jwtToken).toBeUndefined();
         });
     });
 });
