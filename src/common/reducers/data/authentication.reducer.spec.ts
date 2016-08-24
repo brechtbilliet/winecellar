@@ -1,5 +1,5 @@
 import {DATA_AUTHENTICATION_SET_AUTHENTICATION, DATA_AUTHENTICATION_CLEAR_AUTHENTICATION} from "../../actionTypes";
-import {authenticationReducer} from "./authenticationReducer";
+import {authenticationReducer} from "./authentication.reducer";
 import {AuthenticationDataState} from "../../state/DataState";
 let deepfreeze = require("deep-freeze");
 
