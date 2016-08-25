@@ -85,7 +85,6 @@ describe("reducer > data", () => {
                 type: DATA_WINES_UPDATE_RATE,
                 payload: {_id: initialState[0]._id, myRating: newRating}
             });
-            console.log(changedState);
             expect(changedState).not.toBe(initialState);
             expect(changedState[0]).not.toBe(initialState[0]);
             expect(changedState[0].myRating).toBe(newRating);
@@ -117,7 +116,7 @@ describe("reducer > data", () => {
         });
     });
     describe("case @ngrx/store/init", () => {
-        it("should return the default value", () => {
+        it("should return the default value for the state param", () => {
             let changedState: Array<Wine> = winesReducer(undefined, {type: Dispatcher.INIT});
             expect(changedState.length).toBe(0);
         });

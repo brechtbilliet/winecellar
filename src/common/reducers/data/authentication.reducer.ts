@@ -10,7 +10,7 @@ let initialState: AuthenticationDataState = {
 }
 
 export function authenticationReducer(state: AuthenticationDataState = initialState,
-                                      action: Action = null): AuthenticationDataState {
+                                      action: Action): AuthenticationDataState {
     let token: string, firstName: string, lastName: string, login: string;
     switch (action.type) {
         case DATA_AUTHENTICATION_SET_AUTHENTICATION:

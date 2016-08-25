@@ -58,7 +58,7 @@ describe("reducer: data > authenticationReducer", () => {
         });
     });
     describe("case @ngrx/store/init", () => {
-        it("should return the default value", () => {
+        it("should return the default value for the state param", () => {
             let changedState: AuthenticationDataState = authenticationReducer(undefined, {type: Dispatcher.INIT});
             expect(changedState.isAuthenticated).toBeFalsy();
             expect(changedState.account).toBeUndefined();
