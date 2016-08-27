@@ -9,7 +9,7 @@ module.exports = {
     entry: {
         app: './src/index.ts',
         vendor: [
-            '@ngrx/rootReducer',
+            '@ngrx/store',
             '@angular/common',
             '@angular/compiler',
             '@angular/core',
@@ -21,7 +21,7 @@ module.exports = {
             'lodash',
             'rxjs',
             'toastr',
-            '@angular/router-deprecated',
+            '@angular/router',
             'bootstrap/dist/css/bootstrap.css',
             'toastr/build/toastr.css',
             'font-awesome/css/font-awesome.css'
@@ -39,9 +39,9 @@ module.exports = {
     debug: true,
     plugins: [
         new CopyWebpackPlugin([
-            {from: 'node_modules/core-js/client/shim.min.js', to: 'node_modules/core-js/client/shim.min.js'},
-            {from: 'node_modules/zone.js/dist/zone.js', to: 'node_modules/zone.js/dist/zone.js'},
-            {from: 'node_modules/reflect-metadata/Reflect.js', to: 'node_modules/reflect-metadata/Reflect.js'}
+            {from: 'node_modules/core-js/client/shim.min.js', to: 'polyfills/core-js/client/shim.min.js'},
+            {from: 'node_modules/zone.js/dist/zone.js', to: 'polyfills/zone.js/dist/zone.js'},
+            {from: 'node_modules/reflect-metadata/Reflect.js', to: 'polyfills/reflect-metadata/Reflect.js'}
         ]),
         new StringReplacePlugin(),
         new HtmlWebpackPlugin({

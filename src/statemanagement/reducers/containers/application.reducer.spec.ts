@@ -37,7 +37,7 @@ describe("reducer: containers > applicationReducer", () => {
             expect(changedState).toBe(initialState);
         });
     });
-    describe("case @ngrx/rootReducer/init", () => {
+    describe("case @ngrx/store/init", () => {
         it("should return the default value for the state param", () => {
             let changedState: ApplicationContainerState = applicationReducer(undefined, {type: Dispatcher.INIT});
             expect(changedState.isBusy).toBeFalsy();
