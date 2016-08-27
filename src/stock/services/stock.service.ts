@@ -16,7 +16,7 @@ export class StockService {
     }
 
     add(wine: Wine): void {
-        let result$ = this.http.post(`${API_URL}/wines`, wine, this.authorizedHttpOptions()).share().map((res: Response) => res.json());
+        let result$ = this.http.post(`${API_URL}/wines`, wine, this.authorizedHttpOptions()).publishReplay(1).refCount().map((res: Response) => res.json());
         this.busyHandler.handle(result$);
         result$.subscribe(resp => this.store.dispatch(addWine(resp)), resp => this.onError(resp));
     }
@@ -30,14 +30,14 @@ export class StockService {
     }
 
     load(): void {
-        let result$ = this.http.get(`${API_URL}/wines`, this.authorizedHttpOptions()).share()
+        let result$ = this.http.get(`${API_URL}/wines`, this.authorizedHttpOptions()).publishReplay(1).refCount()
             .map((res: Response) => res.json());
         this.busyHandler.handle(result$);
         result$.subscribe(wines => this.store.dispatch(addAllWines(wines)), (resp: Response) => this.onError(resp));
     }
 
     fetchWine(id: string): Observable<Wine> {
-        let result$ = this.http.get(`${API_URL}/wines/${id}`, this.authorizedHttpOptions()).share()
+        let result$ = this.http.get(`${API_URL}/wines/${id}`, this.authorizedHttpOptions()).publishReplay(1).refCount()
             .map((res: Response) => res.json());
         this.busyHandler.handle(result$);
         return result$;
