@@ -1,5 +1,5 @@
 import {Wine} from "../../../stock/entities/Wine";
-import {winesReducer} from "./winesReducer";
+import {winesReducer} from "./wines.reducer";
 import * as _ from "lodash";
 import {
     DATA_WINES_ADD,
@@ -9,6 +9,7 @@ import {
     DATA_WINES_UPDATE_RATE,
     DATA_WINES_UPDATE_STOCK
 } from "../../actionTypes";
+import {Dispatcher} from "@ngrx/store";
 let deepfreeze = require("deep-freeze");
 
 describe("reducer > data", () => {
@@ -112,6 +113,12 @@ describe("reducer > data", () => {
             deepfreeze(initialState);
             let changedState: Array<Wine> = winesReducer(initialState, {type: null});
             expect(changedState).toBe(initialState);
+        });
+    });
+    describe("case @ngrx/store/init", () => {
+        it("should return the default value for the state param", () => {
+            let changedState: Array<Wine> = winesReducer(undefined, {type: Dispatcher.INIT});
+            expect(changedState.length).toBe(0);
         });
     });
 });

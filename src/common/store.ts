@@ -1,6 +1,6 @@
 import {collapsableSidebarReducer} from "./reducers/containers/collapsableSidebarReducer";
-import {authenticationReducer} from "./reducers/data/authenticationReducer";
-import {winesReducer} from "./reducers/data/winesReducer";
+import {authenticationReducer} from "./reducers/data/authentication.reducer";
+import {winesReducer} from "./reducers/data/wines.reducer";
 import {applicationReducer} from "./reducers/containers/applicationReducer";
 import {
     DATA_AUTHENTICATION_CLEAR_AUTHENTICATION,
