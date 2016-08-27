@@ -10,6 +10,8 @@ import {CommonLogicModule} from "../common/index";
 import {StockModule} from "../stock/index";
 import {AuthenticationModule} from "../authentication/index";
 import {AboutModule} from "../about/index";
+import {instrumentStore} from "@ngrx/store-devtools";
+import {useLogMonitor} from "@ngrx/store-log-monitor";
 @NgModule({
     imports: [BrowserModule, StoreModule.provideStore(store), AboutModule, AuthenticationModule, CommonLogicModule, StockModule, routing],
     declarations: [ApplicationContainer, StoreLogMonitorComponent],
