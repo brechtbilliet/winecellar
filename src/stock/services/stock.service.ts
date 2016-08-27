@@ -3,18 +3,11 @@ import * as toastr from "toastr";
 import {Injectable} from "@angular/core";
 import {Http, Response, Headers, RequestOptionsArgs, RequestOptions} from "@angular/http";
 import {Wine} from "../entities/Wine";
-import {ApplicationState} from "../../common/state/ApplicationState";
+import {ApplicationState} from "../../statemanagement/state/ApplicationState";
 import {API_URL} from "../../configuration";
 import {BusyHandlerService} from "../../common/services/busyHandler.service";
 import {Observable} from "rxjs";
-import {
-    addWine,
-    updateWine,
-    removeWine,
-    addAllWines,
-    updateRateWine,
-    updateStockWine
-} from "../../common/actionCreators";
+import {addWine, addAllWines} from "../../statemanagement/actionCreators";
 
 @Injectable()
 export class StockService {
@@ -29,15 +22,11 @@ export class StockService {
     }
 
     update(id: string, wine: Wine): void {
-        let result$ = this.http.put(`${API_URL}/wines/${id}`, wine, this.authorizedHttpOptions()).share();
-        this.busyHandler.handle(result$);
-        result$.subscribe(resp => this.store.dispatch(updateWine(id, wine)), resp => this.onError(resp));
+       this.http.put(`${API_URL}/wines/${id}`, wine, this.authorizedHttpOptions()).subscribe(() => {}, this.onError);
     }
 
     remove(wine: Wine): void {
-        let result$ = this.http.delete(`${API_URL}/wines/${wine._id}`, this.authorizedHttpOptions()).share();
-        this.busyHandler.handle(result$);
-        result$.subscribe(() => this.store.dispatch(removeWine(wine._id)), (resp: Response) => this.onError(resp));
+        this.http.delete(`${API_URL}/wines/${wine._id}`, this.authorizedHttpOptions()).subscribe(() => {}, this.onError);
     }
 
     load(): void {
@@ -56,22 +45,19 @@ export class StockService {
 
     setRate(wine: Wine, myRating: number): void {
         let newWine: Wine = Object.assign({}, wine, {myRating: myRating});
-        let result$ = this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).share();
-        this.busyHandler.handle(result$);
-        result$.subscribe(() => this.store.dispatch(updateRateWine(wine._id, myRating)), (resp: Response) => this.onError(resp));
+        this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).subscribe(() => {}, this.onError);
     }
 
     setStock(wine: Wine, inStock: number): void {
         let newWine: Wine = Object.assign({}, wine, {inStock: inStock});
-        let result$ = this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).share();
-        result$.subscribe(() => this.store.dispatch(updateStockWine(wine._id, inStock)), (resp: Response) => this.onError(resp));
+        this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).subscribe(() => {}, this.onError);
     }
 
     private authorizedHttpOptions(): RequestOptionsArgs {
         let state: ApplicationState;
         this.store.take(1).subscribe(s => state = s);
         let headers = new Headers({
-            "authorization": "Bearer " + state.data.authentication.jwtToken
+            authorization: `Bearer ${state.data.authentication.jwtToken}`
         });
         return new RequestOptions({headers: headers});
     }

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {ApplicationState} from "./state/ApplicationState";
+import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
-import {toggleSidebar} from "./actionCreators";
+import {toggleSidebar} from "../statemanagement/actionCreators";
 
 @Injectable()
 export class CommonSandbox {

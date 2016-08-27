@@ -1,5 +1,5 @@
 import {Wine} from "../../../stock/entities/Wine";
-import {winesReducer} from "./winesReducer";
+import {winesReducer} from "./wines.reducer";
 import * as _ from "lodash";
 import {
     DATA_WINES_ADD,

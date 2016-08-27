@@ -13,10 +13,9 @@ import {Subscription} from "rxjs/Rx";
     styles: [require("./application.container.scss")],
     providers: [Title],
     template: `
-        <navbar [account]="account$|async" (logout)="logout()" [hidden]="!(isAuthenticated$|async)"></navbar>
+        <navbar [account]="account$|async" (logout)="logout()" *ngIf="isAuthenticated$|async"></navbar>
         <router-outlet></router-outlet>
         <spinner [spin]="isBusy$|async"></spinner>
-        <!--<ngrx-store-log-monitor toggleCommand="ctrl-t" positionCommand="ctrl-m"></ngrx-store-log-monitor>-->
     `
 })
 export class ApplicationContainer implements OnInit, OnDestroy {
@@ -32,11 +31,11 @@ export class ApplicationContainer implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.sb.checkInitialAuthentication();
-        this.sb.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
+        this.subscriptions.push(this.sb.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
             if (isAuthenticated) {
                 this.sb.loadWines();
             }
-        });
+        }));
     }
 
     logout(): void {

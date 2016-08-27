@@ -8,7 +8,7 @@ import {
     DATA_WINES_ADD
 } from "../../actionTypes";
 import {Wine} from "../../../stock/entities/Wine";
-export function winesReducer(state: Array<Wine>,
+export function winesReducer(state: Array<Wine> = [],
                              action: Action = null): Array<Wine> {
     let _id: string, inStock: number, myRating: number, wine: Wine, wines: Array<Wine>;
     switch (action.type) {

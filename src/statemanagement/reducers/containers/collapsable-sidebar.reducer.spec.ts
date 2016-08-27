@@ -33,7 +33,7 @@ describe("reducer: containers > collaspableSidebarReducer", () => {
             expect(changedState).toBe(initialState);
         });
     });
-    describe("case @ngrx/store/init", () => {
+    describe("case @ngrx/rootReducer/init", () => {
         it("should return the default value for the state param", () => {
             let changedState: CollapsableSidebarContainerState = collapsableSidebarReducer(undefined, {type: Dispatcher.INIT});
             expect(changedState.isCollapsed).toBeFalsy();

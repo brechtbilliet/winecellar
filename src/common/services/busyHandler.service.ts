@@ -1,8 +1,8 @@
 import {Subject, Observable} from "rxjs/Rx";
-import {ApplicationState} from "../state/ApplicationState";
+import {ApplicationState} from "../../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
 import {Injectable} from "@angular/core";
-import {enableBusy, disableBusy} from "../actionCreators";
+import {enableBusy, disableBusy} from "../../statemanagement/actionCreators";
 
 @Injectable()
 export class BusyHandlerService {

@@ -3,7 +3,12 @@ import {AuthenticationDataState} from "../../state/DataState";
 import {DATA_AUTHENTICATION_SET_AUTHENTICATION, DATA_AUTHENTICATION_CLEAR_AUTHENTICATION} from "../../actionTypes";
 import {AuthenticationResult} from "../../../authentication/types/AuthenticationResult";
 
-export function authenticationReducer(state: AuthenticationDataState,
+let initialState = {
+    isAuthenticated: false,
+    jwtToken: "",
+    account: null
+}
+export function authenticationReducer(state: AuthenticationDataState = initialState,
                                       action: Action = null): AuthenticationDataState {
     switch (action.type) {
         case DATA_AUTHENTICATION_SET_AUTHENTICATION:

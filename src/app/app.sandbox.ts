@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {ApplicationState} from "../common/state/ApplicationState";
+import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
 import {AuthenticationService} from "../authentication/services/authentication.service";
 import {StockService} from "../stock/services/stock.service";

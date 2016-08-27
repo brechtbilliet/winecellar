@@ -1,6 +1,6 @@
 import {collapsableSidebarReducer} from "./reducers/containers/collapsable-side.reducer";
-import {authenticationReducer} from "./reducers/data/authenticationReducer";
-import {winesReducer} from "./reducers/data/winesReducer";
+import {authenticationReducer} from "./reducers/data/authentication.reducer";
+import {winesReducer} from "./reducers/data/wines.reducer";
 import {applicationReducer} from "./reducers/containers/application.reducer";
 import {
     DATA_AUTHENTICATION_CLEAR_AUTHENTICATION,
@@ -58,4 +58,4 @@ let reducerComposer: any = {
     }
 };
 
-export let store = createReducerTree(reducerComposer);
+export let rootReducer = createReducerTree(reducerComposer);

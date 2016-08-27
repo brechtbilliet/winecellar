@@ -9,7 +9,7 @@ module.exports = {
     entry: {
         app: './src/index.ts',
         vendor: [
-            '@ngrx/store',
+            '@ngrx/rootReducer',
             '@angular/common',
             '@angular/compiler',
             '@angular/core',

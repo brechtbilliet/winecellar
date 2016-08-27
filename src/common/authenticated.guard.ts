@@ -1,4 +1,4 @@
-import {ApplicationState} from "./state/ApplicationState";
+import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
 import {CanActivate, Router, RouterStateSnapshot} from "@angular/router";
 import {Injectable, state} from "@angular/core";

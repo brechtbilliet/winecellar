@@ -5,11 +5,11 @@ import {AuthenticationResult} from "../types/AuthenticationResult";
 import {Account} from "../types/Account";
 import {API_URL, LOCALSTORAGE_AUTH} from "../../configuration";
 import * as toastr from "toastr";
-import {ApplicationState} from "../../common/state/ApplicationState";
+import {ApplicationState} from "../../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
 import {BusyHandlerService} from "../../common/services/busyHandler.service";
 import {Observable} from "rxjs/Rx";
-import {clearAuthentication, setAuthentication} from "../../common/actionCreators";
+import {clearAuthentication, setAuthentication} from "../../statemanagement/actionCreators";
 @Injectable()
 export class AuthenticationService {
     constructor(private http: Http, private store: Store<ApplicationState>, private busyHandlerService: BusyHandlerService) {
