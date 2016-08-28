@@ -17,13 +17,13 @@ export class AuthenticationService {
 
     authenticate(credentials: Credentials): Observable<AuthenticationResult> {
         return this.handleAuthenticationResult(
-            this.http.post(`${API_URL}/authentication/login`, credentials).share().map(resp => resp.json())
+            this.http.post(`${API_URL}/authentication/login`, credentials).publishReplay(1).refCount().map(resp => resp.json())
         );
     }
 
     register(account: Account): Observable<AuthenticationResult> {
         return this.handleAuthenticationResult(
-            this.http.post(`${API_URL}/authentication/register`, account).share().map(resp => resp.json())
+            this.http.post(`${API_URL}/authentication/register`, account).publishReplay(1).refCount().map(resp => resp.json())
         );
     }
 

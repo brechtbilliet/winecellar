@@ -11,7 +11,7 @@ export class WineComService {
 
     search(query: string): Observable<WineComSearchResult> {
         let result$ = this.http
-            .get(`${WINE_COM_API_URL}catalog?apikey=${WINE_COM_API_KEY}&search=${query}`).share()
+            .get(`${WINE_COM_API_URL}catalog?apikey=${WINE_COM_API_KEY}&search=${query}`).publishReplay(1).refCount()
             .map((resp: Response) => JSON.parse(JSON.stringify(resp.json()), camelCaseReviver));
         this.busyHandler.handle(result$);
         return result$;
