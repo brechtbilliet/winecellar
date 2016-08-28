@@ -4,10 +4,14 @@ import {Account} from "./types/Account";
 import {AuthenticationService} from "./services/authentication.service";
 import {AuthenticationResult} from "./types/AuthenticationResult";
 import {Observable} from "rxjs/Rx";
+import {ApplicationState} from "../statemanagement/state/ApplicationState";
+import {Store} from "@ngrx/store";
 
 @Injectable()
 export class AuthenticationSandbox {
-    constructor(private authenticationService: AuthenticationService) {
+    isBusy$ = this.store.select(state => state.containers.application.isBusy);
+
+    constructor(private authenticationService: AuthenticationService, private store: Store<ApplicationState>) {
     }
 
     login(credentials: Credentials): Observable<AuthenticationResult> {

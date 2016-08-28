@@ -9,8 +9,8 @@ import {Subscription} from "rxjs/Rx";
     template: `
     <div class="container">
         <panel [header]="'You are not authenticated!'">
-            <login *ngIf="curTab === 0" (authenticate)="login($event)"></login>
-            <register *ngIf="curTab === 1" (authenticate)="register($event)"></register>
+            <login *ngIf="curTab === 0" (authenticate)="login($event)" [isBusy]="isBusy$|async"></login>
+            <register *ngIf="curTab === 1" (authenticate)="register($event)" [isBusy]="isBusy$|async"></register>
             <a href="javascript:void(0)" (click)="enableTab(1)" *ngIf="curTab===0">I don't have an account yet</a>
             <a href="javascript:void(0)" (click)="enableTab(0)" *ngIf="curTab===1">I have an account already</a>
         </panel>
@@ -21,6 +21,7 @@ export class AuthenticationContainer implements OnDestroy {
     curTab: number = 0;
 
     subscriptions: Array<Subscription> = [];
+    isBusy$ = this.sb.isBusy$;
 
     constructor(private sb: AuthenticationSandbox, private router: Router) {
     }

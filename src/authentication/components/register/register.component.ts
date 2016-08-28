@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from "@angular/core";
+import {Component, Output, EventEmitter, Input} from "@angular/core";
 import {Account} from "../../types/Account";
 import {FormBuilder, Validators} from "@angular/forms";
 @Component({
@@ -22,7 +22,7 @@ import {FormBuilder, Validators} from "@angular/forms";
                 [placeholder]="'Confirm your password'">
             </form-group-password>
             <form-group-footer>
-                <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary btn-block btn-lg" (click)="onSubmit()">
+                <button type="submit" [disabled]="!registerForm.valid || isBusy" class="btn btn-primary btn-block btn-lg" (click)="onSubmit()">
                     <i class="fa fa-user"></i>&nbsp;Sign up
                 </button>
             </form-group-footer>
@@ -30,8 +30,8 @@ import {FormBuilder, Validators} from "@angular/forms";
        `
 })
 export class RegisterComponent {
-    @Output()
-    authenticate = new EventEmitter<Account>();
+    @Output() authenticate = new EventEmitter<Account>();
+    @Input() isBusy: boolean;
 
     registerForm = this.formBuilder.group({
         firstName: ["", Validators.required],
