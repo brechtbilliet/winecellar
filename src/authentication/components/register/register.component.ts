@@ -22,7 +22,8 @@ import {FormBuilder, Validators} from "@angular/forms";
                 [placeholder]="'Confirm your password'">
             </form-group-password>
             <form-group-footer>
-                <button type="submit" [disabled]="!registerForm.valid || isBusy" class="btn btn-primary btn-block btn-lg" (click)="onSubmit()">
+                <button type="submit" [disabled]="!registerForm.valid || isBusy" 
+                    class="btn btn-primary btn-block btn-lg" (click)="onSubmit()">
                     <i class="fa fa-user"></i>&nbsp;Sign up
                 </button>
             </form-group-footer>
