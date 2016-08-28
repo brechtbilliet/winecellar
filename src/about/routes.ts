@@ -5,4 +5,4 @@ export const routes = [
     { path: "about", component: AboutPageContainer, canActivate: [AuthenticatedGuard] }
 ];
 
-export const routing = RouterModule.forChild(routes);
+export const routing = RouterModule.forRoot(routes);

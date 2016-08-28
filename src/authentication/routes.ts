@@ -4,4 +4,4 @@ export const routes = [
     { path: "authentication", component: AuthenticationContainer}
 ];
 
-export const routing = RouterModule.forChild(routes);
+export const routing = RouterModule.forRoot(routes);
