@@ -11,7 +11,7 @@ export class BusyHandlerService {
     constructor(private store: Store<ApplicationState>) {
     }
 
-    handle(obs: Observable<any>): Observable<any> {
+    handle(obs: Observable<any>): void {
         let subject: Subject<any> = new Subject();
         obs.subscribe(subject);
         if (this.activeCalls === 0) {
@@ -24,6 +24,5 @@ export class BusyHandlerService {
                 this.store.dispatch(disableBusy());
             }
         }).subscribe();
-        return subject;
     }
 }
