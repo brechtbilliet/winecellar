@@ -66,12 +66,17 @@ export class DetailWineFormComponent implements OnInit {
     }
 
     selectWine(wine: Product): void {
-        this.wineForm.setValue({
-            name: wine.name,
-            description: wine.description,
-            price: wine.priceRetail,
-            region: wine.appellation ? wine.appellation.region.name : ""
-        });
-        this.wine.image = wine.labels.length > 0 ? wine.labels[0].url : null;
+        console.log(wine);
+        if (wine.name) {
+
+            this.wineForm.setValue({
+                name: wine.name,
+                description: wine.description,
+                price: wine.priceRetail,
+                region: wine.appellation ? wine.appellation.region.name : ""
+            });
+            this.wine.image = wine.labels.length > 0 ? wine.labels[0].url : null;
+
+        }
     }
 }

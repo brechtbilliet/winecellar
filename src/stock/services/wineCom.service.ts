@@ -2,19 +2,16 @@ import {WINE_COM_API_URL, WINE_COM_API_KEY} from "../../configuration";
 import {Observable} from "rxjs/Observable";
 import {Http, Response} from "@angular/http";
 import {Injectable} from "@angular/core";
-import {BusyHandlerService} from "../../common/services/busyHandler.service";
 
 @Injectable()
 export class WineComService {
-    constructor(private http: Http, private busyHandler: BusyHandlerService) {
+    constructor(private http: Http) {
     }
 
     search(query: string): Observable<WineComSearchResult> {
-        let result$ = this.http
-            .get(`${WINE_COM_API_URL}catalog?apikey=${WINE_COM_API_KEY}&search=${query}`).publishReplay(1).refCount()
+        return this.http
+            .get(`${WINE_COM_API_URL}catalog?apikey=${WINE_COM_API_KEY}&search=${query}`)
             .map((resp: Response) => JSON.parse(JSON.stringify(resp.json()), camelCaseReviver));
-        this.busyHandler.handle(result$);
-        return result$;
     }
 }
 
