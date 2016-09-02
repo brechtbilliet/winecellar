@@ -9,4 +9,4 @@ export const routes = [
     { path: "stock/:id", component: EditStockPageContainer, canActivate: [AuthenticatedGuard] }
 ];
 
-export const routing = RouterModule.forRoot(routes);
+export const routing = RouterModule.forChild(routes);
