@@ -1,8 +1,9 @@
-import {Component} from "@angular/core";
+import {Component, ViewEncapsulation} from "@angular/core";
 import {CommonSandbox} from "../../common.sandbox";
 @Component({
     selector: "collapsable-sidebar",
     styles: [require("./collapsable-sidebar.container.scss")],
+    encapsulation: ViewEncapsulation.None,
     template: `
         <div class="collapsable-part" [class.is-collapsed]="isCollapsed$|async">
             <button class="btn btn-primary btn-collapsable" (click)="toggle()">
