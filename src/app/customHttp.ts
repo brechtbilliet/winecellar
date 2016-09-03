@@ -100,10 +100,10 @@ export class CustomHttp extends Http {
     }
 
     private httpCallRequested(): void {
-        this.activeCalls++;
-        if (this.activeCalls !== 0) {
+        if (this.activeCalls === 0) {
             this.store.dispatch(enableBusy());
         }
+        this.activeCalls++;
     }
 
 }
