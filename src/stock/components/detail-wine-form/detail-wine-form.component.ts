@@ -8,7 +8,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <form [formGroup]="wineForm" class="form-horizontal col-sm-12" (ngSubmit)="onSubmit()">
-            <wine-search [control]="wineForm.controls.name" (select)="selectWine($event)"></wine-search>
+            <wine-search [control]="wineForm.controls.name" (selectWine)="onSelectWine($event)"></wine-search>
             <form-group-textarea [label]="'Description'" [control]="wineForm.controls.description"
                                  [placeholder]="'Enter description'">
             </form-group-textarea>
@@ -65,7 +65,7 @@ export class DetailWineFormComponent implements OnInit {
         this.wine.inStock = inStock;
     }
 
-    selectWine(wine: Product): void {
+    onSelectWine(wine: Product): void {
         this.wineForm.setValue({
             name: wine.name,
             description: wine.description,
