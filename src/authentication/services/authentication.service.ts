@@ -1,18 +1,17 @@
 import {Injectable} from "@angular/core";
 import {Credentials} from "../types/Credentials";
-import {Response, Http, RequestOptionsArgs, Headers, RequestOptions} from "@angular/http";
+import {Response, Http} from "@angular/http";
 import {AuthenticationResult} from "../types/AuthenticationResult";
 import {Account} from "../types/Account";
 import {API_URL, LOCALSTORAGE_AUTH} from "../../configuration";
 import * as toastr from "toastr";
 import {ApplicationState} from "../../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
-import {BusyHandlerService} from "../../common/services/busyHandler.service";
 import {Observable} from "rxjs/Rx";
 import {clearAuthentication, setAuthentication} from "../../statemanagement/actionCreators";
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: Http, private store: Store<ApplicationState>, private busyHandlerService: BusyHandlerService) {
+    constructor(private http: Http, private store: Store<ApplicationState>) {
     }
 
     authenticate(credentials: Credentials): Observable<AuthenticationResult> {
@@ -40,7 +39,6 @@ export class AuthenticationService {
     }
 
     private handleAuthenticationResult(obs$: Observable<AuthenticationResult>): Observable<AuthenticationResult> {
-        this.busyHandlerService.handle(obs$);
         obs$.subscribe((result: AuthenticationResult) => {
                 window.localStorage.setItem(LOCALSTORAGE_AUTH, JSON.stringify(result));
                 this.store.dispatch(setAuthentication(result));

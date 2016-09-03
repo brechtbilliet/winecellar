@@ -1,8 +1,7 @@
 import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
-import {CanActivate, Router, RouterStateSnapshot} from "@angular/router";
-import {Injectable, state} from "@angular/core";
-import {BehaviorSubject} from "rxjs/Rx";
+import {CanActivate, Router} from "@angular/router";
+import {Injectable} from "@angular/core";
 import {LOCALSTORAGE_AUTH} from "../configuration";
 @Injectable()
 export class AuthenticatedGuard implements CanActivate {

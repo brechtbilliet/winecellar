@@ -1,7 +1,7 @@
 import {Store} from "@ngrx/store";
 import * as toastr from "toastr";
 import {Injectable} from "@angular/core";
-import {Http, Response, Headers, RequestOptionsArgs, RequestOptions} from "@angular/http";
+import {Response, Headers, RequestOptionsArgs, RequestOptions, Http} from "@angular/http";
 import {Wine} from "../entities/Wine";
 import {ApplicationState} from "../../statemanagement/state/ApplicationState";
 import {API_URL} from "../../configuration";

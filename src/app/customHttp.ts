@@ -2,10 +2,10 @@ import {Injectable} from "@angular/core";
 import {Http, RequestOptionsArgs, RequestOptions, ConnectionBackend, Request, Response} from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import {Store} from "@ngrx/store";
-import {enableBusy, disableBusy} from "../../statemanagement/actionCreators";
-import {ApplicationState} from "../../statemanagement/state/ApplicationState";
+import {enableBusy, disableBusy} from "../statemanagement/actionCreators";
+import {ApplicationState} from "../statemanagement/state/ApplicationState";
 @Injectable()
-export class HttpWrapper extends Http {
+export class CustomHttp extends Http {
     private activeCalls: number;
     private store: Store<ApplicationState>;
 

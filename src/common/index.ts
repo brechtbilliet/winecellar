@@ -15,7 +15,6 @@ import {Rating} from "./components/rating/rating.component";
 import {SpinnerComponent} from "./components/spinner/spinner.component";
 import {CollapsableSidebarContainer} from "./containers/collapsable-sidebar/collapsable-sidebar.container";
 import {CommonSandbox} from "./common.sandbox";
-import {BusyHandlerService} from "./services/busyHandler.service";
 import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {AuthenticatedGuard} from "./authenticated.guard";
@@ -26,7 +25,7 @@ import {AuthenticatedGuard} from "./authenticated.guard";
         MainComponent, NavbarComponent, NumberPickerComponent, PanelComponent, Rating, SpinnerComponent, CollapsableSidebarContainer],
     exports: [DefaultPageComponent, FormGroupContent, FormGroupFooter, FormGroupPassword, FormGroupTextarea, FormGroupTextbox,
         MainComponent, NavbarComponent, NumberPickerComponent, PanelComponent, Rating, SpinnerComponent, CollapsableSidebarContainer],
-    providers: [CommonSandbox, BusyHandlerService, AuthenticatedGuard]
+    providers: [CommonSandbox, AuthenticatedGuard]
 })
 export class CommonLogicModule {
 }
