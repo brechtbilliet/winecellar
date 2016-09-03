@@ -17,7 +17,8 @@ export class CustomHttp extends Http {
 
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
         this.httpCallRequested();
-        return super.get(url, options).finally<Response>(
+
+        return super.get(url, options).finally(
             () => {
                 this.httpCallReady();
             }
@@ -26,7 +27,7 @@ export class CustomHttp extends Http {
 
     request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
         this.httpCallRequested();
-        return super.request(url, options).finally<Response>(
+        return super.request(url, options).finally(
             () => {
                 this.httpCallReady();
             }
@@ -35,7 +36,7 @@ export class CustomHttp extends Http {
 
     post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         this.httpCallRequested();
-        return super.post(url, body, options).finally<Response>(
+        return super.post(url, body, options).finally(
             () => {
                 this.httpCallReady();
             }
@@ -44,7 +45,7 @@ export class CustomHttp extends Http {
 
     put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         this.httpCallRequested();
-        return super.put(url, body, options).finally<Response>(
+        return super.put(url, body, options).finally(
             () => {
                 this.httpCallReady();
             }
@@ -53,7 +54,7 @@ export class CustomHttp extends Http {
 
     delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
         this.httpCallRequested();
-        return super.delete(url, options).finally<Response>(
+        return super.delete(url, options).finally(
             () => {
                 this.httpCallReady();
             }
@@ -62,7 +63,7 @@ export class CustomHttp extends Http {
 
     patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         this.httpCallRequested();
-        return super.patch(url, body, options).finally<Response>(
+        return super.patch(url, body, options).finally(
             () => {
                 this.httpCallReady();
             }
@@ -71,7 +72,7 @@ export class CustomHttp extends Http {
 
     head(url: string, options?: RequestOptionsArgs): Observable<Response> {
         this.httpCallRequested();
-        return super.head(url, options).finally<Response>(
+        return super.head(url, options).finally(
             () => {
                 this.httpCallReady();
             }
@@ -83,7 +84,7 @@ export class CustomHttp extends Http {
      */
     options(url: string, options?: RequestOptionsArgs): Observable<Response> {
         this.httpCallRequested();
-        return super.options(url, options).finally<Response>(
+        return super.options(url, options).finally(
             () => {
                 this.httpCallReady();
             }
