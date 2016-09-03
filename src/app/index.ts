@@ -12,9 +12,16 @@ import {AboutModule} from "../about/index";
 import {XHRBackend, RequestOptions, Http} from "@angular/http";
 import {CustomHttp} from "./customHttp";
 import {ApplicationState} from "../statemanagement/state/ApplicationState";
+import {StoreLogMonitorModule, useLogMonitor} from "@ngrx/store-log-monitor";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 @NgModule({
     imports: [BrowserModule, StoreModule.provideStore(rootReducer),
-        AboutModule, AuthenticationModule, CommonLogicModule, StockModule, routing],
+        AboutModule, AuthenticationModule, CommonLogicModule, StockModule, routing, StoreLogMonitorModule, StoreDevtoolsModule.instrumentStore({
+            monitor: useLogMonitor({
+                visible: false,
+                position: "right"
+            })
+        })],
     declarations: [ApplicationContainer],
     bootstrap: [ApplicationContainer],
     providers: [

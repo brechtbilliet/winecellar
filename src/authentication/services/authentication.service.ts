@@ -34,7 +34,11 @@ export class AuthenticationService {
     checkInitialAuthentication(): void {
         let localStorageObj = window.localStorage.getItem(LOCALSTORAGE_AUTH);
         if (localStorageObj) {
-            this.store.dispatch(setAuthentication(JSON.parse(localStorageObj)));
+            // evil fix for bug in @ngrx/dev-tools
+            // https://github.com/ngrx/store-devtools/issues/25
+            setTimeout(() => {
+                this.store.dispatch(setAuthentication(JSON.parse(localStorageObj)));
+            });
         }
     }
 

@@ -16,7 +16,8 @@ import {Subscription} from "rxjs/Rx";
         <navbar [account]="account$|async" (logout)="logout()" *ngIf="isAuthenticated$|async"></navbar>
         <router-outlet></router-outlet>
         <spinner [spin]="isBusy$|async"></spinner>
-    `
+        <ngrx-store-log-monitor toggleCommand="ctrl-t" positionCommand="ctrl-m"></ngrx-store-log-monitor>
+  `
 })
 export class ApplicationContainer implements OnInit, OnDestroy {
     account$ = this.sb.account$;
