@@ -9,6 +9,7 @@ import {updateWine, removeWine, updateRateWine, updateStockWine} from "../statem
 @Injectable()
 export class StockSandbox {
     wines$ = this.store.select(state => state.data.wines);
+    isAuthenticated$ = this.store.select(state => state.data.authentication.isAuthenticated);
 
     constructor(private store: Store<ApplicationState>, private stockService: StockService, private wineComService: WineComService) {
     }
