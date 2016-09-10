@@ -35,6 +35,7 @@ export class ApplicationContainer implements OnInit, OnDestroy {
         this.subscriptions.push(this.sb.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
             if (isAuthenticated) {
                 this.sb.loadWines();
+                this.sb.connectRealTime();
             }
         }));
     }

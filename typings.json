@@ -7,6 +7,7 @@
     "jasmine": "registry:dt/jasmine#2.2.0+20160412134438",
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#661fc869669af796c6048483e999dce5732eed72",
     "node": "registry:env/node#4.0.0+20160824014937",
+    "socket.io-client": "registry:dt/socket.io-client#1.4.4+20160317120654",
     "toastr": "registry:dt/toastr#2.0.1+20160316155526",
     "zone.js": "github:DefinitelyTyped/DefinitelyTyped/zone.js/zone.js.d.ts#56295f5058cac7ae458540423c50ac2dcf9fc711"
   }
