@@ -3,7 +3,7 @@ import {authenticationReducer} from "./reducers/data/authentication.reducer";
 import {winesReducer} from "./reducers/data/wines.reducer";
 import {applicationReducer} from "./reducers/containers/application.reducer";
 import {combineReducers} from "@ngrx/store";
-export let rootReducer = {
+export let rootReducer = combineReducers({
     data: combineReducers({
         authentication: authenticationReducer,
         wines: winesReducer
@@ -12,4 +12,4 @@ export let rootReducer = {
         collapsableSidebar: collapsableSidebarReducer,
         application: applicationReducer
     })
-};
+});
