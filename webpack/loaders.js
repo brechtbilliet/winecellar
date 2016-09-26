@@ -6,11 +6,11 @@ module.exports = [
     },
     {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style!css'
     },
     {
         test: /\.scss$/,
-        loader: 'raw-loader!sass-loader',
+        loader: 'style!css!sass',
         include: /src/
     }, {
         test: /\.html$/,

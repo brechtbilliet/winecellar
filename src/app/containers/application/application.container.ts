@@ -1,22 +1,16 @@
 import {Title} from "@angular/platform-browser";
-import {Component, ViewEncapsulation, OnInit, OnDestroy} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import "bootstrap";
-import "bootstrap/dist/css/bootstrap.css";
-import "toastr/build/toastr.css";
-import "font-awesome/css/font-awesome.css";
 import {AppSandbox} from "../../app.sandbox";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs/Rx";
 @Component({
     selector: "application",
-    encapsulation: ViewEncapsulation.None,
-    styles: [require("./application.container.scss")],
     providers: [Title],
     template: `
         <navbar [account]="account$|async" (logout)="logout()" *ngIf="isAuthenticated$|async"></navbar>
         <router-outlet></router-outlet>
         <spinner [spin]="isBusy$|async"></spinner>
-        <ngrx-store-log-monitor toggleCommand="ctrl-t" positionCommand="ctrl-m"></ngrx-store-log-monitor>
   `
 })
 export class ApplicationContainer implements OnInit, OnDestroy {

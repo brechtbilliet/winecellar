@@ -1,5 +1,3 @@
-@import "../../../colors";
-
-:host i.over, :host i.starred {
+rating i.over, rating i.starred {
   color: $color-purple;
 }

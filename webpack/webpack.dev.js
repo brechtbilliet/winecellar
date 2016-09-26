@@ -1,41 +1,61 @@
-var loaders = require('./loaders');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const loaders = require('./loaders');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var StringReplacePlugin = require("string-replace-webpack-plugin");
-var CopyWebpackPlugin = require("copy-webpack-plugin");
+const Dashboard = require('webpack-dashboard');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
+// const dashboard = new Dashboard();
+
 var API_KEY = process.env.npm_config_apikey;
 
 module.exports = {
     entry: {
-        app: './src/index.ts',
+        polyfills: './src/bootstrap/polyfills.ts',
+        app: './src/bootstrap/bootstrap-dev.ts',
+        css: './src/styles/styles.scss',
         vendor: [
+            '@ngrx/core',
             '@ngrx/store',
+            '@ngrx/store-devtools',
+            '@ngrx/store-log-monitor',
             '@angular/common',
             '@angular/compiler',
+            '@angular/forms',
             '@angular/core',
+            '@angular/router',
             '@angular/http',
             '@angular/platform-browser',
             '@angular/platform-browser-dynamic',
-            'bootstrap',
-            'jquery',
-            'lodash',
-            'rxjs',
-            'toastr',
-            '@angular/router',
-            'bootstrap/dist/css/bootstrap.css',
-            'toastr/build/toastr.css',
-            'font-awesome/css/font-awesome.css'
+            'lodash/flatMap',
+            'lodash/groupBy',
+            'lodash/orderBy',
+            'lodash/flatten',
+            'rxjs/Observable',
+            'rxjs/Subject',
+            'rxjs/BehaviorSubject',
+            'rxjs/ReplaySubject',
+            'rxjs/Subscription',
+            'rxjs/add/operator/map',
+            'rxjs/add/operator/filter',
+            'rxjs/add/operator/take',
+            'rxjs/add/operator/mergeMap',
+            'rxjs/add/operator/distinctUntilChanged',
+            'rxjs/add/operator/retryWhen',
+            'rxjs/add/operator/debounceTime',
+            'rxjs/add/operator/do',
+            'rxjs/add/operator/switchMap',
+            'rxjs/add/observable/combineLatest'
         ]
     },
     output: {
-        filename: './[name].bundle.js',
-        path: 'dev',
+        filename: './[name].js',
         publicPath: '/'
     },
     devServer: {
-        historyApiFallback: true,
         hot: true,
+        historyApiFallback: true,
+        // quiet: true, // lets WebpackDashboard do its thing
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000
@@ -43,31 +63,32 @@ module.exports = {
     },
     resolve: {
         root: __dirname,
-        extensions: ['', '.ts', '.js', '.json']
+        extensions: ['', '.ts', '.js']
     },
-    debug: true,
-    // devtool: 'cheap-module-eval-source-map',
     devtool: 'source-map',
     plugins: [
-        new CopyWebpackPlugin([
-            {from: 'node_modules/core-js/client/shim.min.js', to: 'polyfills/core-js/client/shim.min.js'},
-            {from: 'node_modules/zone.js/dist/zone.js', to: 'polyfills/zone.js/dist/zone.js'},
-            {from: 'node_modules/reflect-metadata/Reflect.js', to: 'polyfills/reflect-metadata/Reflect.js'}
-        ]),
+        new webpack.LoaderOptionsPlugin({
+            minimize: false,
+            debug: true
+        }),
+        // new DashboardPlugin(dashboard.setData),
         new StringReplacePlugin(),
+        new webpack.optimize.CommonsChunkPlugin({name: 'vendor', fileName: 'vendor.bundle.js'}),
         new HtmlWebpackPlugin({
             template: './src/index.html',
             inject: 'body',
-            hash: true
+            hash: true,
+            chunksSortMode: (a, b) => {
+                return a.id < b.id
+            }
         }),
-        new OpenBrowserPlugin({url: 'http://localhost:8080'}),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
             'window.jquery': 'jquery'
         }),
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+        new OpenBrowserPlugin({url: 'http://localhost:8080'})
     ],
     module: {
         loaders: loaders.concat([

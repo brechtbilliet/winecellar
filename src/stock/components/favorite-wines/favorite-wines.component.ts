@@ -4,7 +4,6 @@ import {Wine} from "../../entities/Wine";
 @Component({
     selector: "favorite-wines",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styles: [require("./favorite-wines.component.scss")],
     template: `    
     <div>
         <h2><i class="fa fa-star"></i>&nbsp;Favorites</h2>

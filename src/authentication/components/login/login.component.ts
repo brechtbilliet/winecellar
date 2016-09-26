@@ -3,13 +3,12 @@ import {Credentials} from "../../types/Credentials";
 import {FormBuilder, Validators} from "@angular/forms";
 @Component({
     selector: "login",
-    styles: [require("./login.component.scss")],
     template: `
         <form [formGroup]="loginForm" class="form-horizontal">
             <form-group-textbox [label]="'Login (*)'"
-                                [control]="loginForm.controls.login" [placeholder]="'Enter login'">
+                                [control]="loginForm.controls['login']" [placeholder]="'Enter login'">
             </form-group-textbox>
-            <form-group-password [label]="'Password (*)'" [control]="loginForm.controls.password"
+            <form-group-password [label]="'Password (*)'" [control]="loginForm.controls['password']"
                                  [placeholder]="'Enter password'">
             </form-group-password>
             <form-group-footer>

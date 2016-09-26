@@ -1,7 +1,6 @@
 import {Component, Input, ChangeDetectionStrategy} from "@angular/core";
 @Component({
     selector: "spinner",
-    styles: [require("./spinner.component.scss")],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="spinner" [class.active]="spin">

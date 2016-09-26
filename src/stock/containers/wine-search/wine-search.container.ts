@@ -6,7 +6,6 @@ import {StockSandbox} from "../../stock.sandbox";
 
 @Component({
     selector: "wine-search",
-    styles: [require("./wine-search.container.scss")],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="form-group has-feedback" [class.has-success]="control.valid">

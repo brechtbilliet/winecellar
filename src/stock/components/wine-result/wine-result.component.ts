@@ -18,7 +18,7 @@ import {Wine} from "../../entities/Wine";
                     <a class="btn btn-lg btn-primary" [routerLink]="['/stock', wine._id]">
                         <i class="fa fa-pencil"></i>
                     </a>
-                    <button class="btn btn-lg btn-danger" (click)="onRemove(wine)"><i class="fa fa-trash-o"></i></button>
+                    <button class="btn btn-lg btn-danger" (click)="onRemove()"><i class="fa fa-trash-o"></i></button>
                 </div>
             </div>
         </td>

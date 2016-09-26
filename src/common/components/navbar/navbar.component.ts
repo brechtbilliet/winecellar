@@ -3,7 +3,6 @@ import {Account} from "../../../authentication/types/Account";
 @Component({
     selector: "navbar",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styles: [require("./navbar.component.scss")],
     template: `
       <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">

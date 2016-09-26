@@ -1,5 +1,8 @@
 import {Injectable} from "@angular/core";
-import {Http, RequestOptionsArgs, RequestOptions, ConnectionBackend, Request, Response} from "@angular/http";
+import {
+    Http, RequestOptionsArgs, RequestOptions, ConnectionBackend, Request, Response,
+    XHRBackend
+} from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import {Store} from "@ngrx/store";
 import {enableBusy, disableBusy} from "../statemanagement/actionCreators";
@@ -44,39 +47,19 @@ export class CustomHttp extends Http {
     };
 
     put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-        this.httpCallRequested();
-        return super.put(url, body, options).finally(
-            () => {
-                this.httpCallReady();
-            }
-        );
+        return super.put(url, body, options);
     }
 
     delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        this.httpCallRequested();
-        return super.delete(url, options).finally(
-            () => {
-                this.httpCallReady();
-            }
-        );
+        return super.delete(url, options);
     }
 
     patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-        this.httpCallRequested();
-        return super.patch(url, body, options).finally(
-            () => {
-                this.httpCallReady();
-            }
-        );
+        return super.patch(url, body, options);
     }
 
     head(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        this.httpCallRequested();
-        return super.head(url, options).finally(
-            () => {
-                this.httpCallReady();
-            }
-        );
+        return super.head(url, options);
     }
 
     /**
@@ -105,5 +88,10 @@ export class CustomHttp extends Http {
         }
         this.activeCalls++;
     }
+}
 
+export function customHttpFactory(backend: XHRBackend,
+                                  defaultOptions: RequestOptions,
+                                  store: Store<ApplicationState>) {
+    return new CustomHttp(backend, defaultOptions, store);
 }

@@ -1,49 +1,42 @@
-var loaders = require('./loaders');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var StringReplacePlugin = require("string-replace-webpack-plugin");
-var CopyWebpackPlugin = require("copy-webpack-plugin");
+const loaders = require('./loaders');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 var API_KEY = process.env.npm_config_apikey;
 
 module.exports = {
     entry: {
-        app: './src/index.ts',
-        vendor: [
-            '@ngrx/store',
-            '@angular/common',
-            '@angular/compiler',
-            '@angular/core',
-            '@angular/http',
-            '@angular/platform-browser',
-            '@angular/platform-browser-dynamic',
-            'bootstrap',
-            'jquery',
-            'lodash',
-            'rxjs',
-            'toastr',
-            '@angular/router',
-            'bootstrap/dist/css/bootstrap.css',
-            'toastr/build/toastr.css',
-            'font-awesome/css/font-awesome.css'
-        ]
+        polyfills: './src/bootstrap/polyfills.ts',
+        app: './out_treeshaked/bundle.js',
+        css: './src/styles/styles.scss'
     },
     output: {
-        filename: './[name].bundle.js',
-        path: 'dist',
+        filename: '[name].js',
+        path: './dist',
         publicPath: '/'
     },
     resolve: {
         root: __dirname,
         extensions: ['', '.ts', '.js', '.json']
     },
+    devtool: false,
     debug: true,
     plugins: [
-        new CopyWebpackPlugin([
-            {from: 'node_modules/core-js/client/shim.min.js', to: 'polyfills/core-js/client/shim.min.js'},
-            {from: 'node_modules/zone.js/dist/zone.js', to: 'polyfills/zone.js/dist/zone.js'},
-            {from: 'node_modules/reflect-metadata/Reflect.js', to: 'polyfills/reflect-metadata/Reflect.js'}
-        ]),
-        new StringReplacePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            comments: false,
+            compress: {
+                screw_ie8: true,
+                dead_code: true
+            },
+            mangle: {
+                screw_ie8: true,
+                dead_code: true
+            }
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
+        }),
         new HtmlWebpackPlugin({
             template: './src/index.html',
             inject: 'body',
@@ -55,10 +48,23 @@ module.exports = {
             'window.jQuery': 'jquery',
             'window.jquery': 'jquery'
         }),
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+        new CompressionPlugin({
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: /\.js$|\.css$/,
+            threshold: 10240,
+            minRatio: 0.8
+        })
     ],
     module: {
-        loaders: loaders.concat([
+        loaders: loaders.concat(
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015']
+                }
+            },
             {
                 test: /configuration.ts$/,
                 loader: StringReplacePlugin.replace({
@@ -72,6 +78,6 @@ module.exports = {
                     ]
                 })
             }
-        ])
+        )
     }
 };

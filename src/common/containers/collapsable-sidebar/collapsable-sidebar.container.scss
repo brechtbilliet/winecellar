@@ -1,10 +1,6 @@
-@import "../../../colors";
-
-:host {
+collapsable-sidebar {
   height: 100%;
   display: flex;
-
-
 }
 .collapsable-part {
   min-width: 400px;

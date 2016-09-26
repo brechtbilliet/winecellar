@@ -8,15 +8,18 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
-    "outDir": "out"
+    "outDir": "out",
+    "types": [
+      "es6-shim",
+      "jasmine",
+      "lodash"
+    ]
   },
   "exclude": [
     "out",
     "node_modules",
     "dist",
-    "typings/main.d.ts",
-    "typings/main",
     "reports"
   ],
-  "version": "1.8.10"
+  "version": "2.0.2"
 }

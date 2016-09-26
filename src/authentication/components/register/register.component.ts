@@ -3,22 +3,21 @@ import {Account} from "../../types/Account";
 import {FormBuilder, Validators} from "@angular/forms";
 @Component({
     selector: "register",
-    styles: [require("./register.component.scss")],
     template: `
         <div class="form-horizontal">
-            <form-group-textbox [label]="'First name (*)'" [control]="registerForm.controls.firstName" 
+            <form-group-textbox [label]="'First name (*)'" [control]="registerForm.controls['firstName']" 
                 [placeholder]="'Enter first name'">
             </form-group-textbox>
-            <form-group-textbox [label]="'Last name (*)'"  [control]="registerForm.controls.lastName" 
+            <form-group-textbox [label]="'Last name (*)'"  [control]="registerForm.controls['lastName']" 
                 [placeholder]="'Enter last name'">
             </form-group-textbox>
-            <form-group-textbox [label]="'Login (*)'" [control]="registerForm.controls.login" 
+            <form-group-textbox [label]="'Login (*)'" [control]="registerForm.controls['login']" 
                 [placeholder]="'Enter login'">
             </form-group-textbox>
-            <form-group-password [label]="'Password (*)'" [control]="registerForm.controls.password" 
+            <form-group-password [label]="'Password (*)'" [control]="registerForm.controls['password']" 
                 [placeholder]="'Enter password'">
             </form-group-password>
-            <form-group-password [label]="'Confirm password (*)'" [control]="registerForm.controls.confirmPassword" 
+            <form-group-password [label]="'Confirm password (*)'" [control]="registerForm.controls['confirmPassword']" 
                 [placeholder]="'Confirm your password'">
             </form-group-password>
             <form-group-footer>
