@@ -2,7 +2,7 @@ import {StockService} from "./services/stock.service";
 import {Injectable} from "@angular/core";
 import {WineComService, WineComSearchResult} from "./services/wineCom.service";
 import {Wine} from "./entities/Wine";
-import {Observable} from "rxjs/Rx";
+import {Observable} from "rxjs/Observable";
 import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
 @Injectable()

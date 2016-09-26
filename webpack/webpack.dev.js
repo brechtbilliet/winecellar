@@ -11,10 +11,10 @@ var API_KEY = process.env.npm_config_apikey;
 
 module.exports = {
     entry: {
-        polyfills: './src/bootstrap/polyfills.ts',
-        app: './src/bootstrap/bootstrap-dev.ts',
-        css: './src/styles/styles.scss',
-        vendor: [
+        'polyfills': './src/bootstrap/polyfills.ts',
+        'app': './src/bootstrap/bootstrap-dev.ts',
+        'css': './src/styles/styles.scss',
+        'vendor': [
             '@ngrx/core',
             '@ngrx/store',
             '@ngrx/store-devtools',
@@ -37,6 +37,7 @@ module.exports = {
             'rxjs/ReplaySubject',
             'rxjs/Subscription',
             'rxjs/add/operator/map',
+            'rxjs/add/operator/finally',
             'rxjs/add/operator/filter',
             'rxjs/add/operator/take',
             'rxjs/add/operator/mergeMap',
@@ -49,7 +50,7 @@ module.exports = {
         ]
     },
     output: {
-        filename: './[name].js',
+        filename: '[name].js',
         publicPath: '/'
     },
     devServer: {
@@ -73,14 +74,14 @@ module.exports = {
         }),
         // new DashboardPlugin(dashboard.setData),
         new StringReplacePlugin(),
-        new webpack.optimize.CommonsChunkPlugin({name: 'vendor', fileName: 'vendor.bundle.js'}),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['polyfills', 'app', 'css', 'vendor'].reverse()
+        }),
         new HtmlWebpackPlugin({
             template: './src/index.html',
             inject: 'body',
             hash: true,
-            chunksSortMode: (a, b) => {
-                return a.id < b.id
-            }
+            chunksSortMode: 'dependency'
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',

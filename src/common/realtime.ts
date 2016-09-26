@@ -1,4 +1,4 @@
-import * as io from "socket.io-client";
+var io = require("socket.io-client");
 import {BACKEND} from "../configuration";
 import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";

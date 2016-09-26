@@ -1,9 +1,11 @@
 import {Component} from "@angular/core";
 import {Wine} from "../../entities/Wine";
-import * as _ from "lodash";
-import {Observable} from "rxjs/Rx";
+import {Observable} from "rxjs/Observable";
 import {FormControl} from "@angular/forms";
 import {StockSandbox} from "../../stock.sandbox";
+
+let orderBy = require("lodash/orderBy");
+let sumBy = require("lodash/sumBy");
 @Component({
     selector: "stock-page",
     template: `
@@ -51,8 +53,8 @@ export class StockPageContainer {
     searchCtrl = new FormControl("");
 
     wines$ = this.sb.wines$;
-    favoriteWines$ = this.wines$.map(wines => _.orderBy(wines, ["myRating"], ["desc"]));
-    numberOfWines$ = this.wines$.map(wines => _.sumBy(wines, (wine: Wine) => wine.inStock));
+    favoriteWines$ = this.wines$.map(wines => orderBy(wines, ["myRating"], ["desc"]));
+    numberOfWines$ = this.wines$.map(wines => sumBy(wines, (wine: Wine) => wine.inStock));
     matchingWines$ = Observable.combineLatest(this.searchCtrl.valueChanges.startWith(""), this.wines$,
         (term: string, wines: Array<Wine>) => {
             return wines.filter(wine => wine.name.toLowerCase().indexOf(term) > -1);

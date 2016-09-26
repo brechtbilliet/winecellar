@@ -8,7 +8,7 @@
     "test": "npm run ngc && ./node_modules/.bin/karma start karma.conf.js",
     "start": "npm run ngc && ./node_modules/.bin/webpack-dev-server --config webpack/webpack.dev.js --inline --hot",
     "clean-dist": "./node_modules/.bin/rimraf dist",
-    "build-prod": "npm run clean-dist && ./node_modules/.bin/webpack --config webpack/webpack.build.js --output-public-path /contentpicker/",
+    "build-prod": "npm run clean-dist && ./node_modules/.bin/webpack --config webpack/webpack.build.js",
     "build-es2015": "./node_modules/.bin/tsc --project tsconfig.es2015.json",
     "build-treeshake": "./node_modules/.bin/rollup -c rollup.config.js",
     "build": "npm run ngc && npm run build-es2015 && npm run build-treeshake && npm run build-prod",

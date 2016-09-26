@@ -3,7 +3,7 @@ import {Credentials} from "./types/Credentials";
 import {Account} from "./types/Account";
 import {AuthenticationService} from "./services/authentication.service";
 import {AuthenticationResult} from "./types/AuthenticationResult";
-import {Observable} from "rxjs/Rx";
+import {Observable} from "rxjs/Observable";
 import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
 

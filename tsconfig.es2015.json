@@ -14,6 +14,6 @@
             "lodash"
         ]
     },
-    "files": ["src/bootstrap-prod.ts"],
+    "files": ["src/bootstrap/bootstrap-prod.ts"],
     "version": "2.0.2"
 }

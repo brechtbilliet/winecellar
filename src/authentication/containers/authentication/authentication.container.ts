@@ -3,7 +3,7 @@ import {Account} from "../../types/Account";
 import {Credentials} from "../../types/Credentials";
 import {AuthenticationSandbox} from "../../authentication.sandbox";
 import {Router} from "@angular/router";
-import {Subscription} from "rxjs/Rx";
+import {Subscription} from "rxjs/Subscription";
 @Component({
     selector: "authentication",
     template: `

@@ -2,6 +2,7 @@ const loaders = require('./loaders');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+var StringReplacePlugin = require("string-replace-webpack-plugin");
 var API_KEY = process.env.npm_config_apikey;
 
 module.exports = {
@@ -33,6 +34,9 @@ module.exports = {
                 dead_code: true
             }
         }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['polyfills', 'app', 'css'].reverse()
+        }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false
@@ -40,7 +44,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html',
             inject: 'body',
-            hash: true
+            hash: true,
+            chunksSortMode: 'dependency'
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',

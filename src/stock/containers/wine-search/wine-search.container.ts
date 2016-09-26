@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnDestroy, OnInit} from "@angular/core";
-import {Subscription, BehaviorSubject} from "rxjs";
+import {Subscription} from "rxjs/Subscription";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Product, WineComSearchResult} from "../../services/wineCom.service";
 import {FormControl} from "@angular/forms";
 import {StockSandbox} from "../../stock.sandbox";

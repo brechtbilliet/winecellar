@@ -3,7 +3,7 @@ import {
     Http, RequestOptionsArgs, RequestOptions, ConnectionBackend, Request, Response,
     XHRBackend
 } from "@angular/http";
-import {Observable} from "rxjs/Rx";
+import {Observable} from "rxjs/Observable";
 import {Store} from "@ngrx/store";
 import {enableBusy, disableBusy} from "../statemanagement/actionCreators";
 import {ApplicationState} from "../statemanagement/state/ApplicationState";

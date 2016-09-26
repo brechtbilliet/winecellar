@@ -5,7 +5,7 @@ import {Response, Headers, RequestOptionsArgs, RequestOptions, Http} from "@angu
 import {Wine} from "../entities/Wine";
 import {ApplicationState} from "../../statemanagement/state/ApplicationState";
 import {API_URL} from "../../configuration";
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
 import {
     addWine, addAllWines, updateWine, removeWine, updateRateWine,
     updateStockWine
