@@ -1,8 +1,13 @@
+winecomkey.txt
+reports
 node_modules
 dist
 out
 typings
 .idea
 npm-debug.log
-winecomkey.txt
 reports
+out_aot
+*.ngfactory.ts
+out_es2015
+out_treeshaked
