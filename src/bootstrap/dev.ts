@@ -23,7 +23,7 @@ export class ApplicationWrapperContainer {
                 visible: false,
                 position: "right"
             })
-        }), StoreUndoModule.instrumentStore({bufferSize: 100}), StoreLogMonitorModule, AppModule],
+        }), StoreUndoModule.interceptStore({bufferSize: 100}), StoreLogMonitorModule, AppModule],
     declarations: [ApplicationWrapperContainer],
     bootstrap: [ApplicationWrapperContainer]
 })

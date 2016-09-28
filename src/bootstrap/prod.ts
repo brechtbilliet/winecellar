@@ -14,7 +14,7 @@ export class ApplicationWrapperContainer {
 }
 
 @NgModule({
-    imports: [StoreModule.provideStore(rootReducer), StoreUndoModule.instrumentStore({bufferSize: 100}), AppModule],
+    imports: [StoreModule.provideStore(rootReducer), StoreUndoModule.interceptStore({bufferSize: 100}), AppModule],
     declarations: [ApplicationWrapperContainer],
     bootstrap: [ApplicationWrapperContainer],
     schemas: [CUSTOM_ELEMENTS_SCHEMA,]
