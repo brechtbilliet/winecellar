@@ -4,7 +4,7 @@
     "noImplicitAny": false,
     "removeComments": true,
     "sourceMap": true,
-    "module": "commonjs",
+    "module": "es2015",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",

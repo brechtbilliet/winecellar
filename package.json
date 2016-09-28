@@ -9,8 +9,7 @@
     "start": "npm run ngc && ./node_modules/.bin/webpack-dev-server --config webpack/webpack.dev.js --inline --hot",
     "clean-dist": "./node_modules/.bin/rimraf dist",
     "build-prod": "npm run clean-dist && ./node_modules/.bin/webpack --config webpack/webpack.build.js",
-    "build-treeshake": "./node_modules/.bin/rollup -c rollup.config.js",
-    "build": "npm run ngc && npm run build-treeshake && npm run build-prod",
+    "build": "npm run ngc && npm run build-prod",
     "deploy": "npm run build && surge --project dist --domain winecellar.surge.sh"
   },
   "author": "",
@@ -26,7 +25,6 @@
     "babel-plugin-lodash": "3.2.8",
     "babel-polyfill": "6.13.0",
     "babel-preset-es2015": "6.14.0",
-    "babel-preset-es2015-rollup": "1.2.0",
     "compression-webpack-plugin": "0.3.1",
     "copy-webpack-plugin": "3.0.1",
     "css-loader": "0.23.1",
@@ -58,12 +56,6 @@
     "phantomjs2-ext": "0.2.2",
     "raw-loader": "0.5.1",
     "rimraf": "2.5.4",
-    "rollup": "0.36.0",
-    "rollup-plugin-alias": "1.2.0",
-    "rollup-plugin-babel": "2.6.1",
-    "rollup-plugin-commonjs": "5.0.4",
-    "rollup-plugin-node-resolve": "2.0.0",
-    "rollup-plugin-uglify": "1.0.1",
     "sass": "0.5.0",
     "sass-loader": "4.0.2",
     "style-loader": "0.13.1",
@@ -74,7 +66,7 @@
     "uglifyjs": "2.4.10",
     "url-loader": "0.5.7",
     "wallaby-webpack": "0.0.23",
-    "webpack": "2.1.0-beta.21",
+    "webpack": "2.1.0-beta.22",
     "webpack-dashboard": "0.0.1",
     "webpack-dev-server": "2.1.0-beta.2"
   },
@@ -112,6 +104,7 @@
     "rxjs-es": "5.0.0-beta.12",
     "socket.io-client": "1.4.8",
     "toastr": "2.1.2",
-    "zone.js": "0.6.21"
+    "zone.js": "0.6.21",
+    "ngrx-undo": "0.0.7"
   }
 }

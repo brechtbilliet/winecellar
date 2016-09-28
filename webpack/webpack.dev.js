@@ -72,7 +72,6 @@ module.exports = {
             minimize: false,
             debug: true
         }),
-        // new DashboardPlugin(dashboard.setData),
         new StringReplacePlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['polyfills', 'app', 'css', 'vendor'].reverse()

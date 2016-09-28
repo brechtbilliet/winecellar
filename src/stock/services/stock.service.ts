@@ -9,6 +9,7 @@ import {
     addWine, addAllWines, updateWine, removeWine, updateRateWine,
     updateStockWine
 } from "../../statemanagement/actionCreators";
+import {UNDO_ACTION} from "ngrx-undo";
 let toastr = require("toastr");
 
 @Injectable()
@@ -32,7 +33,7 @@ export class StockService {
         this.http.put(`${API_URL}/wines/${id}`, wine, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
             toastr.error(resp.json().message);
-            this.store.dispatch({type: "UNDO_ACTION", payload: action});
+            this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
 
@@ -42,7 +43,7 @@ export class StockService {
         this.http.delete(`${API_URL}/wines/${wine._id}`, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
             toastr.error(resp.json().message);
-            this.store.dispatch({type: "UNDO_ACTION", payload: action});
+            this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
 
@@ -66,7 +67,7 @@ export class StockService {
         this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
             toastr.error(resp.json().message);
-            this.store.dispatch({type: "UNDO_ACTION", payload: action});
+            this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
 
@@ -77,7 +78,7 @@ export class StockService {
         this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
             toastr.error(resp.json().message);
-            this.store.dispatch({type: "UNDO_ACTION", payload: action});
+            this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
 

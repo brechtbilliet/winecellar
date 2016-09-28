@@ -2,8 +2,9 @@ import {NgModule, Component} from "@angular/core";
 import {StoreLogMonitorModule, useLogMonitor} from "@ngrx/store-log-monitor";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {AppModule} from "../app";
-import {handleUndoReducer} from "../statemanagement/handleUndoReducer";
 import {StoreModule} from "@ngrx/store";
+import {rootReducer} from "../statemanagement/rootReducer";
+import {StoreUndoModule} from "ngrx-undo"
 
 @Component({
     selector: "application-wrapper",
@@ -17,12 +18,12 @@ export class ApplicationWrapperContainer {
 
 @NgModule({
     imports: [
-        StoreModule.provideStore(handleUndoReducer) , StoreLogMonitorModule, StoreDevtoolsModule.instrumentStore({
+        StoreModule.provideStore(rootReducer), StoreDevtoolsModule.instrumentStore({
             monitor: useLogMonitor({
                 visible: false,
                 position: "right"
             })
-        }), AppModule],
+        }), StoreUndoModule.instrumentStore({bufferSize: 100}), StoreLogMonitorModule, AppModule],
     declarations: [ApplicationWrapperContainer],
     bootstrap: [ApplicationWrapperContainer]
 })
