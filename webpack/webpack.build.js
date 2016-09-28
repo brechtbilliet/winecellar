@@ -8,7 +8,7 @@ var API_KEY = process.env.npm_config_apikey;
 module.exports = {
     entry: {
         polyfills: './src/bootstrap/polyfills.ts',
-        app: './out_treeshaked/bundle.js',
+        app: './out_aot/bootstrap/bootstrap-prod.js',
         css: './src/styles/styles.scss'
     },
     output: {

@@ -1,6 +1,7 @@
 import {Component, Output, EventEmitter, Input} from "@angular/core";
 import {Account} from "../../types/Account";
 import {FormBuilder, Validators} from "@angular/forms";
+let toastr = require("toastr");
 @Component({
     selector: "register",
     template: `

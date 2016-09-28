@@ -1,6 +1,5 @@
 import {NgModule} from "@angular/core";
 import {HttpModule} from "@angular/http";
-import {routing} from "./routes";
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {StockService} from "./services/stock.service";
@@ -18,9 +17,10 @@ import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {StockSandbox} from "./stock.sandbox";
 
 @NgModule({
-    imports: [FormsModule, ReactiveFormsModule, RouterModule, CommonModule, HttpModule, CommonLogicModule, routing],
+    imports: [FormsModule, ReactiveFormsModule, RouterModule, CommonModule, HttpModule, CommonLogicModule],
     declarations: [AddStockPageContainer, EditStockPageContainer, StockPageContainer, WineSearchContainer, DetailWineFormComponent,
         FavoriteWinesComponent, WineResultComponent, WineResultsComponent],
+    exports: [AddStockPageContainer, EditStockPageContainer, StockPageContainer],
     providers: [StockService, WineComService, StockSandbox]
 })
 export class StockModule {

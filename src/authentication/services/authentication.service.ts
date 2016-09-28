@@ -4,11 +4,12 @@ import {Response, Http} from "@angular/http";
 import {AuthenticationResult} from "../types/AuthenticationResult";
 import {Account} from "../types/Account";
 import {API_URL, LOCALSTORAGE_AUTH} from "../../configuration";
-import * as toastr from "toastr";
 import {ApplicationState} from "../../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs/Rx";
 import {clearAuthentication, setAuthentication} from "../../statemanagement/actionCreators";
+let toastr = require("toastr");
+
 @Injectable()
 export class AuthenticationService {
     constructor(private http: Http, private store: Store<ApplicationState>) {

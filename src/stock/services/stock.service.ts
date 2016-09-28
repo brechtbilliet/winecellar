@@ -1,5 +1,4 @@
 import {Store} from "@ngrx/store";
-import * as toastr from "toastr";
 import {Injectable} from "@angular/core";
 import {Response, Headers, RequestOptionsArgs, RequestOptions, Http} from "@angular/http";
 import {Wine} from "../entities/Wine";
@@ -10,6 +9,7 @@ import {
     addWine, addAllWines, updateWine, removeWine, updateRateWine,
     updateStockWine
 } from "../../statemanagement/actionCreators";
+let toastr = require("toastr");
 
 @Injectable()
 export class StockService {
