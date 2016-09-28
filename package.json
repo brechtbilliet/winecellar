@@ -105,6 +105,6 @@
     "socket.io-client": "1.4.8",
     "toastr": "2.1.2",
     "zone.js": "0.6.21",
-    "ngrx-undo": "0.0.7"
+    "ngrx-undo": "0.0.8"
   }
 }
