@@ -31,7 +31,7 @@ let sumBy = require("lodash/sumBy");
                 <div class="row">
                     <div class="col-sm-12">
                         <h2>
-                            <i class="fa fa-user"></i>&nbsp;My wines 
+                            <i class="fa fa-user"></i>&nbsp;My wines
                             <span class="badge badge-primary">{{numberOfWines$|async}}</span>
                         </h2>
                     </div>

@@ -12,7 +12,8 @@
     "types": [
       "es6-shim",
       "jasmine",
-      "lodash"
+      "lodash",
+      "node"
     ]
   },
   "exclude": [

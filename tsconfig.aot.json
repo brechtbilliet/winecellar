@@ -25,11 +25,12 @@
   },
   "angularCompilerOptions": {
     "debug": true,
-    "skipMetadataEmit" : true
+    "skipMetadataEmit" : true,
+    "genDir": "./out_aot"
   },
   "compileOnSave": false,
   "files": [
-    "src/bootstrap/bootstrap-prod.ts"
+    "src/setup/prod.module.ts"
   ],
   "exclude": [
     "node_modules",

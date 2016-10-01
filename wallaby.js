@@ -10,38 +10,6 @@ var webpackPostprocessor = wallabyWebpack({
         'src/**/*.spec.js'
     ],
     module: {
-        loaders: [
-            {
-                test: /\.ts$/,
-                loader: 'ts-loader'
-            },
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            },
-            {
-                test: /\.scss$/,
-                loader: 'raw',
-            }, {
-                test: /\.html$/,
-                include: /src/,
-                loader: 'raw'
-            }, {
-                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-            }, {
-                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'file-loader'
-            }, {
-                test: '\.jpg$',
-                include: /src/,
-                loader: 'file'
-            }, {
-                include: /src/,
-                test: '\.png$',
-                loader: 'url'
-            }
-        ]
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -69,14 +37,6 @@ module.exports = function (w) {
             {pattern: 'src/**/*.spec.ts', load: false},
             {pattern: 'node_modules/**/*.js', ignore: true, instrument: false}
         ],
-        preprocessors: {
-            '**/*.js': file => babel.transform(file.content, {sourceMap: true})
-        },
-        env: {
-            runner: require('phantomjs-prebuilt').path,
-            params: { runner: '--web-security=false' }
-        },
-
         'testFramework': 'jasmine',
         postprocessor: webpackPostprocessor,
         bootstrap: function () {

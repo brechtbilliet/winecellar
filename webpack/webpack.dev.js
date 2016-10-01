@@ -4,15 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var StringReplacePlugin = require("string-replace-webpack-plugin");
 const Dashboard = require('webpack-dashboard');
-// const DashboardPlugin = require('webpack-dashboard/plugin');
-// const dashboard = new Dashboard();
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const dashboard = new Dashboard();
 
 var API_KEY = process.env.npm_config_apikey;
 
 module.exports = {
     entry: {
-        'polyfills': './src/bootstrap/polyfills.ts',
-        'app': './src/bootstrap/bootstrap-dev.ts',
+        'polyfills': './src/setup/polyfills.ts',
+        'app': './src/setup/dev.bootstrap.ts',
         'css': './src/styles/styles.scss',
         'vendor': [
             '@ngrx/core',
@@ -56,7 +56,7 @@ module.exports = {
     devServer: {
         hot: true,
         historyApiFallback: true,
-        // quiet: true, // lets WebpackDashboard do its thing
+        quiet: true, // lets WebpackDashboard do its thing
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000
@@ -66,8 +66,9 @@ module.exports = {
         root: __dirname,
         extensions: ['', '.ts', '.js']
     },
-    devtool: 'source-map',
+    devtool: 'cheap-module-eval-source-map',
     plugins: [
+        new DashboardPlugin(dashboard.setData),
         new webpack.LoaderOptionsPlugin({
             minimize: false,
             debug: true
@@ -79,8 +80,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html',
             inject: 'body',
-            hash: true,
-            chunksSortMode: 'dependency'
+            hash: true
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',

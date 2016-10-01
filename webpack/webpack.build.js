@@ -7,8 +7,8 @@ var API_KEY = process.env.npm_config_apikey;
 
 module.exports = {
     entry: {
-        polyfills: './src/bootstrap/polyfills.ts',
-        app: './out_aot/bootstrap/bootstrap-prod.js',
+        polyfills: './src/setup/polyfills.ts',
+        app: './src/setup/prod.bootstrap.ts',
         css: './src/styles/styles.scss'
     },
     output: {
@@ -71,7 +71,7 @@ module.exports = {
                 }
             },
             {
-                test: /configuration.ts$/,
+                test: /configuration.js$/,
                 loader: StringReplacePlugin.replace({
                     replacements: [
                         {

@@ -3,6 +3,8 @@ var path = require('path');
 var cwd = process.cwd();
 var loaders = require('./webpack/loaders');
 var webpack = require('webpack');
+process.env.PHANTOMJS_BIN = 'node_modules/phantomjs-prebuilt/bin/phantomjs';
+
 module.exports = function (config) {
     config.set({
         basePath: '',
@@ -14,26 +16,24 @@ module.exports = function (config) {
         preprocessors: {
             'spec-bundle.js': ['webpack', 'sourcemap'] // the sourcemap is very important if you want to see in which file the error happens
         },
+        browserNoActivityTimeout: 60000,
         webpack: {
             devtool: "inline-source-map",
             resolve: {
                 root: [path.resolve(cwd)],
-                modulesDirectories: ['node_modules', 'src'],
                 extensions: ['', '.ts', '.js', '.css'],
                 alias: {
                     'app': 'app'
                 }
             },
-            plugins: [
-                new webpack.ProvidePlugin({
-                    $: 'jquery',
-                    jQuery: 'jquery',
-                    'window.jQuery': 'jquery',
-                    'window.jquery': 'jquery'
-                })
-            ],
             module: {
-                loaders: loaders,
+                loaders: [{
+                    test: /\.ts$/,
+                    loader: 'awesome-typescript-loader',
+                    query: {
+                        tsconfig: "tsconfig.test.json"
+                    }
+                }],
                 postLoaders: [
                     {
                         test: /^((?!\.spec\.ts).)*.ts$/,

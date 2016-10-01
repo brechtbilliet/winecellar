@@ -1,8 +1,7 @@
 module.exports = [
     {
         test: /\.ts$/,
-        loader: 'ts-loader',
-        include: /src/
+        loader: 'awesome-typescript-loader'
     },
     {
         test: /\.css$/,
@@ -10,12 +9,7 @@ module.exports = [
     },
     {
         test: /\.scss$/,
-        loader: 'style!css!sass',
-        include: /src/
-    }, {
-        test: /\.html$/,
-        include: /src/,
-        loader: 'raw'
+        loader: 'style!css!sass'
     }, {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&mimetype=application/font-woff'
