@@ -54,9 +54,8 @@ export class StockPageContainer {
     searchCtrl = new FormControl("");
 
     wines$ = this.sb.wines$;
-    favoriteWines$ = this.wines$.map(wines => orderBy(wines, ["myRating"], ["desc"]).slice(0,5));
     favoriteWines$ = this.wines$.map((wines: Wine[]) => wines.filter((wine: Wine) => wine.myRating > 3))
-        .map(wines => orderBy(wines, ["myRating"], ["desc"]));
+        .map(wines => orderBy(wines, ["myRating"], ["desc"]).slice(0,5));
     numberOfWines$ = this.wines$.map(wines => sumBy(wines, (wine: Wine) => wine.inStock));
     worth$ = this.wines$.map(wines => sumBy(wines, (wine: Wine) => wine.price * wine.inStock).toFixed(2));
     matchingWines$ = Observable.combineLatest(this.searchCtrl.valueChanges.startWith(""), this.wines$,
