@@ -20,7 +20,8 @@
     "types": [
       "node",
       "jasmine",
-      "lodash"
+      "lodash",
+      "toastr"
     ]
   },
   "angularCompilerOptions": {

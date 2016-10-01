@@ -1,7 +1,7 @@
 import {Component, Output, EventEmitter, Input} from "@angular/core";
 import {Account} from "../../types/Account";
 import {FormBuilder, Validators} from "@angular/forms";
-let toastr = require("toastr");
+import {error} from "toastr"
 @Component({
     selector: "register",
     template: `
@@ -47,7 +47,7 @@ export class RegisterComponent {
 
     onSubmit(): void {
         if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
-            toastr.error("Passwords don't match");
+            error("Passwords don't match");
         } else {
             this.authenticate.emit(this.registerForm.value);
         }

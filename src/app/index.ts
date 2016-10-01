@@ -26,7 +26,7 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/switchMap";
 import "rxjs/add/observable/combineLatest";
 import "rxjs/add/operator/startWith";
-
+import "bootstrap";
 @NgModule({
     imports: [BrowserModule, AboutModule, AuthenticationModule, CommonLogicModule, StockModule, routing],
     declarations: [ApplicationContainer],
