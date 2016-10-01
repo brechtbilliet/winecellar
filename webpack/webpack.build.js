@@ -34,6 +34,7 @@ module.exports = {
                 dead_code: true
             }
         }),
+        new StringReplacePlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['polyfills', 'app', 'css'].reverse()
         }),
