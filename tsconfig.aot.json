@@ -26,8 +26,7 @@
   },
   "angularCompilerOptions": {
     "debug": true,
-    "skipMetadataEmit" : true,
-    "genDir": "./out_aot"
+    "skipMetadataEmit" : true
   },
   "compileOnSave": false,
   "files": [

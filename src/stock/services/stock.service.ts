@@ -22,7 +22,7 @@ export class StockService {
             .map((res: Response) => res.json());
         result$.subscribe(resp => this.store.dispatch(addWine(resp)),
             (resp: Response) => {
-                error(resp.json().message);
+                error("Something went wrong!");
             });
     }
 
@@ -31,7 +31,7 @@ export class StockService {
         this.store.dispatch(action);
         this.http.put(`${API_URL}/wines/${id}`, wine, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
-            error(resp.json().message);
+            error("Something went wrong!");
             this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
@@ -41,7 +41,7 @@ export class StockService {
         this.store.dispatch(action);
         this.http.delete(`${API_URL}/wines/${wine._id}`, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
-            error(resp.json().message);
+            error("Something went wrong!");
             this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
@@ -50,7 +50,7 @@ export class StockService {
         let result$ = this.http.get(`${API_URL}/wines`, this.authorizedHttpOptions())
             .map((res: Response) => res.json());
         result$.subscribe(wines => this.store.dispatch(addAllWines(wines)), (resp: Response) => {
-            error(resp.json().message);
+            error("Something went wrong!");
         });
     }
 
@@ -65,7 +65,7 @@ export class StockService {
         this.store.dispatch(action);
         this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
-            error(resp.json().message);
+            error("Something went wrong!");
             this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
@@ -76,7 +76,7 @@ export class StockService {
         this.store.dispatch(action);
         this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
-            error(resp.json().message);
+            error("Something went wrong!");
             this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }

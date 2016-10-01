@@ -4,6 +4,7 @@ main {
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
+  overflow: auto;
   padding: 15px;
   table.table-striped > tbody > tr:nth-of-type(odd) {
     background-color: $color-white;
