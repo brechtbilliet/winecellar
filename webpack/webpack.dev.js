@@ -76,6 +76,12 @@ module.exports = {
             inject: 'body',
             hash: true
         }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            'window.jquery': 'jquery'
+        }),
         new OpenBrowserPlugin({url: 'http://localhost:8080'})
     ],
     module: {

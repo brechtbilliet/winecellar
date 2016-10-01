@@ -1,9 +1,7 @@
 number-picker {
   min-width: 78px;
-  display: block;
-  .btn {
-    float: left;
-  }
+  display: flex;
+  flex-direction: row;
   .btn-primary {
     background-color: $color-purple-light;
     border: none;
@@ -15,6 +13,5 @@ number-picker {
     width: 30px;
     display: block;
     text-align: center;
-    float: left;
   }
 }

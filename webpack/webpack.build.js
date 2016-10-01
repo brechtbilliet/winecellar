@@ -47,6 +47,12 @@ module.exports = {
             hash: true,
             chunksSortMode: 'dependency'
         }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            'window.jquery': 'jquery'
+        }),
         new CompressionPlugin({
             asset: '[path].gz[query]',
             algorithm: 'gzip',

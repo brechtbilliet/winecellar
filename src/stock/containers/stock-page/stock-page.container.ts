@@ -33,6 +33,7 @@ import * as sumBy from "lodash/sumBy";
                         <h2>
                             <i class="fa fa-user"></i>&nbsp;My wines
                             <span class="badge badge-primary">{{numberOfWines$|async}}</span>
+                            <span class="badge badge-primary">{{worth$|async}} euro</span>
                         </h2>
                     </div>
                 </div>
@@ -53,8 +54,9 @@ export class StockPageContainer {
     searchCtrl = new FormControl("");
 
     wines$ = this.sb.wines$;
-    favoriteWines$ = this.wines$.map(wines => orderBy(wines, ["myRating"], ["desc"]));
+    favoriteWines$ = this.wines$.map(wines => orderBy(wines, ["myRating"], ["desc"]).slice(0,5));
     numberOfWines$ = this.wines$.map(wines => sumBy(wines, (wine: Wine) => wine.inStock));
+    worth$ = this.wines$.map(wines => sumBy(wines, (wine: Wine) => wine.price * wine.inStock).toFixed(2));
     matchingWines$ = Observable.combineLatest(this.searchCtrl.valueChanges.startWith(""), this.wines$,
         (term: string, wines: Array<Wine>) => {
             return wines.filter(wine => wine.name.toLowerCase().indexOf(term) > -1);
