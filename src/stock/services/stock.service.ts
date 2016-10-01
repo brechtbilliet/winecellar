@@ -13,8 +13,12 @@ import {UNDO_ACTION} from "ngrx-undo";
 import {error} from "toastr";
 @Injectable()
 export class StockService {
+    private jwtToken: string;
+
     constructor(private store: Store<ApplicationState>,
                 private http: Http) {
+        this.store.select((state: ApplicationState) => state.data.authentication.jwtToken)
+            .subscribe((jwtToken: string) => this.jwtToken = jwtToken);
     }
 
     add(wine: Wine): void {
@@ -82,10 +86,8 @@ export class StockService {
     }
 
     private authorizedHttpOptions(): RequestOptionsArgs {
-        let state: ApplicationState;
-        this.store.take(1).subscribe(s => state = s);
         let headers = new Headers({
-            authorization: `Bearer ${state.data.authentication.jwtToken}`
+            authorization: `Bearer ${this.jwtToken}`
         });
         return new RequestOptions({headers: headers});
     }
