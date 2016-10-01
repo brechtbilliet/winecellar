@@ -38,7 +38,6 @@ npm run deploy --apikey=<yourapikeyforwine.com> --backendenv=http://localhost:30
 - [x] Rxjs
 - [x] @ngrx/store
 - [x] redux architecture
-- [x] shadow DOM
 
 ### Features
 

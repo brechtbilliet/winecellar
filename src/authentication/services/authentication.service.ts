@@ -8,7 +8,7 @@ import {ApplicationState} from "../../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs/Rx";
 import {clearAuthentication, setAuthentication} from "../../statemanagement/actionCreators";
-let toastr = require("toastr");
+import {error, success} from "toastr";
 
 @Injectable()
 export class AuthenticationService {
@@ -47,9 +47,9 @@ export class AuthenticationService {
         obs$.subscribe((result: AuthenticationResult) => {
                 window.localStorage.setItem(LOCALSTORAGE_AUTH, JSON.stringify(result));
                 this.store.dispatch(setAuthentication(result));
-                toastr.success("successfully logged in!");
+                success("successfully logged in!");
             }, (errorResponse: Response) => {
-                toastr.error(errorResponse.json().error);
+                error(errorResponse.json().error);
             });
         return obs$;
     }

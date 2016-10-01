@@ -4,8 +4,8 @@ import {Observable} from "rxjs/Observable";
 import {FormControl} from "@angular/forms";
 import {StockSandbox} from "../../stock.sandbox";
 
-let orderBy = require("lodash/orderBy");
-let sumBy = require("lodash/sumBy");
+import * as orderBy from "lodash/orderBy";
+import * as sumBy from "lodash/sumBy";
 @Component({
     selector: "stock-page",
     template: `

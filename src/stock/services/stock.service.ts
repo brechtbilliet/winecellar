@@ -10,8 +10,7 @@ import {
     updateStockWine
 } from "../../statemanagement/actionCreators";
 import {UNDO_ACTION} from "ngrx-undo";
-let toastr = require("toastr");
-
+import {error} from "toastr";
 @Injectable()
 export class StockService {
     constructor(private store: Store<ApplicationState>,
@@ -23,7 +22,7 @@ export class StockService {
             .map((res: Response) => res.json());
         result$.subscribe(resp => this.store.dispatch(addWine(resp)),
             (resp: Response) => {
-                toastr.error(resp.json().message);
+                error(resp.json().message);
             });
     }
 
@@ -32,7 +31,7 @@ export class StockService {
         this.store.dispatch(action);
         this.http.put(`${API_URL}/wines/${id}`, wine, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
-            toastr.error(resp.json().message);
+            error(resp.json().message);
             this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
@@ -42,7 +41,7 @@ export class StockService {
         this.store.dispatch(action);
         this.http.delete(`${API_URL}/wines/${wine._id}`, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
-            toastr.error(resp.json().message);
+            error(resp.json().message);
             this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
@@ -51,7 +50,7 @@ export class StockService {
         let result$ = this.http.get(`${API_URL}/wines`, this.authorizedHttpOptions())
             .map((res: Response) => res.json());
         result$.subscribe(wines => this.store.dispatch(addAllWines(wines)), (resp: Response) => {
-            toastr.error(resp.json().message);
+            error(resp.json().message);
         });
     }
 
@@ -66,7 +65,7 @@ export class StockService {
         this.store.dispatch(action);
         this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
-            toastr.error(resp.json().message);
+            error(resp.json().message);
             this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
@@ -77,7 +76,7 @@ export class StockService {
         this.store.dispatch(action);
         this.http.put(`${API_URL}/wines/${wine._id}`, newWine, this.authorizedHttpOptions()).subscribe(() => {
         }, (resp: Response) => {
-            toastr.error(resp.json().message);
+            error(resp.json().message);
             this.store.dispatch({type: UNDO_ACTION, payload: action});
         });
     }
