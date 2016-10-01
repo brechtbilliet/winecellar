@@ -71,7 +71,7 @@ module.exports = {
                 }
             },
             {
-                test: /configuration.js$/,
+                test: /configuration.ts$/,
                 loader: StringReplacePlugin.replace({
                     replacements: [
                         {
