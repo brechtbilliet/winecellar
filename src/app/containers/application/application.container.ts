@@ -1,6 +1,5 @@
 import {Title} from "@angular/platform-browser";
 import {Component, OnInit, OnDestroy} from "@angular/core";
-import "bootstrap";
 import {AppSandbox} from "../../app.sandbox";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";

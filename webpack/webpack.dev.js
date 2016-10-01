@@ -3,10 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var StringReplacePlugin = require("string-replace-webpack-plugin");
-const Dashboard = require('webpack-dashboard');
-const DashboardPlugin = require('webpack-dashboard/plugin');
-const dashboard = new Dashboard();
-
 var API_KEY = process.env.npm_config_apikey;
 
 module.exports = {
@@ -56,7 +52,6 @@ module.exports = {
     devServer: {
         hot: true,
         historyApiFallback: true,
-        quiet: true, // lets WebpackDashboard do its thing
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000
@@ -68,7 +63,6 @@ module.exports = {
     },
     devtool: 'cheap-module-eval-source-map',
     plugins: [
-        new DashboardPlugin(dashboard.setData),
         new webpack.LoaderOptionsPlugin({
             minimize: false,
             debug: true
@@ -81,12 +75,6 @@ module.exports = {
             template: './src/index.html',
             inject: 'body',
             hash: true
-        }),
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery',
-            'window.jquery': 'jquery'
         }),
         new OpenBrowserPlugin({url: 'http://localhost:8080'})
     ],

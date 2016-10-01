@@ -28,16 +28,10 @@ import {Account} from "../../../authentication/types/Account";
                         <li class="navbar-text hidden-sm hidden-xs hidden-md">
                             Welcome {{account?.firstName}} {{account?.lastName}}
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
-                            aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="javascript: void(0)" (click)="logoutClicked()">
-                                        <i class="fa fa-sign-out"></i>&nbsp;Logout
-                                    </a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="javascript: void(0)" (click)="logoutClicked()">
+                                <i class="fa fa-sign-out"></i>&nbsp;Logout
+                            </a>
                         </li>
                     </ul>
                 </div>
