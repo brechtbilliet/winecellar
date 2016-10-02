@@ -9,10 +9,13 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs/Rx";
 import {clearAuthentication, setAuthentication} from "../../statemanagement/actionCreators";
 import {error, success} from "toastr";
+import {RealTime} from "../../common/realtime";
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: Http, private store: Store<ApplicationState>) {
+    constructor(private http: Http,
+                private store: Store<ApplicationState>,
+                private realTime: RealTime) {
     }
 
     authenticate(credentials: Credentials): Observable<AuthenticationResult> {
@@ -30,6 +33,7 @@ export class AuthenticationService {
     logout(): void {
         localStorage.removeItem(LOCALSTORAGE_AUTH);
         this.store.dispatch(clearAuthentication());
+        this.realTime
     }
 
     checkInitialAuthentication(): void {
