@@ -4,10 +4,12 @@ import {Store} from "@ngrx/store";
 import {AuthenticationService} from "../authentication/services/authentication.service";
 import {StockService} from "../stock/services/stock.service";
 import {RealTime} from "../common/realtime";
+import {addAllWines, clearAuthentication, setAuthentication} from "../statemanagement/actionCreators";
+import {Wine} from "../stock/entities/Wine";
+import {LOCALSTORAGE_AUTH} from "../configuration";
 @Injectable()
 export class AppSandbox {
     isAuthenticated$ = this.store.select(state => state.data.authentication.isAuthenticated);
-    jwtToken$ = this.store.select(state => state.data.authentication.jwtToken);
     isBusy$ = this.store.select(state => state.containers.application.isBusy);
     account$ = this.store.select(state => state.data.authentication.account);
 
@@ -15,16 +17,28 @@ export class AppSandbox {
                 private stockService: StockService, private realTime: RealTime) {
     }
 
-    checkInitialAuthentication(): void {
-        this.authenticationService.checkInitialAuthentication();
-    }
 
     logout(): void {
-        this.authenticationService.logout();
+        localStorage.removeItem(LOCALSTORAGE_AUTH);
+        this.store.dispatch(clearAuthentication());
     }
 
+    checkInitialAuthentication(): void {
+        let obj = this.authenticationService.checkInitialAuthentication();
+        if (obj) {
+            // evil fix for bug in @ngrx/dev-tools
+            // https://github.com/ngrx/store-devtools/issues/25
+            setTimeout(() => {
+                this.store.dispatch(setAuthentication(obj));
+            });
+        }
+    }
+
+
     loadWines(): void {
-        this.stockService.load();
+        this.stockService.load().subscribe((wines: Array<Wine>) => {
+            this.store.dispatch(addAllWines(wines));
+        });
     }
 
     connectRealTime(): void {
