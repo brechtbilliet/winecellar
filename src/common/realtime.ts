@@ -6,7 +6,7 @@ import * as io from "socket.io-client";
 import {info} from "toastr";
 @Injectable()
 export class RealTime {
-    private socket: SocketIOClientStatic;
+    private socket: SocketIOClient.Socket;
 
     constructor(private store: Store<ApplicationState>) {
     }
@@ -22,6 +22,7 @@ export class RealTime {
     }
 
     disconnect(): void {
+        this.socket.close();
     }
 }
 

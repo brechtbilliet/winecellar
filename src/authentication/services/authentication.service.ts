@@ -33,7 +33,7 @@ export class AuthenticationService {
     logout(): void {
         localStorage.removeItem(LOCALSTORAGE_AUTH);
         this.store.dispatch(clearAuthentication());
-        this.realTime
+        this.realTime.disconnect();
     }
 
     checkInitialAuthentication(): void {
