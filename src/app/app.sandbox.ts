@@ -21,6 +21,7 @@ export class AppSandbox {
     logout(): void {
         localStorage.removeItem(LOCALSTORAGE_AUTH);
         this.store.dispatch(clearAuthentication());
+        this.realTime.disconnect();
     }
 
     checkInitialAuthentication(): void {
