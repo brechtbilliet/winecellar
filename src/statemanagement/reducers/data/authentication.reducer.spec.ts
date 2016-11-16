@@ -1,6 +1,6 @@
-import {DATA_AUTHENTICATION_SET_AUTHENTICATION, DATA_AUTHENTICATION_CLEAR_AUTHENTICATION} from "../../actionTypes";
 import {authenticationReducer} from "./authentication.reducer";
 import {AuthenticationDataState} from "../../state/DataState";
+import {ClearAuthentication, SetAuthentication} from "../../actions/data/autentication";
 let deepfreeze = require("deep-freeze");
 
 describe("reducer: data > authenticationReducer", () => {
@@ -14,7 +14,7 @@ describe("reducer: data > authenticationReducer", () => {
             let payload: any = {token: "token", firstName: "firstname", lastName: "lastname", login: "login"};
             deepfreeze(initialState);
             let changedState: AuthenticationDataState =
-                authenticationReducer(initialState, {type: DATA_AUTHENTICATION_SET_AUTHENTICATION, payload});
+                authenticationReducer(initialState, new SetAuthentication(payload));
             expect(changedState).not.toBe(initialState);
             expect(changedState.jwtToken).toEqual(payload.token);
             expect(changedState.account.firstName).toEqual(payload.firstName);
@@ -35,25 +35,9 @@ describe("reducer: data > authenticationReducer", () => {
             };
             deepfreeze(initialState);
             let changedState: AuthenticationDataState =
-                authenticationReducer(initialState, {type: DATA_AUTHENTICATION_CLEAR_AUTHENTICATION});
+                authenticationReducer(initialState, new ClearAuthentication());
             expect(changedState).not.toBe(initialState);
             expect(changedState.isAuthenticated).toBe(false);
-        });
-    });
-    describe("case default", () => {
-        it("should return the same state", () => {
-            let initialState: AuthenticationDataState = {
-                isAuthenticated: true,
-                jwtToken: "token",
-                account: {
-                    firstName: "firstName",
-                    lastName: "lastName",
-                    login: "login"
-                }
-            };
-            deepfreeze(initialState);
-            let changedState: AuthenticationDataState = authenticationReducer(initialState, {type: null});
-            expect(changedState).toBe(initialState);
         });
     });
 });

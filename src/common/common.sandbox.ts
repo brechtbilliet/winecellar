@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
-import {toggleSidebar} from "../statemanagement/actionCreators";
+import {ToggleSidebar} from "../statemanagement/actions/containers/sidebar";
 
 @Injectable()
 export class CommonSandbox {
@@ -11,6 +11,6 @@ export class CommonSandbox {
     }
 
     toggleSidebar(): void {
-        this.store.dispatch(toggleSidebar());
+        this.store.dispatch(new ToggleSidebar());
     }
 }

@@ -8,7 +8,7 @@ import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store} from "@ngrx/store";
 import {success} from "toastr";
 import {LOCALSTORAGE_AUTH} from "../configuration";
-import {setAuthentication} from "../statemanagement/actionCreators";
+import {SetAuthentication} from "../statemanagement/actions/data/autentication";
 
 @Injectable()
 export class AuthenticationSandbox {
@@ -28,6 +28,6 @@ export class AuthenticationSandbox {
     private handleAuth(authenticationResult: AuthenticationResult): void {
         window.localStorage.setItem(LOCALSTORAGE_AUTH, JSON.stringify(authenticationResult));
         success("successfully logged in!");
-        this.store.dispatch(setAuthentication(authenticationResult));
+        this.store.dispatch(new SetAuthentication(authenticationResult));
     }
 }

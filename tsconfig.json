@@ -19,6 +19,7 @@
   },
   "exclude": [
     "out",
+    "out_aot",
     "node_modules",
     "dist",
     "reports"
