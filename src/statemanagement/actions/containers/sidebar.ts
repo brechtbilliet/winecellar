@@ -1,0 +1,14 @@
+import {type} from "../../util/util";
+import {Action} from "@ngrx/store";
+export const ActionTypes = {
+    TOGGLE_SIDEBAR: type("[sidebar] Toggle")
+}
+
+export class ToggleSidebar implements Action {
+    type = ActionTypes.TOGGLE_SIDEBAR;
+
+    public constructor() {}
+}
+
+export type Actions =
+    ToggleSidebar;

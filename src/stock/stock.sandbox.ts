@@ -5,9 +5,9 @@ import {Wine} from "./entities/Wine";
 import {Observable} from "rxjs/Observable";
 import {ApplicationState} from "../statemanagement/state/ApplicationState";
 import {Store, Action} from "@ngrx/store";
-import {addWine, updateWine, removeWine, updateRateWine, updateStockWine} from "../statemanagement/actionCreators";
 import * as toastr from "toastr";
 import {UNDO_ACTION} from "ngrx-undo";
+import {AddWine, UpdateWine, UpdateStock, RemoveWine, UpdateRate} from "../statemanagement/actions/data/wine";
 @Injectable()
 export class StockSandbox {
     wines$ = this.store.select(state => state.data.wines);
@@ -18,12 +18,12 @@ export class StockSandbox {
 
     addWine(wine: Wine): void {
         this.stockService.add(wine).subscribe((wine: Wine) => {
-            this.store.dispatch(addWine(wine));
+            this.store.dispatch(new AddWine(wine));
         }, () => this.handleError());
     }
 
     updateWine(id: string, wine: Wine): void {
-        let action = updateWine(id, wine);
+        let action = new UpdateWine(id, wine);
         this.store.dispatch(action);
         this.stockService.update(id, wine).subscribe(() => {
         }, () => this.handleError(action));
@@ -34,21 +34,21 @@ export class StockSandbox {
     }
 
     removeWine(wine: Wine): void {
-        let action = removeWine(wine._id);
+        let action = new RemoveWine(wine._id);
         this.store.dispatch(action);
         this.stockService.remove(wine).subscribe(() => {
         }, () => this.handleError(action));
     }
 
     setRate(wine: Wine, rate: number): void {
-        let action = updateRateWine(wine._id, rate);
+        let action = new UpdateRate(wine._id, rate);
         this.store.dispatch(action);
         this.stockService.setRate(wine, rate).subscribe(() => {
         }, () => this.handleError(action));
     }
 
     setStock(wine: Wine, inStock: number): void {
-        let action = updateStockWine(wine._id, inStock);
+        let action = new UpdateStock(wine._id, inStock);
         this.store.dispatch(action);
         this.stockService.setStock(wine, inStock).subscribe(() => {
         }, () => this.handleError(action));

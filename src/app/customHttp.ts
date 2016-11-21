@@ -5,8 +5,8 @@ import {
 } from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {Store} from "@ngrx/store";
-import {enableBusy, disableBusy} from "../statemanagement/actionCreators";
 import {ApplicationState} from "../statemanagement/state/ApplicationState";
+import {DisableBusyFlag, EnableBusyFlag} from "../statemanagement/actions/containers/application";
 @Injectable()
 export class CustomHttp extends Http {
     private activeCalls: number;
@@ -78,13 +78,13 @@ export class CustomHttp extends Http {
     private httpCallReady(): void {
         this.activeCalls--;
         if (this.activeCalls === 0) {
-            this.store.dispatch(disableBusy());
+            this.store.dispatch(new DisableBusyFlag());
         }
     }
 
     private httpCallRequested(): void {
         if (this.activeCalls === 0) {
-            this.store.dispatch(enableBusy());
+            this.store.dispatch(new EnableBusyFlag());
         }
         this.activeCalls++;
     }
