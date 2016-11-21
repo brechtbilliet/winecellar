@@ -40,4 +40,20 @@ describe("reducer: data > authenticationReducer", () => {
             expect(changedState.isAuthenticated).toBe(false);
         });
     });
+    describe("case default", () => {
+        it("should return the same state", () => {
+            let initialState: AuthenticationDataState = {
+                isAuthenticated: true,
+                jwtToken: "token",
+                account: {
+                    firstName: "firstName",
+                    lastName: "lastName",
+                    login: "login"
+                }
+            };
+            deepfreeze(initialState);
+            let changedState: AuthenticationDataState = authenticationReducer(initialState, {type: null} as any);
+            expect(changedState).toBe(initialState);
+        });
+    });
 });

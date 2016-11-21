@@ -94,4 +94,12 @@ describe("reducer > data", () => {
             expect(changedState[0].inStock).toBe(newInStock);
         });
     });
+    describe("case default", () => {
+        it("should return the same state", () => {
+            let initialState: Array<Wine> = [new Wine(), new Wine(), new Wine()];
+            deepfreeze(initialState);
+            let changedState: Array<Wine> = winesReducer(initialState, {type: null} as any);
+            expect(changedState).toBe(initialState);
+        });
+    });
 });
