@@ -50,7 +50,7 @@
     "karma-webpack": "1.8.0",
     "less": "2.7.1",
     "less-loader": "2.2.3",
-    "node-sass": "3.4.2",
+    "node-sass": "3.13.0",
     "open-browser-webpack-plugin": "0.0.2",
     "phantomjs": "2.1.7",
     "phantomjs-polyfill": "0.0.2",
