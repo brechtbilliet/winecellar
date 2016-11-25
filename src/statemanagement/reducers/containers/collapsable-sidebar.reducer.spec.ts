@@ -1,6 +1,6 @@
 import {CollapsableSidebarContainerState} from "../../state/ContainersState";
-import {collapsableSidebarReducer} from "./collapsable-side.reducer";
-import {CONTAINER_COLLAPSABLESIDEBAR_TOGGLE} from "../../actionTypes";
+import {collapsableSidebarReducer} from "./collapsable-sidebar.reducer";
+import {ToggleSidebar} from "../../actions/containers/sidebar";
 import {Dispatcher} from "@ngrx/store";
 let deepfreeze = require("deep-freeze");
 
@@ -12,13 +12,13 @@ describe("reducer: containers > collaspableSidebarReducer", () => {
             };
             deepfreeze(initialState);
             let changedState: CollapsableSidebarContainerState =
-                collapsableSidebarReducer(initialState, {type: CONTAINER_COLLAPSABLESIDEBAR_TOGGLE});
+                collapsableSidebarReducer(initialState, new ToggleSidebar());
             expect(changedState).not.toBe(initialState);
             expect(changedState.isCollapsed).toBe(true);
             initialState = {
                 isCollapsed: true
             };
-            changedState = collapsableSidebarReducer(initialState, {type: CONTAINER_COLLAPSABLESIDEBAR_TOGGLE});
+            changedState = collapsableSidebarReducer(initialState, new ToggleSidebar());
             expect(changedState.isCollapsed).toBe(false);
 
         });
@@ -29,14 +29,15 @@ describe("reducer: containers > collaspableSidebarReducer", () => {
                 isCollapsed: false
             };
             deepfreeze(initialState);
-            let changedState: CollapsableSidebarContainerState = collapsableSidebarReducer(initialState, {type: null});
+            let changedState: CollapsableSidebarContainerState = collapsableSidebarReducer(initialState, {type: null}) as any;
             expect(changedState).toBe(initialState);
         });
     });
     describe("case @ngrx/store/init", () => {
         it("should return the default value for the state param", () => {
-            let changedState: CollapsableSidebarContainerState = collapsableSidebarReducer(undefined, {type: Dispatcher.INIT});
+            let changedState: CollapsableSidebarContainerState = collapsableSidebarReducer(undefined, {type: Dispatcher.INIT} as any);
             expect(changedState.isCollapsed).toBeFalsy();
         });
     });
-});
+})
+;

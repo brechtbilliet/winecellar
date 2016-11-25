@@ -4,9 +4,10 @@ import {Store} from "@ngrx/store";
 import {AuthenticationService} from "../authentication/services/authentication.service";
 import {StockService} from "../stock/services/stock.service";
 import {RealTime} from "../common/realtime";
-import {addAllWines, clearAuthentication, setAuthentication} from "../statemanagement/actionCreators";
 import {Wine} from "../stock/entities/Wine";
 import {LOCALSTORAGE_AUTH} from "../configuration";
+import {ClearAuthentication, SetAuthentication} from "../statemanagement/actions/data/autentication";
+import {AddAllWines} from "../statemanagement/actions/data/wine";
 @Injectable()
 export class AppSandbox {
     isAuthenticated$ = this.store.select(state => state.data.authentication.isAuthenticated);
@@ -20,7 +21,7 @@ export class AppSandbox {
 
     logout(): void {
         localStorage.removeItem(LOCALSTORAGE_AUTH);
-        this.store.dispatch(clearAuthentication());
+        this.store.dispatch(new ClearAuthentication());
         this.realTime.disconnect();
     }
 
@@ -30,7 +31,7 @@ export class AppSandbox {
             // evil fix for bug in @ngrx/dev-tools
             // https://github.com/ngrx/store-devtools/issues/25
             setTimeout(() => {
-                this.store.dispatch(setAuthentication(obj));
+                this.store.dispatch(new SetAuthentication(obj));
             });
         }
     }
@@ -38,7 +39,7 @@ export class AppSandbox {
 
     loadWines(): void {
         this.stockService.load().subscribe((wines: Array<Wine>) => {
-            this.store.dispatch(addAllWines(wines));
+            this.store.dispatch(new AddAllWines(wines));
         });
     }
 

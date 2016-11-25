@@ -1,4 +1,4 @@
-import {collapsableSidebarReducer} from "./reducers/containers/collapsable-side.reducer";
+import {collapsableSidebarReducer} from "./reducers/containers/collapsable-sidebar.reducer";
 import {authenticationReducer} from "./reducers/data/authentication.reducer";
 import {winesReducer} from "./reducers/data/wines.reducer";
 import {applicationReducer} from "./reducers/containers/application.reducer";
