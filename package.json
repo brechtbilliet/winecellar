@@ -66,6 +66,7 @@
     "testdouble": "1.6.1",
     "ts-helpers": "1.1.1",
     "ts-loader": "0.8.2",
+    "tslint": "4.0.2",
     "typescript": "2.0.2",
     "uglifyjs": "2.4.10",
     "url-loader": "0.5.7",
