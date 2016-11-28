@@ -7,7 +7,7 @@ import {RealTime} from "../common/realtime";
 import {Wine} from "../stock/entities/Wine";
 import {LOCALSTORAGE_AUTH} from "../configuration";
 import {ClearAuthentication, SetAuthentication} from "../statemanagement/actions/data/autentication";
-import {AddAllWines} from "../statemanagement/actions/data/wine";
+import {SetAllWines} from "../statemanagement/actions/data/wine";
 @Injectable()
 export class AppSandbox {
     isAuthenticated$ = this.store.select(state => state.data.authentication.isAuthenticated);
@@ -39,7 +39,7 @@ export class AppSandbox {
 
     loadWines(): void {
         this.stockService.load().subscribe((wines: Array<Wine>) => {
-            this.store.dispatch(new AddAllWines(wines));
+            this.store.dispatch(new SetAllWines(wines));
         });
     }
 

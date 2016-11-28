@@ -7,7 +7,7 @@ export function winesReducer(state: Array<Wine> = [],
     switch (action.type) {
         case wine.ActionTypes.WINES_ADD:
             return [...state, action.payload.wine];
-        case wine.ActionTypes.WINES_ADD_ALL:
+        case wine.ActionTypes.WINES_SET_ALL:
             return [...action.payload.wines];
         case wine.ActionTypes.WINES_REMOVE:
             return state.filter(item => item._id !== action.payload._id);

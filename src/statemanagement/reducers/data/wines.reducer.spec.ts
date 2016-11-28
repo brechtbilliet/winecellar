@@ -1,7 +1,7 @@
 import {Wine} from "../../../stock/entities/Wine";
 import {winesReducer} from "./wines.reducer";
 import * as _ from "lodash";
-import {AddWine, AddAllWines, RemoveWine, UpdateWine, UpdateRate, UpdateStock} from "../../actions/data/wine";
+import {AddWine, SetAllWines, RemoveWine, UpdateWine, UpdateRate, UpdateStock} from "../../actions/data/wine";
 let deepfreeze = require("deep-freeze");
 
 describe("reducer > data", () => {
@@ -22,7 +22,7 @@ describe("reducer > data", () => {
             let initialState: Array<Wine> = [];
             let wines: Wine[] = [new Wine(), new Wine(), new Wine()];
             deepfreeze(initialState);
-            let changedState: Array<Wine> = winesReducer(initialState, new AddAllWines(wines));
+            let changedState: Array<Wine> = winesReducer(initialState, new SetAllWines(wines));
             expect(changedState).not.toBe(initialState);
             _.each(wines, (wine: Wine, index: number) => {
                 expect(wine).toBe(changedState[index]);
