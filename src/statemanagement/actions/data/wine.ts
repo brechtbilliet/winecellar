@@ -2,12 +2,12 @@ import {type} from "../../util/util";
 import {Action} from "@ngrx/store";
 import {Wine} from "../../../stock/entities/Wine";
 export const ActionTypes = {
-    WINES_ADD: type("[Wine] addWine"),
-    WINES_REMOVE: type("[Wine] removeWine"),
-    WINES_UPDATE: type("[Wine] updateWine"),
-    WINES_UPDATE_RATE: type("[Wine] updateRate"),
-    WINES_UPDATE_STOCK: type("[Wine] updateStock"),
-    WINES_ADD_ALL: type("[Wine] addAllWines"),
+    WINES_ADD: type("DATA_WINES_ADD"),
+    WINES_REMOVE: type("DATA_WINES_REMOVE"),
+    WINES_UPDATE: type("DATA_WINES_UPDATE"),
+    WINES_UPDATE_RATE: type("DATA_WINES_UPDATE_RATE"),
+    WINES_UPDATE_STOCK: type("DATA_WINES_UPDATE_STOCK"),
+    WINES_SET_ALL: type("DATA_WINES_ADD_ALL"),
 }
 
 export class AddWine implements Action {
@@ -55,8 +55,8 @@ export class UpdateStock implements Action {
     }
 }
 
-export class AddAllWines implements Action {
-    type = ActionTypes.WINES_ADD_ALL;
+export class SetAllWines implements Action {
+    type = ActionTypes.WINES_SET_ALL;
     payload: {wines: Wine[]};
 
     constructor(wines: Wine[]){
@@ -70,4 +70,4 @@ export type Actions =
     | UpdateWine
     | UpdateStock
     | UpdateRate
-    | AddAllWines;
+    | SetAllWines;

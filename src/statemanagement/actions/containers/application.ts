@@ -1,8 +1,8 @@
 import {type} from "../../util/util";
 import {Action} from "@ngrx/store";
 export const ActionTypes = {
-    ENABLE_BUSY_FLAG: type("[Application] EnableBusyFlag"),
-    DISABLE_BUSY_FLAG: type("[Application] DisableBusyFlag"),
+    ENABLE_BUSY_FLAG: type("CONTAINER_APPLICATION_ENABLE_BUSY_FLAG"),
+    DISABLE_BUSY_FLAG: type("CONTAINER_APPLICATION_DISABLE_BUSY_FLAG"),
 };
 
 export class EnableBusyFlag implements Action {

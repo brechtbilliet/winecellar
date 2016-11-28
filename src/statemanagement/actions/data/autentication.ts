@@ -2,8 +2,8 @@ import {type} from "../../util/util";
 import {Action} from "@ngrx/store";
 import {AuthenticationResult} from "../../../authentication/types/AuthenticationResult";
 export const ActionTypes = {
-    SET_AUTHENTICATION: type("[authentication] setAuthentication"),
-    CLEAR_AUTHENTICATION: type("[authentication] clearAuthentication")
+    SET_AUTHENTICATION: type("DATA_AUTHENTICATION_SET_AUTHENTICATION"),
+    CLEAR_AUTHENTICATION: type("DATA_AUTHENTICATION_CLEAR_AUTHENTICATION")
 }
 
 export class SetAuthentication implements Action {
